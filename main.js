@@ -751,6 +751,8 @@
     revealItems.forEach((item) => revealObserver.observe(item));
   };
 
+  /*
+  // Disabled — replaced by Gaussian Splat renderer
   const initStarryCanvas = () => {
     const canvas = document.getElementById("starry-canvas");
     if (!canvas) return;
@@ -758,108 +760,126 @@
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    // Retrieve the modular simplex-noise createNoise2D from our declared exports
+    const cjsExports = window.exports || (typeof exports !== "undefined" ? exports : null);
+    if (!cjsExports || !cjsExports.createNoise2D) {
+      console.warn("simplex-noise createNoise2D not found on exports.");
+      return;
+    }
+
+    const noise2D = cjsExports.createNoise2D();
+
     let width = 0;
     let height = 0;
-    let lines = [];
-    const colors = ["#1a2744", "#0d4f5c", "#c4a35a"];
+    let starsList = [];
+    let particles = [];
 
-    const OPACITY_LIGHT_MIN = 0.06;
-    const OPACITY_LIGHT_MAX = 0.12;
-    const OPACITY_DARK_MIN = 0.10;
-    const OPACITY_DARK_MAX = 0.18;
-
-    const stars = [
-      { cx: 0.82, cy: 0.22, colorRatio: [0.1, 0.2, 0.7] },
-      { cx: 0.18, cy: 0.28, colorRatio: [0.1, 0.3, 0.6] },
-      { cx: 0.48, cy: 0.72, colorRatio: [0.1, 0.3, 0.6] },
-      { cx: 0.88, cy: 0.78, colorRatio: [0.2, 0.2, 0.6] }
-    ];
-
-    const vortex = { cx: 0.62, cy: 0.48 };
-
-    const chooseColor = (ratio) => {
-      const r = Math.random();
-      if (r < ratio[0]) return colors[0];
-      if (r < ratio[0] + ratio[1]) return colors[1];
-      return colors[2];
+    const colors = {
+      dark: {
+        blues: [
+          { r: 10, g: 22, b: 40 },   // #0a1628
+          { r: 13, g: 43, b: 78 },   // #0d2b4e
+          { r: 26, g: 74, b: 122 },  // #1a4a7a
+          { r: 46, g: 109, b: 164 }, // #2e6da4
+          { r: 74, g: 144, b: 217 }  // #4a90d9
+        ],
+        yellows: [
+          { r: 245, g: 200, b: 66 }, // #f5c842
+          { r: 232, g: 160, b: 32 }, // #e8a020
+          { r: 255, g: 244, b: 194 } // #fff4c2
+        ]
+      },
+      light: {
+        blues: [
+          { r: 133, g: 163, b: 201 }, // washed-out blues
+          { r: 169, g: 194, b: 224 },
+          { r: 110, g: 133, b: 160 },
+          { r: 184, g: 209, b: 242 },
+          { r: 90, g: 115, b: 142 }
+        ],
+        yellows: [
+          { r: 255, g: 248, b: 212 }, // pale gold / cream
+          { r: 223, g: 186, b: 107 },
+          { r: 242, g: 209, b: 128 }
+        ]
+      }
     };
 
-    const generateLines = () => {
-      lines = [];
+    const starColorMap = {
+      "#ffffff": { r: 255, g: 255, b: 255 },
+      "#fff9d6": { r: 255, g: 249, b: 214 },
+      "#c8e0ff": { r: 200, g: 224, b: 255 }
+    };
 
-      // Star Halo Lines (24 lines total, 6 per star)
-      const linesPerStar = 6;
-      stars.forEach((star) => {
-        for (let i = 0; i < linesPerStar; i++) {
-          const radius = 25 + Math.random() * 55;
-          const angle = Math.random() * Math.PI * 2;
-          const length = 45 + radius * 0.5;
-          const lineWidth = 1.5 + Math.random() * 1.2;
-          const color = chooseColor(star.colorRatio || [0.1, 0.2, 0.7]);
-          const baseOpacity = 0.4 + Math.random() * 0.6;
-          const speed = (0.0003 + Math.random() * 0.0005) * (Math.random() < 0.5 ? 1 : -1);
+    const starColors = ["#ffffff", "#fff9d6", "#c8e0ff"];
 
-          lines.push({
-            type: "star",
-            star,
-            radius,
-            angle,
-            length,
-            lineWidth,
-            color,
-            baseOpacity,
-            speed
-          });
+    const generateStars = () => {
+      const arr = [];
+      for (let i = 0; i < 80; i++) {
+        arr.push({
+          x: Math.random(),
+          y: Math.random(),
+          radius: 1 + Math.random() * 2,
+          color: starColors[Math.floor(Math.random() * starColors.length)]
+        });
+      }
+      return arr;
+    };
+
+    const generateParticles = () => {
+      particles = [];
+      const numParticles = 600;
+      for (let i = 0; i < numParticles; i++) {
+        const isBlue = Math.random() < 0.8;
+        let darkRgb, lightRgb;
+        if (isBlue) {
+          const idx = Math.floor(Math.random() * colors.dark.blues.length);
+          darkRgb = colors.dark.blues[idx];
+          lightRgb = colors.light.blues[idx];
+        } else {
+          const idx = Math.floor(Math.random() * colors.dark.yellows.length);
+          darkRgb = colors.dark.yellows[idx];
+          lightRgb = colors.light.yellows[idx];
         }
-      });
 
-      // Vortex Swirl Lines (20 lines)
-      for (let i = 0; i < 20; i++) {
-        const radius = 60 + Math.random() * 140;
-        const angle = Math.random() * Math.PI * 2;
-        const length = 60 + Math.random() * 40;
-        const lineWidth = 1.5 + Math.random() * 1.5;
-        const color = chooseColor([0.5, 0.4, 0.1]);
-        const baseOpacity = Math.random();
-        const speed = 0.0002 + Math.random() * 0.0004;
-
-        lines.push({
-          type: "vortex",
-          vortex,
-          radius,
-          angle,
-          length,
-          lineWidth,
-          color,
-          baseOpacity,
-          speed
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          speed: 0.3 + Math.random() * 0.5,
+          size: 1.2 + Math.random() * 1.5,
+          opacity: 0.45 + Math.random() * 0.55,
+          trailLength: Math.floor(8 + Math.random() * 7),
+          history: [],
+          darkRgb,
+          lightRgb
         });
       }
+    };
 
-      // Wave Flow Lines (36 lines)
-      for (let i = 0; i < 36; i++) {
-        const x = Math.random();
-        const y = 0.15 + Math.random() * 0.7;
-        const length = 70 + Math.random() * 50;
-        const lineWidth = 1.5 + Math.random() * 1.5;
-        const color = chooseColor([0.4, 0.4, 0.2]);
-        const baseOpacity = Math.random();
-        const speedX = 0.00004 + Math.random() * 0.00006;
-        const speedY = 0.0002 + Math.random() * 0.0004;
-        const phaseY = Math.random() * Math.PI * 2;
+    const drawStar = (star) => {
+      const px = star.x * width;
+      const py = star.y * height;
+      const rgb = starColorMap[star.color];
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      const opScale = isDark ? 0.85 : 0.25;
 
-        lines.push({
-          type: "flow",
-          x, y,
-          length,
-          lineWidth,
-          color,
-          baseOpacity,
-          speedX,
-          speedY,
-          phaseY
-        });
-      }
+      // Circle 3 (outer glow)
+      ctx.fillStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${0.15 * opScale})`;
+      ctx.beginPath();
+      ctx.arc(px, py, star.radius + 3, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Circle 2 (inner glow)
+      ctx.fillStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${0.4 * opScale})`;
+      ctx.beginPath();
+      ctx.arc(px, py, star.radius + 1.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Circle 1 (core)
+      ctx.fillStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${1.0 * opScale})`;
+      ctx.beginPath();
+      ctx.arc(px, py, star.radius, 0, Math.PI * 2);
+      ctx.fill();
     };
 
     const resizeCanvas = () => {
@@ -871,7 +891,8 @@
       canvas.width = width;
       canvas.height = height;
 
-      generateLines();
+      starsList = generateStars();
+      generateParticles();
 
       if (reduceMotion.matches) {
         drawStatic();
@@ -890,123 +911,12 @@
       observer.observe(parent);
     }
 
-    const colorMap = {
-      "#1a2744": { r: 26, g: 39, b: 68 },
-      "#0d4f5c": { r: 13, g: 79, b: 92 },
-      "#c4a35a": { r: 196, g: 163, b: 90 }
-    };
-
-    const drawLine = (line, timestamp) => {
-      let sx, sy, ex, ey, cx, cy, finalLineWidth, finalCurvature, angle;
-
-      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-      const minOp = isDark ? OPACITY_DARK_MIN : OPACITY_LIGHT_MIN;
-      const maxOp = isDark ? OPACITY_DARK_MAX : OPACITY_LIGHT_MAX;
-      const opacity = minOp + line.baseOpacity * (maxOp - minOp);
-
-      if (line.type === "star") {
-        const orbitAngle = reduceMotion.matches ? line.angle : (line.angle + timestamp * line.speed);
-        sx = line.star.cx * width + Math.cos(orbitAngle) * line.radius;
-        sy = line.star.cy * height + Math.sin(orbitAngle) * line.radius;
-
-        angle = orbitAngle + Math.PI / 2;
-        ex = sx + Math.cos(angle) * line.length;
-        ey = sy + Math.sin(angle) * line.length;
-
-        const mx = (sx + ex) / 2;
-        const my = (sy + ey) / 2;
-
-        const chord = line.length;
-        const R = Math.max(line.radius, chord / 2 + 1);
-        const heightOffset = R - Math.sqrt(R * R - (chord * chord) / 4);
-        finalCurvature = Math.min(25, heightOffset);
-
-        const perpAngle = angle + Math.PI / 2;
-        cx = mx + Math.cos(perpAngle) * finalCurvature;
-        cy = my + Math.sin(perpAngle) * finalCurvature;
-
-        finalLineWidth = line.lineWidth;
-
-      } else if (line.type === "vortex") {
-        const orbitAngle = reduceMotion.matches ? line.angle : (line.angle + timestamp * line.speed);
-        const pulse = reduceMotion.matches ? 0 : Math.sin(timestamp * 0.0005 + line.angle) * 8;
-        const currentRadius = line.radius + pulse;
-
-        sx = line.vortex.cx * width + Math.cos(orbitAngle) * currentRadius;
-        sy = line.vortex.cy * height + Math.sin(orbitAngle) * currentRadius;
-
-        angle = orbitAngle + Math.PI / 2 + 0.12;
-        ex = sx + Math.cos(angle) * line.length;
-        ey = sy + Math.sin(angle) * line.length;
-
-        const mx = (sx + ex) / 2;
-        const my = (sy + ey) / 2;
-
-        const R = Math.max(currentRadius, line.length / 2 + 1);
-        const heightOffset = R - Math.sqrt(R * R - (line.length * line.length) / 4);
-        finalCurvature = Math.min(20, heightOffset);
-
-        const perpAngle = angle + Math.PI / 2;
-        cx = mx + Math.cos(perpAngle) * finalCurvature;
-        cy = my + Math.sin(perpAngle) * finalCurvature;
-
-        finalLineWidth = line.lineWidth;
-
-      } else {
-        const driftX = reduceMotion.matches ? 0 : (timestamp * line.speedX);
-        const currentX = (line.x + driftX) % 1.2;
-        const actualX = currentX - 0.1;
-
-        const pulseY = reduceMotion.matches ? 0 : Math.sin(timestamp * line.speedY + line.phaseY) * 0.025;
-        const actualY = line.y + pulseY;
-
-        const getWaveY = (xVal) => {
-          return actualY + 0.08 * Math.sin(xVal * Math.PI * 2 + (reduceMotion.matches ? 0 : timestamp * 0.0002)) + 0.04 * Math.cos(xVal * Math.PI);
-        };
-
-        const y1 = getWaveY(actualX);
-        const y2 = getWaveY(actualX + 0.04);
-
-        sx = actualX * width;
-        sy = y1 * height;
-
-        const p2x = (actualX + 0.04) * width;
-        const p2y = y2 * height;
-
-        angle = Math.atan2(p2y - sy, p2x - sx);
-
-        ex = sx + Math.cos(angle) * line.length;
-        ey = sy + Math.sin(angle) * line.length;
-
-        const mx = (sx + ex) / 2;
-        const my = (sy + ey) / 2;
-
-        const waveCurvePhase = reduceMotion.matches ? line.phaseY : (timestamp * 0.001 + line.phaseY);
-        finalCurvature = Math.sin(waveCurvePhase) * 12;
-
-        const perpAngle = angle + Math.PI / 2;
-        cx = mx + Math.cos(perpAngle) * finalCurvature;
-        cy = my + Math.sin(perpAngle) * finalCurvature;
-
-        finalLineWidth = line.lineWidth;
-      }
-
-      const rgb = colorMap[line.color];
-      ctx.strokeStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity})`;
-      ctx.lineWidth = finalLineWidth;
-      ctx.lineCap = "round";
-
-      ctx.beginPath();
-      ctx.moveTo(sx, sy);
-      ctx.quadraticCurveTo(cx, cy, ex, ey);
-      ctx.stroke();
-    };
-
     const drawStatic = () => {
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      canvas.style.opacity = isDark ? "0.85" : "0.25";
+
       ctx.clearRect(0, 0, width, height);
-      lines.forEach((line) => {
-        drawLine(line, 0);
-      });
+      starsList.forEach(drawStar);
     };
 
     let lastFrameTime = 0;
@@ -1019,7 +929,7 @@
 
       requestAnimationFrame(animate);
 
-      if (!isHeroVisible || document.hidden) {
+      if (!isHeroVisible || document.hidden || document.visibilityState === "hidden") {
         return;
       }
 
@@ -1029,9 +939,88 @@
       }
       lastFrameTime = timestamp - (elapsed % fpsInterval);
 
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      canvas.style.opacity = isDark ? "0.85" : "0.25";
+
       ctx.clearRect(0, 0, width, height);
-      lines.forEach((line) => {
-        drawLine(line, timestamp);
+
+      // 1. Render static stars
+      starsList.forEach(drawStar);
+
+      // 2. Render particle flow
+      const noiseScale = 0.003;
+      const timeOffset = timestamp * 0.00008;
+
+      const v1 = { x: 0.25 * width, y: 0.35 * height, dir: -1 };
+      const v2 = { x: 0.75 * width, y: 0.60 * height, dir: 1 };
+
+      ctx.lineCap = "round";
+
+      particles.forEach((p) => {
+        p.history.push({ x: p.x, y: p.y });
+        if (p.history.length > p.trailLength) {
+          p.history.shift();
+        }
+
+        const noiseVal = noise2D(p.x * noiseScale, p.y * noiseScale + timeOffset);
+        const noiseAngle = noiseVal * Math.PI * 2;
+
+        const dx1 = p.x - v1.x;
+        const dy1 = p.y - v1.y;
+        const dist1 = Math.hypot(dx1, dy1) + 0.1;
+        const inf1 = Math.exp(-dist1 / 180);
+        const angle1 = Math.atan2(dy1, dx1) - Math.PI / 2;
+
+        const dx2 = p.x - v2.x;
+        const dy2 = p.y - v2.y;
+        const dist2 = Math.hypot(dx2, dy2) + 0.1;
+        const inf2 = Math.exp(-dist2 / 180);
+        const angle2 = Math.atan2(dy2, dx2) + Math.PI / 2;
+
+        let nx = Math.cos(noiseAngle);
+        let ny = Math.sin(noiseAngle);
+
+        nx += Math.cos(angle1) * inf1 * 1.5;
+        ny += Math.sin(angle1) * inf1 * 1.5;
+
+        nx += Math.cos(angle2) * inf2 * 1.5;
+        ny += Math.sin(angle2) * inf2 * 1.5;
+
+        const angle = Math.atan2(ny, nx);
+
+        const vx = Math.cos(angle) * p.speed;
+        const vy = Math.sin(angle) * p.speed;
+
+        p.x += vx;
+        p.y += vy;
+
+        if (p.x < 0) p.x += width;
+        if (p.x > width) p.x -= width;
+        if (p.y < 0) p.y += height;
+        if (p.y > height) p.y -= height;
+
+        const rgb = isDark ? p.darkRgb : p.lightRgb;
+        const history = p.history;
+        if (history.length >= 2) {
+          for (let i = 1; i < history.length; i++) {
+            const p1 = history[i - 1];
+            const p2 = history[i];
+
+            if (Math.abs(p1.x - p2.x) > width * 0.5 || Math.abs(p1.y - p2.y) > height * 0.5) {
+              continue;
+            }
+
+            const opacityRatio = i / (history.length - 1);
+            const op = p.opacity * opacityRatio;
+
+            ctx.strokeStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${op})`;
+            ctx.lineWidth = p.size * (0.3 + 0.7 * opacityRatio);
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+          }
+        }
       });
     };
 
@@ -1054,7 +1043,260 @@
       }
     });
 
-    window.addEventListener("resize", resizeCanvas);
+    let resizeTimeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        resizeCanvas();
+      }, 200);
+    };
+
+    window.addEventListener("resize", handleResize);
+    resizeCanvas();
+
+    if (!reduceMotion.matches) {
+      requestAnimationFrame(animate);
+    }
+  };
+  */
+
+  const initStarryCanvas = () => {
+    const canvas = document.getElementById("starry-canvas");
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let width = 0;
+    let height = 0;
+    let splats = [];
+
+    const colors = {
+      blues: [
+        { r: 74, g: 144, b: 217 },  // #4a90d9
+        { r: 46, g: 109, b: 164 },  // #2e6da4
+        { r: 26, g: 74, b: 122 },   // #1a4a7a
+        { r: 107, g: 174, b: 214 }  // #6baed6
+      ],
+      lightBlues: [
+        { r: 179, g: 212, b: 252 },
+        { r: 208, g: 225, b: 253 },
+        { r: 162, g: 196, b: 232 },
+        { r: 225, g: 239, b: 252 }
+      ],
+      teals: [
+        { r: 56, g: 178, b: 172 },  // #38b2ac
+        { r: 77, g: 208, b: 196 },  // #4dd0c4
+        { r: 44, g: 158, b: 152 }   // #2c9e98
+      ],
+      accents: [
+        { r: 245, g: 200, b: 66 },  // #f5c842
+        { r: 232, g: 160, b: 32 }   // #e8a020
+      ],
+      neutral: [
+        { r: 200, g: 223, b: 245 }, // #c8dff5
+        { r: 232, g: 244, b: 253 }  // #e8f4fd
+      ]
+    };
+
+    const createSplat = (rx, ry) => {
+      const r = Math.random();
+      let darkColor, lightColor;
+      if (r < 0.50) {
+        const idx = Math.floor(Math.random() * colors.blues.length);
+        darkColor = colors.blues[idx];
+        lightColor = colors.lightBlues[idx];
+      } else if (r < 0.75) {
+        const idx = Math.floor(Math.random() * colors.teals.length);
+        darkColor = lightColor = colors.teals[idx];
+      } else if (r < 0.90) {
+        const idx = Math.floor(Math.random() * colors.accents.length);
+        darkColor = lightColor = colors.accents[idx];
+      } else {
+        const idx = Math.floor(Math.random() * colors.neutral.length);
+        darkColor = lightColor = colors.neutral[idx];
+      }
+
+      const speed = 0.08 + Math.random() * 0.12;
+      const angle = Math.random() * Math.PI * 2;
+      const vx = Math.cos(angle) * speed;
+      const vy = Math.sin(angle) * speed;
+
+      const vRotation = (0.001 + Math.random() * 0.002) * (Math.random() < 0.5 ? 1 : -1);
+
+      return {
+        rx, ry,
+        x: rx * width,
+        y: ry * height,
+        vx, vy,
+        rotation: Math.random() * Math.PI * 2,
+        vRotation,
+        scaleX: 18 + Math.random() * 37,
+        scaleY: 8 + Math.random() * 20,
+        baseOpacity: Math.random(),
+        pulsePhase: Math.random() * Math.PI * 2,
+        pulseAmp: 0.02 + Math.random() * 0.03,
+        pulseSpeed: 0.0009 + Math.random() * 0.0007,
+        darkColor,
+        lightColor
+      };
+    };
+
+    const updateSplatCount = () => {
+      const targetCount = width > 900 ? 120 : 55;
+      if (splats.length < targetCount) {
+        const needed = targetCount - splats.length;
+        for (let i = 0; i < needed; i++) {
+          splats.push(createSplat(Math.random(), Math.random()));
+        }
+      } else if (splats.length > targetCount) {
+        splats.length = targetCount;
+      }
+    };
+
+    const resizeCanvas = () => {
+      const parent = canvas.parentElement;
+      if (!parent) return;
+      const rect = parent.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      canvas.width = width;
+      canvas.height = height;
+
+      updateSplatCount();
+
+      splats.forEach((splat) => {
+        splat.x = splat.rx * width;
+        splat.y = splat.ry * height;
+      });
+
+      if (reduceMotion.matches) {
+        drawStatic();
+      }
+    };
+
+    let isHeroVisible = true;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        isHeroVisible = entry.isIntersecting;
+      });
+    }, { threshold: 0 });
+
+    const parent = canvas.parentElement;
+    if (parent) {
+      observer.observe(parent);
+    }
+
+    const drawSplat = (splat, timestamp) => {
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      const color = isDark ? splat.darkColor : splat.lightColor;
+
+      const minOp = isDark ? 0.06 : 0.04;
+      const maxOp = isDark ? 0.18 : 0.10;
+      const opacity = minOp + splat.baseOpacity * (maxOp - minOp);
+
+      let currentOpacity = opacity + Math.sin(timestamp * splat.pulseSpeed + splat.pulsePhase) * splat.pulseAmp;
+      currentOpacity = Math.max(0.01, Math.min(1.0, currentOpacity));
+
+      ctx.save();
+      ctx.translate(splat.x, splat.y);
+      ctx.rotate(splat.rotation);
+
+      const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, splat.scaleX);
+      gradient.addColorStop(0, `rgba(${color.r}, ${color.g}, ${color.b}, ${currentOpacity})`);
+      gradient.addColorStop(1, `rgba(${color.r}, ${color.g}, ${color.b}, 0)`);
+
+      ctx.scale(1, splat.scaleY / splat.scaleX);
+      ctx.beginPath();
+      ctx.arc(0, 0, splat.scaleX, 0, Math.PI * 2);
+      ctx.fillStyle = gradient;
+      ctx.fill();
+      ctx.restore();
+    };
+
+    const drawStatic = () => {
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      ctx.fillStyle = isDark ? "rgb(10, 14, 26)" : "rgb(245, 247, 252)";
+      ctx.fillRect(0, 0, width, height);
+
+      splats.forEach((splat) => {
+        drawSplat(splat, 0);
+      });
+    };
+
+    let lastFrameTime = 0;
+    const fpsInterval = 1000 / 30;
+
+    const animate = (timestamp) => {
+      if (reduceMotion.matches) {
+        return;
+      }
+
+      requestAnimationFrame(animate);
+
+      if (!isHeroVisible || document.hidden || document.visibilityState === "hidden") {
+        return;
+      }
+
+      const elapsed = timestamp - lastFrameTime;
+      if (elapsed < fpsInterval) {
+        return;
+      }
+      lastFrameTime = timestamp - (elapsed % fpsInterval);
+
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      ctx.fillStyle = isDark ? "rgba(10, 14, 26, 0.18)" : "rgba(245, 247, 252, 0.22)";
+      ctx.fillRect(0, 0, width, height);
+
+      splats.forEach((splat) => {
+        splat.rotation += splat.vRotation;
+
+        splat.x += splat.vx;
+        splat.y += splat.vy;
+
+        const limitX = splat.scaleX;
+        const limitY = splat.scaleX;
+
+        if (splat.x < -limitX) splat.x += width + limitX * 2;
+        if (splat.x > width + limitX) splat.x -= width + limitX * 2;
+        if (splat.y < -limitY) splat.y += height + limitY * 2;
+        if (splat.y > height + limitY) splat.y -= height + limitY * 2;
+
+        splat.rx = splat.x / width;
+        splat.ry = splat.y / height;
+
+        drawSplat(splat, timestamp);
+      });
+    };
+
+    const themeObserver = new MutationObserver(() => {
+      if (reduceMotion.matches) {
+        drawStatic();
+      }
+    });
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"]
+    });
+
+    reduceMotion.addEventListener("change", () => {
+      if (reduceMotion.matches) {
+        drawStatic();
+      } else {
+        lastFrameTime = performance.now();
+        requestAnimationFrame(animate);
+      }
+    });
+
+    let resizeTimeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        resizeCanvas();
+      }, 150);
+    };
+
+    window.addEventListener("resize", handleResize);
     resizeCanvas();
 
     if (!reduceMotion.matches) {
