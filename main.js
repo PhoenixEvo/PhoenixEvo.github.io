@@ -751,12 +751,324 @@
     revealItems.forEach((item) => revealObserver.observe(item));
   };
 
+  const initStarryCanvas = () => {
+    const canvas = document.getElementById("starry-canvas");
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let width = 0;
+    let height = 0;
+    let lines = [];
+    const colors = ["#1a2744", "#0d4f5c", "#c4a35a"];
+
+    const OPACITY_LIGHT_MIN = 0.06;
+    const OPACITY_LIGHT_MAX = 0.12;
+    const OPACITY_DARK_MIN = 0.10;
+    const OPACITY_DARK_MAX = 0.18;
+
+    const stars = [
+      { cx: 0.82, cy: 0.22, colorRatio: [0.1, 0.2, 0.7] },
+      { cx: 0.18, cy: 0.28, colorRatio: [0.1, 0.3, 0.6] },
+      { cx: 0.48, cy: 0.72, colorRatio: [0.1, 0.3, 0.6] },
+      { cx: 0.88, cy: 0.78, colorRatio: [0.2, 0.2, 0.6] }
+    ];
+
+    const vortex = { cx: 0.62, cy: 0.48 };
+
+    const chooseColor = (ratio) => {
+      const r = Math.random();
+      if (r < ratio[0]) return colors[0];
+      if (r < ratio[0] + ratio[1]) return colors[1];
+      return colors[2];
+    };
+
+    const generateLines = () => {
+      lines = [];
+
+      // Star Halo Lines (24 lines total, 6 per star)
+      const linesPerStar = 6;
+      stars.forEach((star) => {
+        for (let i = 0; i < linesPerStar; i++) {
+          const radius = 25 + Math.random() * 55;
+          const angle = Math.random() * Math.PI * 2;
+          const length = 45 + radius * 0.5;
+          const lineWidth = 1.5 + Math.random() * 1.2;
+          const color = chooseColor(star.colorRatio || [0.1, 0.2, 0.7]);
+          const baseOpacity = 0.4 + Math.random() * 0.6;
+          const speed = (0.0003 + Math.random() * 0.0005) * (Math.random() < 0.5 ? 1 : -1);
+
+          lines.push({
+            type: "star",
+            star,
+            radius,
+            angle,
+            length,
+            lineWidth,
+            color,
+            baseOpacity,
+            speed
+          });
+        }
+      });
+
+      // Vortex Swirl Lines (20 lines)
+      for (let i = 0; i < 20; i++) {
+        const radius = 60 + Math.random() * 140;
+        const angle = Math.random() * Math.PI * 2;
+        const length = 60 + Math.random() * 40;
+        const lineWidth = 1.5 + Math.random() * 1.5;
+        const color = chooseColor([0.5, 0.4, 0.1]);
+        const baseOpacity = Math.random();
+        const speed = 0.0002 + Math.random() * 0.0004;
+
+        lines.push({
+          type: "vortex",
+          vortex,
+          radius,
+          angle,
+          length,
+          lineWidth,
+          color,
+          baseOpacity,
+          speed
+        });
+      }
+
+      // Wave Flow Lines (36 lines)
+      for (let i = 0; i < 36; i++) {
+        const x = Math.random();
+        const y = 0.15 + Math.random() * 0.7;
+        const length = 70 + Math.random() * 50;
+        const lineWidth = 1.5 + Math.random() * 1.5;
+        const color = chooseColor([0.4, 0.4, 0.2]);
+        const baseOpacity = Math.random();
+        const speedX = 0.00004 + Math.random() * 0.00006;
+        const speedY = 0.0002 + Math.random() * 0.0004;
+        const phaseY = Math.random() * Math.PI * 2;
+
+        lines.push({
+          type: "flow",
+          x, y,
+          length,
+          lineWidth,
+          color,
+          baseOpacity,
+          speedX,
+          speedY,
+          phaseY
+        });
+      }
+    };
+
+    const resizeCanvas = () => {
+      const parent = canvas.parentElement;
+      if (!parent) return;
+      const rect = parent.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      canvas.width = width;
+      canvas.height = height;
+
+      generateLines();
+
+      if (reduceMotion.matches) {
+        drawStatic();
+      }
+    };
+
+    let isHeroVisible = true;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        isHeroVisible = entry.isIntersecting;
+      });
+    }, { threshold: 0 });
+
+    const parent = canvas.parentElement;
+    if (parent) {
+      observer.observe(parent);
+    }
+
+    const colorMap = {
+      "#1a2744": { r: 26, g: 39, b: 68 },
+      "#0d4f5c": { r: 13, g: 79, b: 92 },
+      "#c4a35a": { r: 196, g: 163, b: 90 }
+    };
+
+    const drawLine = (line, timestamp) => {
+      let sx, sy, ex, ey, cx, cy, finalLineWidth, finalCurvature, angle;
+
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      const minOp = isDark ? OPACITY_DARK_MIN : OPACITY_LIGHT_MIN;
+      const maxOp = isDark ? OPACITY_DARK_MAX : OPACITY_LIGHT_MAX;
+      const opacity = minOp + line.baseOpacity * (maxOp - minOp);
+
+      if (line.type === "star") {
+        const orbitAngle = reduceMotion.matches ? line.angle : (line.angle + timestamp * line.speed);
+        sx = line.star.cx * width + Math.cos(orbitAngle) * line.radius;
+        sy = line.star.cy * height + Math.sin(orbitAngle) * line.radius;
+
+        angle = orbitAngle + Math.PI / 2;
+        ex = sx + Math.cos(angle) * line.length;
+        ey = sy + Math.sin(angle) * line.length;
+
+        const mx = (sx + ex) / 2;
+        const my = (sy + ey) / 2;
+
+        const chord = line.length;
+        const R = Math.max(line.radius, chord / 2 + 1);
+        const heightOffset = R - Math.sqrt(R * R - (chord * chord) / 4);
+        finalCurvature = Math.min(25, heightOffset);
+
+        const perpAngle = angle + Math.PI / 2;
+        cx = mx + Math.cos(perpAngle) * finalCurvature;
+        cy = my + Math.sin(perpAngle) * finalCurvature;
+
+        finalLineWidth = line.lineWidth;
+
+      } else if (line.type === "vortex") {
+        const orbitAngle = reduceMotion.matches ? line.angle : (line.angle + timestamp * line.speed);
+        const pulse = reduceMotion.matches ? 0 : Math.sin(timestamp * 0.0005 + line.angle) * 8;
+        const currentRadius = line.radius + pulse;
+
+        sx = line.vortex.cx * width + Math.cos(orbitAngle) * currentRadius;
+        sy = line.vortex.cy * height + Math.sin(orbitAngle) * currentRadius;
+
+        angle = orbitAngle + Math.PI / 2 + 0.12;
+        ex = sx + Math.cos(angle) * line.length;
+        ey = sy + Math.sin(angle) * line.length;
+
+        const mx = (sx + ex) / 2;
+        const my = (sy + ey) / 2;
+
+        const R = Math.max(currentRadius, line.length / 2 + 1);
+        const heightOffset = R - Math.sqrt(R * R - (line.length * line.length) / 4);
+        finalCurvature = Math.min(20, heightOffset);
+
+        const perpAngle = angle + Math.PI / 2;
+        cx = mx + Math.cos(perpAngle) * finalCurvature;
+        cy = my + Math.sin(perpAngle) * finalCurvature;
+
+        finalLineWidth = line.lineWidth;
+
+      } else {
+        const driftX = reduceMotion.matches ? 0 : (timestamp * line.speedX);
+        const currentX = (line.x + driftX) % 1.2;
+        const actualX = currentX - 0.1;
+
+        const pulseY = reduceMotion.matches ? 0 : Math.sin(timestamp * line.speedY + line.phaseY) * 0.025;
+        const actualY = line.y + pulseY;
+
+        const getWaveY = (xVal) => {
+          return actualY + 0.08 * Math.sin(xVal * Math.PI * 2 + (reduceMotion.matches ? 0 : timestamp * 0.0002)) + 0.04 * Math.cos(xVal * Math.PI);
+        };
+
+        const y1 = getWaveY(actualX);
+        const y2 = getWaveY(actualX + 0.04);
+
+        sx = actualX * width;
+        sy = y1 * height;
+
+        const p2x = (actualX + 0.04) * width;
+        const p2y = y2 * height;
+
+        angle = Math.atan2(p2y - sy, p2x - sx);
+
+        ex = sx + Math.cos(angle) * line.length;
+        ey = sy + Math.sin(angle) * line.length;
+
+        const mx = (sx + ex) / 2;
+        const my = (sy + ey) / 2;
+
+        const waveCurvePhase = reduceMotion.matches ? line.phaseY : (timestamp * 0.001 + line.phaseY);
+        finalCurvature = Math.sin(waveCurvePhase) * 12;
+
+        const perpAngle = angle + Math.PI / 2;
+        cx = mx + Math.cos(perpAngle) * finalCurvature;
+        cy = my + Math.sin(perpAngle) * finalCurvature;
+
+        finalLineWidth = line.lineWidth;
+      }
+
+      const rgb = colorMap[line.color];
+      ctx.strokeStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity})`;
+      ctx.lineWidth = finalLineWidth;
+      ctx.lineCap = "round";
+
+      ctx.beginPath();
+      ctx.moveTo(sx, sy);
+      ctx.quadraticCurveTo(cx, cy, ex, ey);
+      ctx.stroke();
+    };
+
+    const drawStatic = () => {
+      ctx.clearRect(0, 0, width, height);
+      lines.forEach((line) => {
+        drawLine(line, 0);
+      });
+    };
+
+    let lastFrameTime = 0;
+    const fpsInterval = 1000 / 30;
+
+    const animate = (timestamp) => {
+      if (reduceMotion.matches) {
+        return;
+      }
+
+      requestAnimationFrame(animate);
+
+      if (!isHeroVisible || document.hidden) {
+        return;
+      }
+
+      const elapsed = timestamp - lastFrameTime;
+      if (elapsed < fpsInterval) {
+        return;
+      }
+      lastFrameTime = timestamp - (elapsed % fpsInterval);
+
+      ctx.clearRect(0, 0, width, height);
+      lines.forEach((line) => {
+        drawLine(line, timestamp);
+      });
+    };
+
+    const themeObserver = new MutationObserver(() => {
+      if (reduceMotion.matches) {
+        drawStatic();
+      }
+    });
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"]
+    });
+
+    reduceMotion.addEventListener("change", () => {
+      if (reduceMotion.matches) {
+        drawStatic();
+      } else {
+        lastFrameTime = performance.now();
+        requestAnimationFrame(animate);
+      }
+    });
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    if (!reduceMotion.matches) {
+      requestAnimationFrame(animate);
+    }
+  };
+
   applyTheme(getPreferredTheme());
   applyLanguage(currentLanguage);
   refreshIcons();
   setScrolledState();
   setupRevealObserver();
   setupActiveSectionObserver();
+  initStarryCanvas();
 
   window.addEventListener("scroll", setScrolledState, { passive: true });
 
