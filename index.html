@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 
 <head>
   <meta charset="UTF-8">
@@ -27,8 +27,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://api.fontshare.com">
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@300,400,500,600,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
 
@@ -106,7 +105,19 @@
   </header>
 
   <main id="main">
-    <section class="hero section-hero section-anchor" id="home">
+    <section class="hero section-hero section-anchor hero-section" id="home">
+      <div class="hero-video-bg" aria-hidden="true">
+        <video
+          class="hero-video"
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260217_030345_246c0224-10a4-422c-b324-070b7c0eceda.mp4"
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="none"
+        ></video>
+        <div class="hero-video-overlay"></div>
+      </div>
       <canvas id="starry-canvas"></canvas>
       <div class="hero-inner reveal">
         <div class="hero-photo-frame">

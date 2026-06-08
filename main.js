@@ -26,7 +26,9 @@
   const lightboxFigure = document.querySelector(".lightbox__figure");
   const galleryTriggers = Array.from(document.querySelectorAll("[data-gallery-index]"));
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  let activeTheme = "light";
+  let activeTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+    ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', activeTheme);
   let currentLanguage = "en";
   let activeDetailId = null;
   let activeGalleryIndex = 0;
@@ -44,7 +46,7 @@
       "nav.experience": "Experience",
       "nav.awards": "Awards",
       "nav.contact": "Contact",
-      "nav.cv": "CV",
+      "nav.cv": "Download CV",
       "hero.eyebrow": "AI & Computer Vision Researcher",
       "hero.title": "B.Eng. Student in Information Technology, specializing in Artificial Intelligence",
       "hero.tagline": "Pursuing Computer Vision is like chasing the holy grail of perception — where optimization meets understanding.",
@@ -190,7 +192,7 @@
       "nav.experience": "Kinh nghiệm",
       "nav.awards": "Giải thưởng",
       "nav.contact": "Liên hệ",
-      "nav.cv": "CV",
+      "nav.cv": "Tải CV",
       "hero.eyebrow": "Nhà nghiên cứu AI & Thị giác máy tính",
       "hero.title": "Sinh viên B.Eng. ngành Công nghệ thông tin, chuyên ngành Trí tuệ nhân tạo",
       "hero.tagline": "Theo đuổi Thị giác máy tính giống như tìm kiếm chén thánh của tri giác — nơi tối ưu hóa gặp gỡ sự thấu hiểu.",
@@ -1409,7 +1411,7 @@
     }
   };
 
-  applyTheme(getPreferredTheme());
+  applyTheme(activeTheme);
   applyLanguage(currentLanguage);
   refreshIcons();
   setScrolledState();
@@ -1524,7 +1526,7 @@
   });
 
   window.addEventListener("resize", () => {
-    if (window.matchMedia("(min-width: 981px)").matches) {
+    if (window.matchMedia("(min-width: 769px)").matches) {
       closeNav();
     }
   });
