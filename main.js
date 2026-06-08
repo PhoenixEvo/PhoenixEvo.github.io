@@ -7,6 +7,8 @@
   const navMenu = document.querySelector("[data-nav-menu]");
   const navLinks = Array.from(document.querySelectorAll(".nav-link"));
   const sections = Array.from(document.querySelectorAll("main section[id]"));
+  const newsToggle = document.querySelector("[data-news-toggle]");
+  const newsExtras = Array.from(document.querySelectorAll(".news-extra"));
   const detailModal = document.querySelector("[data-detail-modal]");
   const detailPanel = document.querySelector(".detail-modal__panel");
   const lightbox = document.querySelector("[data-lightbox]");
@@ -41,25 +43,34 @@
       "hero.link.github": "GitHub",
       "hero.link.linkedin": "LinkedIn",
       "hero.link.facebook": "Facebook",
+      "hero.link.orcid": "ORCID",
       "news.kicker": "Updates",
       "news.heading": "News",
-      "news.date.1": "Jan 2026",
-      "news.date.2": "2026",
-      "news.date.3": "2025",
-      "news.date.4": "2024",
-      "news.date.5": "2024",
-      "news.item.1": "Participated in the BMW Digital Twin & AI-Based Industrial Simulation exchange at University of Ulsan, South Korea.",
-      "news.item.2": "Completed Adaptive Density Pruning for Efficient 3D Gaussian Splatting, achieving 30% smaller model size with no quality loss.",
-      "news.item.3": "Received the Advanced Youth \"Following Uncle Ho\" award at university level.",
-      "news.item.4": "Completed HCMUTE student research on retinal vessel segmentation with a \"Good\" evaluation.",
-      "news.item.5": "Awarded Student of Five Merits at Ho Chi Minh City level.",
+      "news.date.1": "Apr 2026",
+      "news.date.2": "Mar 2026",
+      "news.date.3": "Jan 2026",
+      "news.date.4": "Jan 2026",
+      "news.date.5": "May 2025",
+      "news.date.6": "Jul 2025",
+      "news.date.7": "Sep 2025",
+      "news.date.8": "Dec 2024",
+      "news.item.1": "Honored to receive the \"Outstanding Student in Scientific Research\" award from the Faculty of Advanced Education (FAEPRIME) for the academic year 2024-2025.",
+      "news.item.2": "Awarded Student of Five Merits at University level.",
+      "news.item.3": "Awarded Student of Five Merits at Ho Chi Minh City level.",
+      "news.item.4": "Participated in the BMW Digital Twin & AI-Based Industrial Simulation exchange at University of Ulsan, South Korea.",
+      "news.item.5": "Received the Advanced Youth \"Following Uncle Ho\" award at university level.",
+      "news.item.6": "Our research project \"Advanced Retinal Blood Vessel Analysis Using Deep Learning for High-Resolution Image Segmentation\" was successfully defended with a Good rating.",
+      "news.item.7": "Successfully completed the intensive Artificial Intelligence course at Samsung Innovation Campus, co-organized by LetuinEdu and VDCA.",
+      "news.item.8": "Honored as an \"HCMUTE Talented Student 2024\" for outstanding academic and leadership excellence.",
+      "news.see_all": "See all news",
+      "news.collapse": "Show less",
       "about.kicker": "Profile",
       "about.heading": "About",
-      "about.p1": "Nguyen Nhat Phat is a third-year Bachelor of Information Technology student at HCMC University of Technology and Education, concentrating in Artificial Intelligence and Computer Vision. His academic work focuses on intelligent visual systems that can analyze, reconstruct, and reason about complex visual data.",
+      "about.p1": "I am a final-year B.Eng. Student in Information Technology at HCMC University of Technology and Engineering, concentrating in Artificial Intelligence and Computer Vision. My academic work focuses on intelligent visual systems that can analyze, reconstruct, and reason about complex visual data.",
       "about.publish_name.before": "I publish under the name",
       "about.publish_name.after": ".",
-      "about.p2": "His current research spans efficient 3D reconstruction with 3D Gaussian Splatting, geometry-aware model compression, and medical image analysis. He has completed independent research on adaptive density pruning for 3DGS and university research on retinal vessel segmentation using deep learning.",
-      "about.p3": "He is building a research foundation toward graduate study and international collaboration, with an interest in practical AI systems that remain rigorous, efficient, and useful in real-world scientific and clinical contexts.",
+      "about.p2": "My current research spans efficient 3D reconstruction with 3D Gaussian Splatting, geometry-aware model compression, and medical image analysis. I have completed independent research on adaptive density pruning for 3DGS and university research on retinal vessel segmentation using deep learning.",
+      "about.p3": "I am building a research foundation toward graduate study and international collaboration, with an interest in practical AI systems that remain rigorous, efficient, and useful in real-world scientific and clinical contexts.",
       "about.interests": "Research Interests",
       "interest.3d_reconstruction": "3D Reconstruction",
       "interest.medical_image": "Medical Image Analysis",
@@ -72,9 +83,12 @@
       "research.note.before": "Author lines follow academic convention;",
       "research.note.after": "is bolded throughout.",
       "research.paper1.venue": "Independent Research · 2026",
-      "research.paper1.desc": "A geometry-aware pruning method for 3D scene reconstruction models. It uses adaptive density estimation to remove spatially redundant components while preserving critical structures, producing a 30% smaller model with no quality loss across 11 scenes and two benchmarks.",
-      "research.paper2.venue": "HCMUTE University Research Program · 2024",
-      "research.paper2.desc": "A deep-learning approach for retinal blood vessel segmentation from medical images. The project applies convolutional neural networks and image processing to support high-resolution pixel-level medical image analysis.",
+      "research.paper1.desc": "A geometry-aware pruning method for 3D scene reconstruction models. Uses adaptive density estimation to remove spatially redundant components while preserving critical structures, achieving 30% smaller model size with no quality loss across 11 scenes and two benchmarks.",
+      "research.paper2.venue": "Independent Research · 2026",
+      "research.paper2.desc": "A self-supervised approach to CT through-plane interpolation using residual 3D Gaussian Splatting. Reconstructs high-resolution volumetric CT stacks from sparse axial slices without paired supervision.",
+      "research.paper3.venue": "HCMUTE University Research Program · 2024",
+      "research.paper3.desc": "A deep-learning approach for retinal blood vessel segmentation from medical images, applying CNNs and image processing for high-resolution pixel-level medical image analysis.",
+      "research.corresponding_note": "* corresponding author",
       "badge.rated_good": "Rated: Good",
       "link.code": "Code",
       "projects.kicker": "Technical Work",
@@ -84,8 +98,8 @@
       "projects.p2.desc": "High-resolution retinal blood vessel segmentation using deep learning for medical imaging.",
       "projects.p3.title": "Cassava Leaf Disease Classification",
       "projects.p3.desc": "MobileNetV3 classifier with k-fold cross-validation, data augmentation, and a GUI interface.",
-      "projects.p4.title": "Visual Graph Drawing Tool",
-      "projects.p4.desc": "Interactive graph visualization with drag-and-drop editing, Dijkstra's algorithm, and save/load support.",
+      "projects.p4.title": "Skin Lesion Classification using Fusion HAM10000",
+      "projects.p4.desc": "Multi-model fusion approach for skin lesion classification on the HAM10000 dataset, combining feature extraction strategies for improved diagnostic accuracy.",
       "status.research": "Research",
       "status.completed": "Completed",
       "experience.kicker": "Academic Life",
@@ -108,6 +122,8 @@
       "awards.table.award": "Award",
       "awards.table.level": "Level",
       "awards.table.details": "Details",
+      "awards.outstanding_research": "Outstanding Student in Scientific Research",
+      "awards.hcmute_talented": "HCMUTE Talented Student 2024",
       "awards.advanced_youth": "Advanced Youth \"Following Uncle Ho\"",
       "awards.five_merits": "Student of Five Merits",
       "awards.good_rating": "University Research \"Good\" Rating",
@@ -116,7 +132,8 @@
       "awards.samsung": "Samsung Innovation Campus (AI Program)",
       "awards.ielts": "IELTS 6.0",
       "awards.level.university": "University Level",
-      "awards.level.hcmc": "Ho Chi Minh City Level",
+      "awards.level.hcmc": "HCMC City Level",
+      "awards.level.faeprime": "Faculty (FAEPRIME)",
       "awards.level.university_short": "University",
       "awards.level.international": "International",
       "skills.kicker": "Toolkit",
@@ -172,25 +189,34 @@
       "hero.link.github": "GitHub",
       "hero.link.linkedin": "LinkedIn",
       "hero.link.facebook": "Facebook",
+      "hero.link.orcid": "ORCID",
       "news.kicker": "Cập nhật",
       "news.heading": "Tin tức",
-      "news.date.1": "01/2026",
-      "news.date.2": "2026",
-      "news.date.3": "2025",
-      "news.date.4": "2024",
-      "news.date.5": "2024",
-      "news.item.1": "Tham gia chương trình trao đổi BMW Digital Twin & AI-Based Industrial Simulation tại University of Ulsan, South Korea.",
-      "news.item.2": "Hoàn thành nghiên cứu Adaptive Density Pruning for Efficient 3D Gaussian Splatting, giảm 30% kích thước mô hình mà không làm suy giảm chất lượng.",
-      "news.item.3": "Đạt danh hiệu Thanh niên tiên tiến làm theo lời Bác cấp trường.",
-      "news.item.4": "Hoàn thành đề tài nghiên cứu sinh viên tại HCMUTE về phân đoạn mạch máu võng mạc với đánh giá \"Tốt\".",
-      "news.item.5": "Đạt danh hiệu Sinh viên 5 tốt cấp Thành phố Hồ Chí Minh.",
+      "news.date.1": "04/2026",
+      "news.date.2": "03/2026",
+      "news.date.3": "01/2026",
+      "news.date.4": "01/2026",
+      "news.date.5": "05/2025",
+      "news.date.6": "07/2025",
+      "news.date.7": "09/2025",
+      "news.date.8": "12/2024",
+      "news.item.1": "Vinh dự nhận giải \"Sinh viên Xuất sắc trong Nghiên cứu Khoa học\" từ Faculty of Advanced Education (FAEPRIME) cho năm học 2024-2025.",
+      "news.item.2": "Đạt danh hiệu Sinh viên 5 tốt cấp trường.",
+      "news.item.3": "Đạt danh hiệu Sinh viên 5 tốt cấp Thành phố Hồ Chí Minh.",
+      "news.item.4": "Tham gia chương trình trao đổi BMW Digital Twin & AI-Based Industrial Simulation tại University of Ulsan, South Korea.",
+      "news.item.5": "Nhận danh hiệu Thanh niên tiên tiến làm theo lời Bác cấp trường.",
+      "news.item.6": "Đề tài nghiên cứu \"Advanced Retinal Blood Vessel Analysis Using Deep Learning for High-Resolution Image Segmentation\" được bảo vệ thành công với đánh giá Tốt.",
+      "news.item.7": "Hoàn thành khóa học chuyên sâu về Artificial Intelligence tại Samsung Innovation Campus, đồng tổ chức bởi LetuinEdu và VDCA.",
+      "news.item.8": "Được vinh danh là \"HCMUTE Talented Student 2024\" nhờ thành tích học tập và năng lực lãnh đạo nổi bật.",
+      "news.see_all": "Xem tất cả tin tức",
+      "news.collapse": "Thu gọn",
       "about.kicker": "Hồ sơ",
       "about.heading": "Giới thiệu",
-      "about.p1": "Nguyen Nhat Phat là sinh viên năm ba ngành Công nghệ thông tin tại HCMC University of Technology and Education, định hướng Trí tuệ nhân tạo và Thị giác máy tính. Hướng học thuật của Phat tập trung vào các hệ thống thị giác thông minh có khả năng phân tích, tái dựng và suy luận từ dữ liệu hình ảnh phức tạp.",
+      "about.p1": "Tôi là sinh viên năm cuối chương trình B.Eng. ngành Công nghệ thông tin tại HCMC University of Technology and Engineering, định hướng Trí tuệ nhân tạo và Thị giác máy tính. Công việc học thuật của tôi tập trung vào các hệ thống thị giác thông minh có khả năng phân tích, tái dựng và suy luận từ dữ liệu hình ảnh phức tạp.",
       "about.publish_name.before": "Tôi công bố học thuật dưới tên",
       "about.publish_name.after": ".",
-      "about.p2": "Nghiên cứu hiện tại của Phat xoay quanh tái dựng 3D hiệu quả với 3D Gaussian Splatting, nén mô hình dựa trên hình học, và phân tích ảnh y sinh. Phat đã hoàn thành nghiên cứu độc lập về adaptive density pruning cho 3DGS và nghiên cứu cấp trường về phân đoạn mạch máu võng mạc bằng học sâu.",
-      "about.p3": "Phat đang xây dựng nền tảng nghiên cứu hướng đến bậc sau đại học và hợp tác quốc tế, với mối quan tâm đến các hệ thống AI thực tiễn nhưng vẫn chặt chẽ, hiệu quả và hữu ích trong bối cảnh khoa học cũng như lâm sàng.",
+      "about.p2": "Nghiên cứu hiện tại của tôi xoay quanh tái dựng 3D hiệu quả với 3D Gaussian Splatting, nén mô hình dựa trên hình học, và phân tích ảnh y sinh. Tôi đã hoàn thành nghiên cứu độc lập về adaptive density pruning cho 3DGS và nghiên cứu cấp trường về phân đoạn mạch máu võng mạc bằng học sâu.",
+      "about.p3": "Tôi đang xây dựng nền tảng nghiên cứu hướng đến bậc sau đại học và hợp tác quốc tế, với mối quan tâm đến các hệ thống AI thực tiễn nhưng vẫn chặt chẽ, hiệu quả và hữu ích trong bối cảnh khoa học cũng như lâm sàng.",
       "about.interests": "Hướng nghiên cứu",
       "interest.3d_reconstruction": "Tái dựng 3D",
       "interest.medical_image": "Phân tích ảnh y sinh",
@@ -203,9 +229,12 @@
       "research.note.before": "Dòng tác giả tuân theo quy ước học thuật;",
       "research.note.after": "được in đậm xuyên suốt.",
       "research.paper1.venue": "Nghiên cứu độc lập · 2026",
-      "research.paper1.desc": "Một phương pháp cắt tỉa dựa trên hình học cho mô hình tái dựng cảnh 3D. Phương pháp dùng ước lượng mật độ thích nghi để loại bỏ các thành phần dư thừa về mặt không gian trong khi vẫn giữ cấu trúc quan trọng, tạo ra mô hình nhỏ hơn 30% mà không giảm chất lượng trên 11 cảnh và hai bộ benchmark.",
-      "research.paper2.venue": "Chương trình Nghiên cứu Sinh viên HCMUTE · 2024",
-      "research.paper2.desc": "Một hướng tiếp cận học sâu cho bài toán phân đoạn mạch máu võng mạc từ ảnh y khoa. Dự án áp dụng mạng nơ-ron tích chập và xử lý ảnh để hỗ trợ phân tích ảnh y sinh ở cấp độ pixel với độ phân giải cao.",
+      "research.paper1.desc": "Một phương pháp cắt tỉa dựa trên hình học cho mô hình tái dựng cảnh 3D. Phương pháp dùng ước lượng mật độ thích nghi để loại bỏ các thành phần dư thừa về mặt không gian trong khi vẫn giữ cấu trúc quan trọng, đạt kích thước mô hình nhỏ hơn 30% mà không giảm chất lượng trên 11 cảnh và hai bộ benchmark.",
+      "research.paper2.venue": "Nghiên cứu độc lập · 2026",
+      "research.paper2.desc": "Một phương pháp tự giám sát cho nội suy lát cắt CT theo trục through-plane bằng residual 3D Gaussian Splatting. Phương pháp tái dựng các chồng CT thể tích độ phân giải cao từ các lát cắt axial thưa mà không cần dữ liệu giám sát theo cặp.",
+      "research.paper3.venue": "Chương trình Nghiên cứu Sinh viên HCMUTE · 2024",
+      "research.paper3.desc": "Một hướng tiếp cận học sâu cho bài toán phân đoạn mạch máu võng mạc từ ảnh y khoa, áp dụng CNN và xử lý ảnh cho phân tích ảnh y sinh độ phân giải cao ở cấp độ pixel.",
+      "research.corresponding_note": "* tác giả liên hệ",
       "badge.rated_good": "Đánh giá: Tốt",
       "link.code": "Mã nguồn",
       "projects.kicker": "Sản phẩm kỹ thuật",
@@ -215,8 +244,8 @@
       "projects.p2.desc": "Phân đoạn mạch máu võng mạc độ phân giải cao bằng học sâu cho ảnh y sinh.",
       "projects.p3.title": "Phân loại bệnh lá sắn",
       "projects.p3.desc": "Bộ phân loại MobileNetV3 với k-fold cross-validation, tăng cường dữ liệu và giao diện GUI.",
-      "projects.p4.title": "Công cụ vẽ đồ thị trực quan",
-      "projects.p4.desc": "Ứng dụng trực quan hóa đồ thị tương tác với kéo-thả, thuật toán Dijkstra và chức năng lưu/tải.",
+      "projects.p4.title": "Skin Lesion Classification using Fusion HAM10000",
+      "projects.p4.desc": "Phương pháp kết hợp nhiều mô hình để phân loại tổn thương da trên bộ dữ liệu HAM10000, tích hợp các chiến lược trích xuất đặc trưng để cải thiện độ chính xác chẩn đoán.",
       "status.research": "Nghiên cứu",
       "status.completed": "Hoàn thành",
       "experience.kicker": "Hoạt động học thuật",
@@ -239,6 +268,8 @@
       "awards.table.award": "Giải thưởng",
       "awards.table.level": "Cấp / Đơn vị",
       "awards.table.details": "Chi tiết",
+      "awards.outstanding_research": "Sinh viên Xuất sắc trong Nghiên cứu Khoa học",
+      "awards.hcmute_talented": "Sinh viên Tài năng HCMUTE 2024",
       "awards.advanced_youth": "Thanh niên tiên tiến làm theo lời Bác",
       "awards.five_merits": "Sinh viên 5 tốt",
       "awards.good_rating": "Đề tài nghiên cứu sinh viên đạt loại \"Tốt\"",
@@ -248,6 +279,7 @@
       "awards.ielts": "IELTS 6.0",
       "awards.level.university": "Cấp trường",
       "awards.level.hcmc": "Cấp Thành phố Hồ Chí Minh",
+      "awards.level.faeprime": "Cấp Khoa (FAEPRIME)",
       "awards.level.university_short": "Cấp trường",
       "awards.level.international": "Quốc tế",
       "skills.kicker": "Công cụ",
@@ -285,6 +317,23 @@
   };
 
   const detailContent = {
+    "faeprime-research": {
+      images: ["https://picsum.photos/seed/faeprime-research/400/300"],
+      tags: ["Scientific Research", "Faculty Award", "AI"],
+      link: "",
+      en: {
+        title: "Outstanding Student in Scientific Research",
+        organization: "Faculty of Advanced Education (FAEPRIME), HCMUTE",
+        date: "April 2026",
+        description: "Honored as Outstanding Student in Scientific Research by the Faculty of Advanced Education (FAEPRIME) for the academic year 2024-2025, recognizing contributions to AI and Computer Vision research."
+      },
+      vi: {
+        title: "Sinh viên Xuất sắc trong Nghiên cứu Khoa học",
+        organization: "Khoa Đào tạo Tiên tiến (FAEPRIME), HCMUTE",
+        date: "Tháng 04/2026",
+        description: "Được vinh danh Sinh viên Xuất sắc trong Nghiên cứu Khoa học bởi Khoa Đào tạo Tiên tiến (FAEPRIME) cho năm học 2024-2025, ghi nhận đóng góp trong lĩnh vực AI và Thị giác máy tính."
+      }
+    },
     "bmw-program": {
       images: [
         "https://picsum.photos/seed/korea1/400/300",
@@ -346,13 +395,13 @@
       en: {
         title: "Advanced Youth \"Following Uncle Ho\"",
         organization: "HCMUTE",
-        date: "2024-2025",
+        date: "May 2025",
         description: "Recognized at university level for youth development, conduct, learning attitude, leadership, and contribution to student and community activities."
       },
       vi: {
         title: "Thanh niên tiên tiến làm theo lời Bác",
         organization: "HCMUTE",
-        date: "2024-2025",
+        date: "Tháng 05/2025",
         description: "Được ghi nhận cấp trường về rèn luyện thanh niên, đạo đức, tinh thần học tập, năng lực lãnh đạo và đóng góp cho hoạt động sinh viên cũng như cộng đồng."
       }
     },
@@ -363,13 +412,13 @@
       en: {
         title: "Student of Five Merits - HCMC Level",
         organization: "Ho Chi Minh City",
-        date: "2023-2024",
+        date: "January 2026",
         description: "Awarded at Ho Chi Minh City level for outstanding academic performance, conduct, physical fitness, volunteerism, and social contribution."
       },
       vi: {
         title: "Sinh viên 5 tốt - Cấp Thành phố Hồ Chí Minh",
         organization: "Ho Chi Minh City",
-        date: "2023-2024",
+        date: "Tháng 01/2026",
         description: "Được trao cấp Thành phố Hồ Chí Minh cho thành tích nổi bật về học tập, đạo đức, thể lực, tình nguyện và đóng góp xã hội."
       }
     },
@@ -380,14 +429,31 @@
       en: {
         title: "Student of Five Merits - University Level",
         organization: "HCMUTE",
-        date: "2023-2024",
+        date: "March 2026",
         description: "Recognized at university level for balanced development across academic performance, ethics, volunteer activities, integration, and physical fitness."
       },
       vi: {
         title: "Sinh viên 5 tốt - Cấp trường",
         organization: "HCMUTE",
-        date: "2023-2024",
+        date: "Tháng 03/2026",
         description: "Được ghi nhận cấp trường cho sự phát triển toàn diện về học tập, đạo đức, hoạt động tình nguyện, hội nhập và thể lực."
+      }
+    },
+    "hcmute-talented-2024": {
+      images: ["https://picsum.photos/seed/hcmute-talented/400/300"],
+      tags: ["Academic Excellence", "Leadership", "Recognition"],
+      link: "",
+      en: {
+        title: "HCMUTE Talented Student 2024",
+        organization: "HCMUTE",
+        date: "December 2024",
+        description: "Recognized as an HCMUTE Talented Student 2024 for outstanding academic performance and leadership excellence throughout the academic year."
+      },
+      vi: {
+        title: "Sinh viên Tài năng HCMUTE 2024",
+        organization: "HCMUTE",
+        date: "Tháng 12/2024",
+        description: "Được công nhận là Sinh viên Tài năng HCMUTE 2024 vì thành tích học tập xuất sắc và khả năng lãnh đạo nổi bật trong năm học."
       }
     },
     "hcmute-research-good": {
@@ -537,6 +603,13 @@
         "aria-label",
         language === "en" ? "Switch to Vietnamese" : "Chuyển sang tiếng Anh"
       );
+    }
+
+    if (newsToggle) {
+      const expanded = newsToggle.getAttribute("aria-expanded") === "true";
+      newsToggle.textContent = expanded
+        ? translations[language]["news.collapse"]
+        : translations[language]["news.see_all"];
     }
 
     if (activeDetailId) {
@@ -1320,6 +1393,17 @@
 
   languageToggle?.addEventListener("click", () => {
     applyLanguage(currentLanguage === "en" ? "vi" : "en");
+  });
+
+  newsToggle?.addEventListener("click", () => {
+    const expanded = newsToggle.getAttribute("aria-expanded") === "true";
+    newsExtras.forEach((item) => {
+      item.hidden = expanded;
+    });
+    newsToggle.setAttribute("aria-expanded", String(!expanded));
+    newsToggle.textContent = !expanded
+      ? translations[currentLanguage]["news.collapse"]
+      : translations[currentLanguage]["news.see_all"];
   });
 
   navToggle?.addEventListener("click", () => {

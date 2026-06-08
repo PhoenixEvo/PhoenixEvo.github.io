@@ -463,6 +463,34 @@ h3 {
   font-weight: 700;
 }
 
+.news-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-primary);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: color var(--transition);
+}
+
+.news-toggle:hover {
+  color: var(--color-primary-hover);
+}
+
+.news-toggle::after {
+  content: "↓";
+  transition: transform 0.2s ease;
+}
+
+.news-toggle[aria-expanded="true"]::after {
+  content: "↑";
+}
+
 .news-list span,
 .prose p,
 .paper p,
@@ -595,6 +623,15 @@ h3 {
   flex-wrap: wrap;
   gap: var(--space-2);
   margin-top: var(--space-4);
+}
+
+.inline-links a.pdf-placeholder {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
 }
 
 .project-grid,
@@ -1003,21 +1040,39 @@ tbody tr:last-child td {
   margin-bottom: var(--space-4);
 }
 
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  justify-content: center;
+}
+
 .contact-button {
   min-height: 2.8rem;
   margin-top: var(--space-6);
-  border-color: var(--color-primary);
-  background: var(--color-primary);
-  color: var(--color-surface);
 }
 
+.contact-links a,
+.contact-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  transition: background-color var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.contact-links a:hover,
 .contact-button:hover {
-  background: var(--color-primary-hover);
-  color: var(--color-surface);
-}
-
-.contact-links {
-  justify-content: center;
+  border-color: var(--color-primary);
+  background: var(--color-surface-soft);
+  color: var(--color-primary);
 }
 
 .footer {

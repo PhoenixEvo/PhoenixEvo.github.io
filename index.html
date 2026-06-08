@@ -66,7 +66,8 @@
     "sameAs": [
       "https://github.com/PhoenixEvo",
       "https://linkedin.com/in/nguyennhatphat1203",
-      "https://facebook.com/nhatphst1203"
+      "https://facebook.com/nhatphst1203",
+      "https://orcid.org/0009-0003-5580-3089"
     ]
   }
   </script>
@@ -130,6 +131,14 @@
                 aria-hidden="true"></i><span data-i18n="hero.link.github">GitHub</span></a>
             <a href="https://linkedin.com/in/nguyennhatphat1203" target="_blank" rel="noopener"><i
                 data-lucide="linkedin" aria-hidden="true"></i><span data-i18n="hero.link.linkedin">LinkedIn</span></a>
+            <a href="https://orcid.org/0009-0003-5580-3089" target="_blank" rel="noopener">
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 256 256" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M128 0C57.3 0 0 57.3 0 128s57.3 128 128 128 128-57.3 128-128S198.7 0 128 0zM86.3 186.2H70.9V79.1h15.4v107.1zM78.6 66.9c-5.4 0-9.8-4.5-9.8-9.9s4.4-9.9 9.8-9.9 9.8 4.5 9.8 9.9-4.4 9.9-9.8 9.9zM190.4 186.2h-15.4v-52c0-12.4-.2-28.4-17.3-28.4-17.3 0-20 13.5-20 27.4v53h-15.4V79.1h14.8v14.6h.2c2.1-3.9 7.1-8 14.6-8 15.6 0 18.5 10.3 18.5 23.6v77z" />
+              </svg>
+              <span data-i18n="hero.link.orcid">ORCID</span>
+            </a>
             <a href="https://facebook.com/nhatphst1203" target="_blank" rel="noopener"><i data-lucide="facebook"
                 aria-hidden="true"></i><span data-i18n="hero.link.facebook">Facebook</span></a>
           </div>
@@ -143,20 +152,18 @@
           <p class="section-kicker" data-i18n="news.kicker">Updates</p>
           <h2 id="news-title" data-i18n="news.heading">News</h2>
         </div>
-        <ol class="news-list">
-          <li><time datetime="2026-01" data-i18n="news.date.1">Jan 2026</time><span data-i18n="news.item.1">Participated
-              in the BMW Digital Twin & AI-Based Industrial Simulation exchange at University of Ulsan, South
-              Korea.</span></li>
-          <li><time datetime="2026" data-i18n="news.date.2">2026</time><span data-i18n="news.item.2">Completed Adaptive
-              Density Pruning for Efficient 3D Gaussian Splatting, achieving 30% smaller model size with no quality
-              loss.</span></li>
-          <li><time datetime="2025" data-i18n="news.date.3">2025</time><span data-i18n="news.item.3">Received the
-              Advanced Youth "Following Uncle Ho" award at university level.</span></li>
-          <li><time datetime="2024" data-i18n="news.date.4">2024</time><span data-i18n="news.item.4">Completed HCMUTE
-              student research on retinal vessel segmentation with a "Good" evaluation.</span></li>
-          <li><time datetime="2024" data-i18n="news.date.5">2024</time><span data-i18n="news.item.5">Awarded Student of
-              Five Merits at Ho Chi Minh City level.</span></li>
+        <ol class="news-list" id="news-list">
+          <li><time datetime="2026-04" data-i18n="news.date.1">Apr 2026</time><span data-i18n="news.item.1">Honored to receive the "Outstanding Student in Scientific Research" award from the Faculty of Advanced Education (FAEPRIME) for the academic year 2024-2025.</span></li>
+          <li><time datetime="2026-03" data-i18n="news.date.2">Mar 2026</time><span data-i18n="news.item.2">Awarded Student of Five Merits at University level.</span></li>
+          <li><time datetime="2026-01" data-i18n="news.date.3">Jan 2026</time><span data-i18n="news.item.3">Awarded Student of Five Merits at Ho Chi Minh City level.</span></li>
+          <li><time datetime="2026-01" data-i18n="news.date.4">Jan 2026</time><span data-i18n="news.item.4">Participated in the BMW Digital Twin & AI-Based Industrial Simulation exchange at University of Ulsan, South Korea.</span></li>
+          <li class="news-extra" hidden><time datetime="2025-05" data-i18n="news.date.5">May 2025</time><span data-i18n="news.item.5">Received the Advanced Youth "Following Uncle Ho" award at university level.</span></li>
+          <li class="news-extra" hidden><time datetime="2025-07" data-i18n="news.date.6">Jul 2025</time><span data-i18n="news.item.6">Our research project "Advanced Retinal Blood Vessel Analysis Using Deep Learning for High-Resolution Image Segmentation" was successfully defended with a Good rating.</span></li>
+          <li class="news-extra" hidden><time datetime="2025-09" data-i18n="news.date.7">Sep 2025</time><span data-i18n="news.item.7">Successfully completed the intensive Artificial Intelligence course at Samsung Innovation Campus, co-organized by LetuinEdu and VDCA.</span></li>
+          <li class="news-extra" hidden><time datetime="2024-12" data-i18n="news.date.8">Dec 2024</time><span data-i18n="news.item.8">Honored as an "HCMUTE Talented Student 2024" for outstanding academic and leadership excellence.</span></li>
         </ol>
+        <button class="news-toggle" type="button" data-news-toggle aria-expanded="false"
+          data-i18n="news.see_all">See all news</button>
       </div>
     </section>
 
@@ -167,18 +174,10 @@
           <h2 id="about-title" data-i18n="about.heading">About</h2>
         </div>
         <div class="prose">
-          <p data-i18n="about.p1">Nguyen Nhat Phat is a third-year Bachelor of Information Technology student at HCMC
-            University of Technology and Education, concentrating in Artificial Intelligence and Computer Vision. His
-            academic work focuses on intelligent visual systems that can analyze, reconstruct, and reason about complex
-            visual data.</p>
+          <p data-i18n="about.p1">I am a final-year B.Eng. Student in Information Technology at HCMC University of Technology and Engineering, concentrating in Artificial Intelligence and Computer Vision. My academic work focuses on intelligent visual systems that can analyze, reconstruct, and reason about complex visual data.</p>
           <p><span data-i18n="about.publish_name.before">I publish under the name</span> <strong>Nhat-Phat Nguyen</strong><span data-i18n="about.publish_name.after">.</span></p>
-          <p data-i18n="about.p2">His current research spans efficient 3D reconstruction with 3D Gaussian Splatting,
-            geometry-aware model compression, and medical image analysis. He has completed independent research on
-            adaptive density pruning for 3DGS and university research on retinal vessel segmentation using deep
-            learning.</p>
-          <p data-i18n="about.p3">He is building a research foundation toward graduate study and international
-            collaboration, with an interest in practical AI systems that remain rigorous, efficient, and useful in
-            real-world scientific and clinical contexts.</p>
+          <p data-i18n="about.p2">My current research spans efficient 3D reconstruction with 3D Gaussian Splatting, geometry-aware model compression, and medical image analysis. I have completed independent research on adaptive density pruning for 3DGS and university research on retinal vessel segmentation using deep learning.</p>
+          <p data-i18n="about.p3">I am building a research foundation toward graduate study and international collaboration, with an interest in practical AI systems that remain rigorous, efficient, and useful in real-world scientific and clinical contexts.</p>
         </div>
         <div class="interest-block">
           <h3 data-i18n="about.interests">Research Interests</h3>
@@ -207,22 +206,39 @@
 
         <div class="paper-list">
           <article class="paper">
-            <a class="paper-thumb" href="https://github.com/PhoenixEvo" target="_blank" rel="noopener"
+            <a class="paper-thumb" href="https://github.com/PhoenixEvo/3dgs-adp" target="_blank" rel="noopener"
               aria-label="View code for Adaptive Density Pruning">
               <img src="https://picsum.photos/seed/3dscene/320/240"
                 alt="Placeholder 3D scene rendering for Gaussian Splatting research" width="320" height="240"
                 loading="lazy">
             </a>
             <div class="paper-content">
-              <h3><a href="https://github.com/PhoenixEvo" target="_blank" rel="noopener">Adaptive Density Pruning for
-                  Efficient 3D Gaussian Splatting</a></h3>
-              <p class="authors"><strong>Nhat-Phat Nguyen</strong></p>
+              <h3><a href="https://github.com/PhoenixEvo/3dgs-adp" target="_blank" rel="noopener">Adaptive Density Pruning for Efficient 3D Gaussian Splatting</a></h3>
+              <p class="authors"><strong>Nhat-Phat Nguyen</strong>, Quoc-Hung Pham and Van-Dung Hoang*</p>
               <p class="venue" data-i18n="research.paper1.venue">Independent Research &middot; 2026</p>
-              <p data-i18n="research.paper1.desc">A geometry-aware pruning method for 3D scene reconstruction models. It
-                uses adaptive density estimation to remove spatially redundant components while preserving critical
-                structures, producing a 30% smaller model with no quality loss across 11 scenes and two benchmarks.</p>
+              <p data-i18n="research.paper1.desc">A geometry-aware pruning method for 3D scene reconstruction models. Uses adaptive density estimation to remove spatially redundant components while preserving critical structures, achieving 30% smaller model size with no quality loss across 11 scenes and two benchmarks.</p>
               <div class="inline-links">
-                <a href="https://github.com/PhoenixEvo" target="_blank" rel="noopener" data-i18n="link.code">Code</a>
+                <a href="#" class="pdf-placeholder" data-pdf-placeholder="true" aria-disabled="true" title="Coming soon"><i data-lucide="lock" aria-hidden="true"></i>PDF</a>
+                <a href="https://github.com/PhoenixEvo/3dgs-adp" target="_blank" rel="noopener" data-i18n="link.code">Code</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="paper">
+            <a class="paper-thumb" href="https://github.com/PhoenixEvo/ct-slice-interpolation-3dgs" target="_blank"
+              rel="noopener" aria-label="View code for CT interpolation research">
+              <img src="https://picsum.photos/seed/ct-volume/320/240" alt="Placeholder CT volume interpolation research image"
+                width="320" height="240" loading="lazy">
+            </a>
+            <div class="paper-content">
+              <h3><a href="https://github.com/PhoenixEvo/ct-slice-interpolation-3dgs" target="_blank"
+                  rel="noopener">Self-Supervised CT Through-Plane Interpolation via Residual 3D Gaussian Splatting</a></h3>
+              <p class="authors"><strong>Nhat-Phat Nguyen</strong>, Quoc-Hung Pham and Van-Dung Hoang*</p>
+              <p class="venue" data-i18n="research.paper2.venue">Independent Research &middot; 2026</p>
+              <p data-i18n="research.paper2.desc">A self-supervised approach to CT through-plane interpolation using residual 3D Gaussian Splatting. Reconstructs high-resolution volumetric CT stacks from sparse axial slices without paired supervision.</p>
+              <div class="inline-links">
+                <a href="#" class="pdf-placeholder" data-pdf-placeholder="true" aria-disabled="true" title="Coming soon"><i data-lucide="lock" aria-hidden="true"></i>PDF</a>
+                <a href="https://github.com/PhoenixEvo/ct-slice-interpolation-3dgs" target="_blank" rel="noopener" data-i18n="link.code">Code</a>
               </div>
             </div>
           </article>
@@ -236,21 +252,19 @@
             </a>
             <div class="paper-content">
               <h3><a href="https://github.com/PhoenixEvo/retinal-vessel-segmentation" target="_blank"
-                  rel="noopener">Advanced Retinal Vessel Analysis Using Deep Learning for High-Resolution
-                  Segmentation</a></h3>
-              <p class="authors"><strong>Nhat-Phat Nguyen</strong></p>
-              <p class="venue"><span data-i18n="research.paper2.venue">HCMUTE University Research Program &middot;
-                  2024</span> <span class="badge" data-i18n="badge.rated_good">Rated: Good</span></p>
-              <p data-i18n="research.paper2.desc">A deep-learning approach for retinal blood vessel segmentation from
-                medical images. The project applies convolutional neural networks and image processing to support
-                high-resolution pixel-level medical image analysis.</p>
+                  rel="noopener">Advanced Retinal Vessel Analysis Using Deep Learning for High-Resolution Segmentation</a></h3>
+              <p class="authors"><strong>Nhat-Phat Nguyen</strong>, Bui Tran Tan Phat, Huynh Gia Han, Tran Huynh Xuan Thanh</p>
+              <p class="venue"><span data-i18n="research.paper3.venue">HCMUTE University Research Program &middot; 2024</span> <span class="badge" data-i18n="badge.rated_good">Rated: Good</span></p>
+              <p data-i18n="research.paper3.desc">A deep-learning approach for retinal blood vessel segmentation from medical images, applying CNNs and image processing for high-resolution pixel-level medical image analysis.</p>
               <div class="inline-links">
+                <a href="#" class="pdf-placeholder" data-pdf-placeholder="true" aria-disabled="true" title="Coming soon"><i data-lucide="lock" aria-hidden="true"></i>PDF</a>
                 <a href="https://github.com/PhoenixEvo/retinal-vessel-segmentation" target="_blank" rel="noopener"
                   data-i18n="link.code">Code</a>
               </div>
             </div>
           </article>
         </div>
+        <p class="section-note" data-i18n="research.corresponding_note">* corresponding author</p>
       </div>
     </section>
 
@@ -314,19 +328,20 @@
           </article>
 
           <article class="project-card reveal">
-            <img src="https://picsum.photos/seed/network-graph/320/240"
-              alt="Placeholder network graph for graph drawing tool" width="320" height="240" loading="lazy">
+            <img src="https://picsum.photos/seed/skin-lesion/320/240" alt="Skin lesion classification project"
+              width="320" height="240" loading="lazy">
             <div class="project-body">
-              <p class="project-meta">C++ <span class="status completed" data-i18n="status.completed">Completed</span>
+              <p class="project-meta">2024 <span class="status completed" data-i18n="status.completed">Completed</span>
               </p>
-              <h3 data-i18n="projects.p4.title">Visual Graph Drawing Tool</h3>
-              <p data-i18n="projects.p4.desc">Interactive graph visualization with drag-and-drop editing, Dijkstra's
-                algorithm, and save/load support.</p>
+              <h3 data-i18n="projects.p4.title">Skin Lesion Classification using Fusion HAM10000</h3>
+              <p data-i18n="projects.p4.desc">Multi-model fusion approach for skin lesion classification on the HAM10000 dataset, combining feature extraction strategies for improved diagnostic accuracy.</p>
               <div class="tag-list compact">
-                <span>C++</span><span>Algorithms</span><span>Dijkstra</span>
+                <span>PyTorch</span><span>Medical AI</span><span>Classification</span><span>HAM10000</span>
               </div>
-              <a class="project-link" href="https://github.com/PhoenixEvo" target="_blank" rel="noopener"><i
-                  data-lucide="github" aria-hidden="true"></i><span data-i18n="hero.link.github">GitHub</span></a>
+              <a class="project-link"
+                href="https://github.com/FlynnBui399/skin-lession-classification-using-fusion-ham10000"
+                target="_blank" rel="noopener"><i data-lucide="github" aria-hidden="true"></i><span
+                  data-i18n="hero.link.github">GitHub</span></a>
             </div>
           </article>
         </div>
@@ -392,26 +407,39 @@
               </tr>
             </thead>
             <tbody>
+              <tr class="award-row" data-detail-id="faeprime-research" tabindex="0" aria-haspopup="dialog">
+                <td>Apr 2026</td>
+                <td data-i18n="awards.outstanding_research">Outstanding Student in Scientific Research</td>
+                <td data-i18n="awards.level.faeprime">Faculty (FAEPRIME)</td>
+                <td><button class="detail-link" type="button" data-detail-id="faeprime-research"
+                    data-i18n="details.see">See details</button></td>
+              </tr>
+              <tr class="award-row" data-detail-id="student-five-merits-university" tabindex="0" aria-haspopup="dialog">
+                <td>Mar 2026</td>
+                <td data-i18n="awards.five_merits">Student of Five Merits</td>
+                <td data-i18n="awards.level.university">University Level</td>
+                <td><button class="detail-link" type="button" data-detail-id="student-five-merits-university"
+                    data-i18n="details.see">See details</button></td>
+              </tr>
+              <tr class="award-row" data-detail-id="student-five-merits" tabindex="0" aria-haspopup="dialog">
+                <td>Jan 2026</td>
+                <td data-i18n="awards.five_merits">Student of Five Merits</td>
+                <td data-i18n="awards.level.hcmc">HCMC City Level</td>
+                <td><button class="detail-link" type="button" data-detail-id="student-five-merits"
+                    data-i18n="details.see">See details</button></td>
+              </tr>
               <tr class="award-row" data-detail-id="advanced-youth" tabindex="0" aria-haspopup="dialog">
-                <td>2024-2025</td>
+                <td>May 2025</td>
                 <td data-i18n="awards.advanced_youth">Advanced Youth "Following Uncle Ho"</td>
                 <td data-i18n="awards.level.university">University Level</td>
                 <td><button class="detail-link" type="button" data-detail-id="advanced-youth"
                     data-i18n="details.see">See details</button></td>
               </tr>
-              <tr class="award-row" data-detail-id="student-five-merits" tabindex="0" aria-haspopup="dialog">
-                <td>2023-2024</td>
-                <td data-i18n="awards.five_merits">Student of Five Merits</td>
-                <td data-i18n="awards.level.hcmc">Ho Chi Minh City Level</td>
-                <td><button class="detail-link" type="button" data-detail-id="student-five-merits"
-                    data-i18n="details.see">See details</button></td>
-              </tr>
-              <tr class="award-row" data-detail-id="student-five-merits-university" tabindex="0"
-                aria-haspopup="dialog">
-                <td>2023-2024</td>
-                <td data-i18n="awards.five_merits">Student of Five Merits</td>
+              <tr class="award-row" data-detail-id="hcmute-talented-2024" tabindex="0" aria-haspopup="dialog">
+                <td>Dec 2024</td>
+                <td data-i18n="awards.hcmute_talented">HCMUTE Talented Student 2024</td>
                 <td data-i18n="awards.level.university">University Level</td>
-                <td><button class="detail-link" type="button" data-detail-id="student-five-merits-university"
+                <td><button class="detail-link" type="button" data-detail-id="hcmute-talented-2024"
                     data-i18n="details.see">See details</button></td>
               </tr>
               <tr class="award-row" data-detail-id="hcmute-research-good" tabindex="0" aria-haspopup="dialog">
@@ -557,6 +585,14 @@
               aria-hidden="true"></i><span data-i18n="hero.link.linkedin">LinkedIn</span></a>
           <a href="https://facebook.com/nhatphst1203" target="_blank" rel="noopener"><i data-lucide="facebook"
               aria-hidden="true"></i><span data-i18n="hero.link.facebook">Facebook</span></a>
+          <a href="https://orcid.org/0009-0003-5580-3089" target="_blank" rel="noopener">
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 256 256" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M128 0C57.3 0 0 57.3 0 128s57.3 128 128 128 128-57.3 128-128S198.7 0 128 0zM86.3 186.2H70.9V79.1h15.4v107.1zM78.6 66.9c-5.4 0-9.8-4.5-9.8-9.9s4.4-9.9 9.8-9.9 9.8 4.5 9.8 9.9-4.4 9.9-9.8 9.9zM190.4 186.2h-15.4v-52c0-12.4-.2-28.4-17.3-28.4-17.3 0-20 13.5-20 27.4v53h-15.4V79.1h14.8v14.6h.2c2.1-3.9 7.1-8 14.6-8 15.6 0 18.5 10.3 18.5 23.6v77z" />
+            </svg>
+            <span data-i18n="hero.link.orcid">ORCID</span>
+          </a>
         </div>
       </div>
     </section>
