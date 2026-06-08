@@ -305,6 +305,70 @@ button {
   overflow: hidden;
 }
 
+.hero-video-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-video-bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.50);
+}
+
+#home {
+  position: relative;
+}
+
+#home > *:not(.hero-video-bg):not(#starry-canvas) {
+  position: relative;
+  z-index: 1;
+}
+
+[data-theme="dark"] .hero-video-bg {
+  display: block;
+}
+
+[data-theme="dark"] #starry-canvas {
+  display: none !important;
+}
+
+[data-theme="light"] .hero-video-bg {
+  display: none;
+}
+
+[data-theme="light"] #starry-canvas {
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .hero-video-bg {
+    display: block;
+  }
+
+  :root:not([data-theme]) #starry-canvas {
+    display: none !important;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .hero-video-bg {
+    display: none;
+  }
+}
+
 #starry-canvas {
   position: absolute;
   inset: 0;

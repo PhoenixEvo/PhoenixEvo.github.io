@@ -743,6 +743,14 @@
   const applyTheme = (theme) => {
     activeTheme = theme;
     root.dataset.theme = theme;
+    const video = document.querySelector(".hero-video-bg video");
+    if (video) {
+      if (activeTheme === "dark") {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    }
 
     if (themeToggle) {
       const nextTheme = theme === "dark" ? "light" : "dark";
@@ -798,13 +806,11 @@
     if (!trackedSections.length) return;
 
     const headerOffset = header?.offsetHeight || 64;
-    const probeY = Math.min(headerOffset + 96, window.innerHeight - 1);
-    const activeItem = trackedSections.find(({ section }) => {
-      const rect = section.getBoundingClientRect();
-      return rect.top <= probeY && rect.bottom > probeY;
-    }) || trackedSections.slice().reverse().find(({ section }) =>
-      section.getBoundingClientRect().top <= probeY
-    ) || trackedSections[0];
+    const activationPoint = window.scrollY + headerOffset + 64;
+    const activeItem = trackedSections.reduce((current, item) => {
+      const sectionTop = item.section.getBoundingClientRect().top + window.scrollY;
+      return sectionTop <= activationPoint ? item : current;
+    }, trackedSections[0]);
 
     setActiveLink(activeItem.navId);
   };
