@@ -523,6 +523,40 @@ h3 {
   margin: 0;
 }
 
+.about-figure {
+  position: relative;
+  overflow: hidden;
+  margin: var(--space-8) 0 0;
+  aspect-ratio: 21 / 10;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+}
+
+.about-figure::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 68%, rgb(0 0 0 / 0.16));
+}
+
+.about-figure img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.about-figure:hover {
+  border-color: color-mix(in srgb, var(--color-primary) 52%, var(--color-border));
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
 .interest-block {
   margin-top: var(--space-8);
 }
@@ -568,6 +602,7 @@ h3 {
 .paper {
   display: grid;
   grid-template-columns: 180px minmax(0, 1fr);
+  align-items: start;
   gap: var(--space-6);
   padding-bottom: var(--space-8);
   border-bottom: 1px solid var(--color-divider);
@@ -581,15 +616,19 @@ h3 {
 .paper-thumb {
   display: block;
   overflow: hidden;
+  width: 100%;
+  aspect-ratio: 4 / 3;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   background: var(--color-surface);
 }
 
 .paper-thumb img {
+  display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  height: 100%;
   object-fit: cover;
+  object-position: center center;
 }
 
 .paper-content h3 {
@@ -1301,6 +1340,10 @@ tbody tr:last-child td {
 
   .reveal {
     opacity: 1;
+    transform: none;
+  }
+
+  .about-figure:hover {
     transform: none;
   }
 

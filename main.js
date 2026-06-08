@@ -6,7 +6,18 @@
   const navToggle = document.querySelector("[data-nav-toggle]");
   const navMenu = document.querySelector("[data-nav-menu]");
   const navLinks = Array.from(document.querySelectorAll(".nav-link"));
-  const sections = Array.from(document.querySelectorAll("main section[id]"));
+  const allSections = Array.from(document.querySelectorAll("main section[id]"));
+  const navSectionIds = new Set(navLinks.map((link) => link.getAttribute("href")?.slice(1)).filter(Boolean));
+  const trackedSections = allSections.reduce((items, section) => {
+    const sectionId = section.id;
+    const navId = navSectionIds.has(sectionId) ? sectionId : items[items.length - 1]?.navId;
+
+    if (navId) {
+      items.push({ section, navId });
+    }
+
+    return items;
+  }, []);
   const newsToggle = document.querySelector("[data-news-toggle]");
   const newsExtras = Array.from(document.querySelectorAll(".news-extra"));
   const detailModal = document.querySelector("[data-detail-modal]");
@@ -19,6 +30,7 @@
   let currentLanguage = "en";
   let activeDetailId = null;
   let activeGalleryIndex = 0;
+  let activeSectionFrame = null;
   let previousFocus = null;
 
   const translations = {
@@ -772,27 +784,47 @@
 
   const setActiveLink = (id) => {
     navLinks.forEach((link) => {
-      link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
+      const isActive = link.getAttribute("href") === `#${id}`;
+      link.classList.toggle("active", isActive);
+      if (isActive) {
+        link.setAttribute("aria-current", "page");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+  };
+
+  const updateActiveSection = () => {
+    if (!trackedSections.length) return;
+
+    const headerOffset = header?.offsetHeight || 64;
+    const probeY = Math.min(headerOffset + 96, window.innerHeight - 1);
+    const activeItem = trackedSections.find(({ section }) => {
+      const rect = section.getBoundingClientRect();
+      return rect.top <= probeY && rect.bottom > probeY;
+    }) || trackedSections.slice().reverse().find(({ section }) =>
+      section.getBoundingClientRect().top <= probeY
+    ) || trackedSections[0];
+
+    setActiveLink(activeItem.navId);
+  };
+
+  const scheduleActiveSectionUpdate = () => {
+    if (activeSectionFrame) return;
+
+    activeSectionFrame = window.requestAnimationFrame(() => {
+      activeSectionFrame = null;
+      updateActiveSection();
     });
   };
 
   const setupActiveSectionObserver = () => {
-    if (!sections.length || reduceMotion.matches) return;
+    if (!trackedSections.length) return;
 
-    const sectionObserver = new IntersectionObserver((entries) => {
-      const visible = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-      if (visible) {
-        setActiveLink(visible.target.id);
-      }
-    }, {
-      rootMargin: "-35% 0px -50% 0px",
-      threshold: [0.12, 0.3, 0.6]
-    });
-
-    sections.forEach((section) => sectionObserver.observe(section));
+    updateActiveSection();
+    window.addEventListener("scroll", scheduleActiveSectionUpdate, { passive: true });
+    window.addEventListener("resize", scheduleActiveSectionUpdate);
+    window.addEventListener("load", scheduleActiveSectionUpdate);
   };
 
   const setupRevealObserver = () => {
@@ -1416,7 +1448,14 @@
   });
 
   navLinks.forEach((link) => {
-    link.addEventListener("click", closeNav);
+    link.addEventListener("click", () => {
+      const id = link.getAttribute("href")?.slice(1);
+      if (id) {
+        setActiveLink(id);
+        window.setTimeout(scheduleActiveSectionUpdate, 250);
+      }
+      closeNav();
+    });
   });
 
   document.querySelectorAll("[data-detail-id]").forEach((trigger) => {
