@@ -457,7 +457,7 @@
       }
     },
     "hcmute-research-good": {
-      images: ["https://picsum.photos/seed/research-lab/400/300"],
+      images: ["./assets/certificates/retinal_seg_cer.jpg", "./assets/projects/retinal_seg.webp"],
       tags: ["Deep Learning", "Medical Image Analysis", "Research Defense"],
       link: "https://github.com/PhoenixEvo/retinal-vessel-segmentation",
       en: {
@@ -497,30 +497,30 @@
       en: {
         title: "Talented Student Scholarship",
         organization: "HCMUTE",
-        date: "Academic recognition",
+        date: "2024",
         description: "Received scholarship recognition from HCMUTE for academic potential, learning effort, and contribution to the university community."
       },
       vi: {
         title: "Học bổng Sinh viên tài năng",
         organization: "HCMUTE",
-        date: "Ghi nhận học thuật",
+        date: "2024",
         description: "Nhận học bổng từ HCMUTE cho tiềm năng học thuật, nỗ lực học tập và đóng góp cho cộng đồng đại học."
       }
     },
     "samsung-campus": {
-      images: ["https://picsum.photos/seed/samsung-campus-detail/400/300"],
+      images: ["./assets/certificates/samsung_ic.jpg"],
       tags: ["AI Program", "Technology", "Training"],
       link: "",
       en: {
         title: "Samsung Innovation Campus (AI Program)",
         organization: "Samsung",
-        date: "Certificate program",
+        date: "September 2025",
         description: "Completed AI-oriented learning through Samsung Innovation Campus, strengthening foundations in modern technology, applied AI concepts, and practical problem solving."
       },
       vi: {
         title: "Samsung Innovation Campus (Chương trình AI)",
         organization: "Samsung",
-        date: "Chương trình chứng chỉ",
+        date: "Tháng 09/2025",
         description: "Hoàn thành chương trình học định hướng AI tại Samsung Innovation Campus, củng cố nền tảng công nghệ hiện đại, khái niệm AI ứng dụng và giải quyết vấn đề thực tế."
       }
     },
@@ -531,13 +531,13 @@
       en: {
         title: "IELTS 6.0",
         organization: "International English Certification",
-        date: "Certificate",
+        date: "2024",
         description: "Achieved IELTS 6.0, supporting academic communication, English research reading, and participation in international learning environments."
       },
       vi: {
         title: "IELTS 6.0",
         organization: "Chứng chỉ tiếng Anh quốc tế",
-        date: "Chứng chỉ",
+        date: "2024",
         description: "Đạt IELTS 6.0, hỗ trợ giao tiếp học thuật, đọc tài liệu nghiên cứu tiếng Anh và tham gia môi trường học tập quốc tế."
       }
     }
@@ -560,7 +560,7 @@
       alt: "Talented Student Scholarship"
     },
     {
-      src: "https://picsum.photos/seed/samsung-cert/400/280",
+      src: "./assets/certificates/samsung_ic.jpg",
       captionKey: "gallery.item.samsung",
       alt: "Samsung Innovation Campus"
     },
@@ -570,7 +570,7 @@
       alt: "BMW Program Certificate"
     },
     {
-      src: "https://picsum.photos/seed/research-cert/400/280",
+      src: "./assets/certificates/retinal_seg_cer.jpg",
       captionKey: "gallery.item.research",
       alt: "HCMUTE Research Certificate"
     }
