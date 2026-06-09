@@ -332,7 +332,7 @@ button {
   position: relative;
 }
 
-#home > *:not(.hero-video-bg):not(#starry-canvas) {
+#home>*:not(.hero-video-bg):not(#starry-canvas) {
   position: relative;
   z-index: 1;
 }
@@ -512,6 +512,24 @@ h3 {
   color: var(--color-text-muted);
   font-size: var(--text-lg);
   line-height: 1.55;
+}
+
+[data-theme="light"] .hero-tagline {
+  color: #172026;
+  max-width: 42rem;
+  margin: var(--space-5) 0 0;
+  padding: 0.75rem 1rem;
+
+  color: var(--color-text);
+  font-size: var(--text-lg);
+  line-height: 1.55;
+
+  background: rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
 }
 
 .quick-links,
