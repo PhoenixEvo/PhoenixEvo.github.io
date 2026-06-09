@@ -743,13 +743,15 @@
   const applyTheme = (theme) => {
     activeTheme = theme;
     root.dataset.theme = theme;
-    const video = document.querySelector(".hero-video-bg video");
-    if (video) {
-      if (activeTheme === "dark") {
-        video.play().catch(() => {});
-      } else {
-        video.pause();
-      }
+    const videoDark = document.querySelector(".hero-video--dark");
+    const videoLight = document.querySelector(".hero-video--light");
+
+    if (activeTheme === "dark") {
+      videoDark?.play().catch(() => {});
+      videoLight?.pause();
+    } else {
+      videoLight?.play().catch(() => {});
+      videoDark?.pause();
     }
 
     if (themeToggle) {
