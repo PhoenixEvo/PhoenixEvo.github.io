@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 – Page Not Found | Nguyen Nhat Phat</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="icon" type="image/x-icon" href="./assets/images/favicon/favicon.ico">
+  <style>
+    .not-found {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    .not-found h1 {
+      font-size: clamp(5rem, 20vw, 10rem);
+      color: var(--color-primary);
+      margin-bottom: 0;
+      line-height: 1;
+    }
+    .not-found p {
+      color: var(--color-text-muted);
+      margin: 1rem 0 2rem;
+      font-size: 1.125rem;
+    }
+    .not-found a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.5rem;
+      border: 1px solid var(--color-primary);
+      border-radius: 999px;
+      color: var(--color-primary);
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 180ms ease, color 180ms ease;
+    }
+    .not-found a:hover {
+      background: var(--color-primary);
+      color: var(--color-surface);
+    }
+  </style>
+</head>
+<body>
+  <main class="not-found">
+    <div>
+      <h1>404</h1>
+      <p>This page doesn't exist — but my portfolio does.</p>
+      <a href="/">← Back to Home</a>
+    </div>
+  </main>
+</body>
+</html>

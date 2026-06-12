@@ -1,0 +1,76 @@
+/* ── Print styles for academic portfolio ── */
+@media print {
+  /* Hide non-content elements */
+  .site-header,
+  .hero-video-bg,
+  #starry-canvas,
+  .nav-toggle,
+  .theme-toggle,
+  .language-toggle,
+  .news-toggle,
+  .cert-carousel__btn,
+  .detail-link,
+  .inline-links,
+  .project-link,
+  .contact-button,
+  .footer nav,
+  .footer-updated,
+  .quick-links,
+  .contact-links,
+  #certificates,
+  #skills,
+  #experience {
+    display: none !important;
+  }
+
+  /* Reset backgrounds and colors for paper */
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+
+  .section,
+  .hero {
+    padding: 1.5rem 0 !important;
+  }
+
+  .section-muted {
+    background: #fff !important;
+  }
+
+  /* Show full URLs for links */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75em;
+    color: #555;
+  }
+
+  /* Don't expand internal anchor links */
+  a[href^="#"]::after {
+    content: "";
+  }
+
+  /* Keep paper cards readable */
+  .paper {
+    break-inside: avoid;
+    border: 1px solid #ddd !important;
+    margin-bottom: 1rem;
+    box-shadow: none !important;
+  }
+
+  .paper-thumb {
+    max-width: 180px !important;
+  }
+
+  /* Avoid page breaks inside important blocks */
+  .education-item,
+  .paper,
+  .project-card {
+    break-inside: avoid;
+  }
+
+  h2 { break-after: avoid; }
+  h3 { break-after: avoid; }
+}

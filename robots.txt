@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://phoenixevo.github.io/sitemap.xml
