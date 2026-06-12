@@ -148,15 +148,6 @@ const SiteData = {
       levelEn: "University Level",
       levelVi: "Cấp trường",
       detailId: "advanced-youth"
-    },
-    {
-      year: "–",
-      sortDate: "0000-00",
-      awardEn: "Talented Student Scholarship",
-      awardVi: "Học bổng Sinh viên tài năng",
-      levelEn: "HCMUTE",
-      levelVi: "HCMUTE",
-      detailId: "talented-scholarship"
     }
   ],
 
@@ -407,12 +398,13 @@ const SiteData = {
 
   papers: [
     {
+      status: "preprint",
       titleEn: "Adaptive Density Pruning for Efficient 3D Gaussian Splatting",
       titleVi: "Adaptive Density Pruning for Efficient 3D Gaussian Splatting",
       authors: [
         { name: "Nhat-Phat Nguyen", bold: true, corresponding: false },
         { name: "Quoc-Hung Pham", bold: false, corresponding: false },
-        { name: "Van-Dung Hoang", bold: false, corresponding: true }
+        { name: "Van-Dung Hoang", bold: false, corresponding: true, supervisor: true }
       ],
       venueEn: "Independent Research · 2026",
       venueVi: "Nghiên cứu độc lập · 2026",
@@ -426,12 +418,13 @@ const SiteData = {
       codeAriaLabel: "View code for Adaptive Density Pruning"
     },
     {
+      status: "preprint",
       titleEn: "Self-Supervised CT Through-Plane Interpolation via Residual 3D Gaussian Splatting",
       titleVi: "Self-Supervised CT Through-Plane Interpolation via Residual 3D Gaussian Splatting",
       authors: [
         { name: "Nhat-Phat Nguyen", bold: true, corresponding: false },
         { name: "Quoc-Hung Pham", bold: false, corresponding: false },
-        { name: "Van-Dung Hoang", bold: false, corresponding: true }
+        { name: "Van-Dung Hoang", bold: false, corresponding: true, supervisor: true }
       ],
       venueEn: "Independent Research · 2026",
       venueVi: "Nghiên cứu độc lập · 2026",
@@ -445,6 +438,7 @@ const SiteData = {
       codeAriaLabel: "View code for CT interpolation research"
     },
     {
+      status: "defended",
       titleEn: "Advanced Retinal Vessel Analysis Using Deep Learning for High-Resolution Segmentation",
       titleVi: "Advanced Retinal Vessel Analysis Using Deep Learning for High-Resolution Segmentation",
       authors: [

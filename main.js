@@ -91,14 +91,15 @@
       "education.meta": "2023 – Expected 2027 · Faculty of Advanced Education (FAE)",
       "education.gpa_label": "GPA",
       "education.ielts_label": "IELTS",
-      "research.kicker": "Selected Work",
+      "research.kicker": "Publications & Preprints",
       "research.heading": "Research",
       "research.note.before": "Author lines follow academic convention;",
       "research.note.after": "is bolded throughout.",
-      "research.corresponding_note": "* corresponding author",
+      "research.supervisor_note": "† Corresponding author is also the research supervisor.",
+      "research.corresponding_note": "* corresponding author  ·  † research supervisor",
       "badge.rated_good": "Rated: Good",
       "link.code": "Code",
-      "projects.kicker": "Technical Work",
+      "projects.kicker": "Open-Source & Coursework",
       "projects.heading": "Projects",
       "status.research": "Research",
       "status.completed": "Completed",
@@ -198,14 +199,15 @@
       "education.meta": "2023 – Dự kiến 2027 · Khoa Đào tạo Tiên tiến (FAE)",
       "education.gpa_label": "GPA",
       "education.ielts_label": "IELTS",
-      "research.kicker": "Công trình tiêu biểu",
+      "research.kicker": "Công bố & Bản thảo",
       "research.heading": "Nghiên cứu",
       "research.note.before": "Dòng tác giả tuân theo quy ước học thuật;",
       "research.note.after": "được in đậm xuyên suốt.",
-      "research.corresponding_note": "* tác giả liên hệ",
+      "research.supervisor_note": "† Tác giả liên lạc cũng là người hướng dẫn nghiên cứu.",
+      "research.corresponding_note": "* tác giả liên lạc  ·  † người hướng dẫn nghiên cứu",
       "badge.rated_good": "Đánh giá: Tốt",
       "link.code": "Mã nguồn",
-      "projects.kicker": "Sản phẩm kỹ thuật",
+      "projects.kicker": "Mã nguồn mở & Đồ án",
       "projects.heading": "Dự án",
       "status.research": "Nghiên cứu",
       "status.completed": "Hoàn thành",
@@ -255,6 +257,21 @@
       "footer.role": "- Nhà nghiên cứu AI & Thị giác máy tính",
       "footer.rights": "Bảo lưu mọi quyền.",
       "footer.updated": "Cập nhật lần cuối:"
+    }
+  };
+
+  const STATUS_LABELS = {
+    en: {
+      preprint: "Preprint",
+      under_review: "Under Review",
+      published: "Published",
+      defended: "Defended ✓"
+    },
+    vi: {
+      preprint: "Bản thảo",
+      under_review: "Đang phản biện",
+      published: "Đã công bố",
+      defended: "Đã bảo vệ ✓"
     }
   };
 
@@ -369,7 +386,8 @@
         fragment.append(document.createTextNode(", "));
       }
 
-      const name = author.corresponding ? `${author.name}*` : author.name;
+      const markers = `${author.corresponding ? "*" : ""}${author.supervisor ? "†" : ""}`;
+      const name = `${author.name}${markers}`;
       if (author.bold) {
         const strong = document.createElement("strong");
         strong.textContent = name;
@@ -436,6 +454,10 @@
         venue.append(badge);
       }
 
+      const statusBadge = document.createElement("span");
+      statusBadge.className = `paper-status paper-status--${item.status}`;
+      statusBadge.textContent = STATUS_LABELS[currentLanguage][item.status];
+
       const description = document.createElement("p");
       description.textContent = localized(item, "descEn", "descVi");
 
@@ -470,7 +492,7 @@
         links.append(code);
       }
 
-      content.append(heading, authors, venue, description, links);
+      content.append(heading, authors, venue, statusBadge, description, links);
       article.append(thumb, content);
       paperList.append(article);
     });
