@@ -79,6 +79,7 @@ const SiteData = {
   awards: [
     {
       year: "Apr 2026",
+      sortDate: "2026-04",
       awardEn: "Outstanding Student in Scientific Research",
       awardVi: "Sinh viên Xuất sắc trong Nghiên cứu Khoa học",
       levelEn: "Faculty (FAEPRIME)",
@@ -87,6 +88,7 @@ const SiteData = {
     },
     {
       year: "Mar 2026",
+      sortDate: "2026-03",
       awardEn: "Student of Five Merits",
       awardVi: "Sinh viên 5 tốt",
       levelEn: "University Level",
@@ -95,6 +97,7 @@ const SiteData = {
     },
     {
       year: "May 2025",
+      sortDate: "2025-05",
       awardEn: "3rd Prize – Men's Doubles Badminton",
       awardVi: "Giải Ba – Cầu lông đôi Nam",
       levelEn: "University (HCMUTE)",
@@ -103,6 +106,7 @@ const SiteData = {
     },
     {
       year: "Jan 2026",
+      sortDate: "2026-01",
       awardEn: "Student of Five Merits",
       awardVi: "Sinh viên 5 tốt",
       levelEn: "HCMC City Level",
@@ -111,6 +115,7 @@ const SiteData = {
     },
     {
       year: "Dec 2024",
+      sortDate: "2024-12",
       awardEn: "HCMUTE Talented Student Scholarship 2024",
       awardVi: "Học bổng Sinh viên Tài năng HCMUTE 2024",
       levelEn: "University",
@@ -119,6 +124,7 @@ const SiteData = {
     },
     {
       year: "Oct 2025",
+      sortDate: "2025-10",
       awardEn: "Euréka XXVII 2025 – Student Scientific Research Prize",
       awardVi: "Euréka XXVII 2025 – Giải thưởng Sinh viên Nghiên cứu Khoa học",
       levelEn: "Ho Chi Minh City Level (Vietnam National University HCM)",
@@ -127,6 +133,7 @@ const SiteData = {
     },
     {
       year: "Oct 2024",
+      sortDate: "2024-10",
       awardEn: "1st Prize – 200m Sprint (HCMUTE Running)",
       awardVi: "Giải Nhất – Chạy 200m (HCMUTE Running)",
       levelEn: "University",
@@ -135,11 +142,21 @@ const SiteData = {
     },
     {
       year: "May 2025",
+      sortDate: "2025-05",
       awardEn: "Advanced Youth \"Following Uncle Ho\"",
       awardVi: "Thanh niên tiên tiến làm theo lời Bác",
       levelEn: "University Level",
       levelVi: "Cấp trường",
       detailId: "advanced-youth"
+    },
+    {
+      year: "–",
+      sortDate: "0000-00",
+      awardEn: "Talented Student Scholarship",
+      awardVi: "Học bổng Sinh viên tài năng",
+      levelEn: "HCMUTE",
+      levelVi: "HCMUTE",
+      detailId: "talented-scholarship"
     }
   ],
 

@@ -305,8 +305,11 @@
     if (!awardsTbody) return;
 
     awardsTbody.innerHTML = "";
+    const sorted = [...siteData.awards].sort((a, b) => (
+      b.sortDate.localeCompare(a.sortDate)
+    ));
 
-    siteData.awards.forEach((item) => {
+    sorted.forEach((item) => {
       const row = document.createElement("tr");
       row.className = "award-row";
       row.dataset.detailId = item.detailId;
