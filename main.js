@@ -1,4 +1,4 @@
-(() => {
+﻿(() => {
   const root = document.documentElement;
   const header = document.querySelector("[data-header]");
   const themeToggle = document.querySelector("[data-theme-toggle]");
@@ -19,18 +19,26 @@
     return items;
   }, []);
   const newsToggle = document.querySelector("[data-news-toggle]");
-  const newsExtras = Array.from(document.querySelectorAll(".news-extra"));
+  const newsList = document.getElementById("news-list");
+  const awardsTbody = document.getElementById("awards-tbody");
+  const paperList = document.getElementById("paper-list");
+  const projectGrid = document.getElementById("project-grid");
+  const galleryTrack = document.querySelector("[data-carousel-track]");
   const detailModal = document.querySelector("[data-detail-modal]");
   const detailPanel = document.querySelector(".detail-modal__panel");
   const lightbox = document.querySelector("[data-lightbox]");
   const lightboxFigure = document.querySelector(".lightbox__figure");
-  const galleryTriggers = Array.from(document.querySelectorAll(".gallery-item[data-gallery-index]"));
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const siteData = window.SiteData || { news: [], awards: [], details: {}, papers: [], projects: [], gallery: [] };
+  const detailContent = siteData.details || {};
+  let galleryItems = siteData.gallery || [];
+  let newsExtras = Array.from(document.querySelectorAll(".news-extra"));
   let activeTheme = "light";
   let currentLanguage = "en";
   let activeDetailId = null;
   let activeGalleryIndex = 0;
   let activeSectionFrame = null;
+  let revealObserver = null;
   let previousFocus = null;
 
   const translations = {
@@ -58,24 +66,6 @@
       "hero.link.orcid": "ORCID",
       "news.kicker": "Updates",
       "news.heading": "News",
-      "news.date.1": "Jun 2026",
-      "news.date.2": "Apr 2026",
-      "news.date.3": "Mar 2026",
-      "news.date.4": "Jan 2026",
-      "news.date.5": "Jan 2026",
-      "news.date.6": "May 2025",
-      "news.date.7": "Jul 2025",
-      "news.date.8": "Sep 2025",
-      "news.date.9": "Dec 2024",
-      "news.item.1": "Completed Software Development with Scrum certification at Axon Active – Agile Software Development Company.",
-      "news.item.2": "Honored to receive the \"Outstanding Student in Scientific Research\" award from the Faculty of Advanced Education (FAEPRIME) for the academic year 2024-2025.",
-      "news.item.3": "Awarded Student of Five Merits at University level.",
-      "news.item.4": "Awarded Student of Five Merits at Ho Chi Minh City level.",
-      "news.item.5": "Participated in the BMW Digital Twin & AI-Based Industrial Simulation exchange at University of Ulsan, South Korea.",
-      "news.item.6": "Received the Advanced Youth \"Following Uncle Ho\" award at university level.",
-      "news.item.7": "Our research project \"Advanced Retinal Blood Vessel Analysis Using Deep Learning for High-Resolution Image Segmentation\" was successfully defended with a Good rating.",
-      "news.item.8": "Successfully completed the intensive Artificial Intelligence course at Samsung Innovation Campus, co-organized by LetuinEdu and VDCA.",
-      "news.item.9": "Honored as an \"HCMUTE Talented Student 2024\" for outstanding academic and leadership excellence.",
       "news.see_all": "See all news",
       "news.collapse": "Show less",
       "about.kicker": "Profile",
@@ -96,24 +86,11 @@
       "research.heading": "Research",
       "research.note.before": "Author lines follow academic convention;",
       "research.note.after": "is bolded throughout.",
-      "research.paper1.venue": "Independent Research · 2026",
-      "research.paper1.desc": "A geometry-aware pruning method for 3D scene reconstruction models. Uses adaptive density estimation to remove spatially redundant components while preserving critical structures, achieving 30% smaller model size with no quality loss across 11 scenes and two benchmarks.",
-      "research.paper2.venue": "Independent Research · 2026",
-      "research.paper2.desc": "A self-supervised approach to CT through-plane interpolation using residual 3D Gaussian Splatting. Reconstructs high-resolution volumetric CT stacks from sparse axial slices without paired supervision.",
-      "research.paper3.venue": "HCMUTE University Research Program · 2024",
-      "research.paper3.desc": "A deep-learning approach for retinal blood vessel segmentation from medical images, applying CNNs and image processing for high-resolution pixel-level medical image analysis.",
       "research.corresponding_note": "* corresponding author",
       "badge.rated_good": "Rated: Good",
       "link.code": "Code",
       "projects.kicker": "Technical Work",
       "projects.heading": "Projects",
-      "projects.p1.desc": "Geometry-aware model compression for efficient 3D scene reconstruction.",
-      "projects.p2.title": "Retinal Vessel Segmentation",
-      "projects.p2.desc": "High-resolution retinal blood vessel segmentation using deep learning for medical imaging.",
-      "projects.p3.title": "Cassava Leaf Disease Classification",
-      "projects.p3.desc": "MobileNetV3 classifier with k-fold cross-validation, data augmentation, and a GUI interface.",
-      "projects.p4.title": "Skin Lesion Classification using Fusion HAM10000",
-      "projects.p4.desc": "Multi-model fusion approach for skin lesion classification on the HAM10000 dataset, combining feature extraction strategies for improved diagnostic accuracy.",
       "status.research": "Research",
       "status.completed": "Completed",
       "experience.kicker": "Academic Life",
@@ -136,26 +113,6 @@
       "awards.table.award": "Award",
       "awards.table.level": "Level",
       "awards.table.details": "Details",
-      "awards.outstanding_research": "Outstanding Student in Scientific Research",
-      "awards.hcmute_talented": "HCMUTE Talented Student 2024",
-      "awards.advanced_youth": "Advanced Youth \"Following Uncle Ho\"",
-      "awards.five_merits": "Student of Five Merits",
-      "awards.badminton_2025": "3rd Prize – Men's Doubles Badminton",
-      "awards.eureka_2025": "Euréka XXVII 2025 – Student Scientific Research Prize",
-      "awards.good_rating": "University Research \"Good\" Rating",
-      "awards.running": "HCMUTE Running - 21km Completion",
-      "awards.running_1st": "1st Prize – 200m Sprint (HCMUTE Running)",
-      "awards.scholarship": "Talented Student Scholarship",
-      "awards.samsung": "Samsung Innovation Campus (AI Program)",
-      "awards.scrum_certificate": "Scrum Certificate (Axon Active)",
-      "awards.ielts": "IELTS 6.0",
-      "awards.level.university": "University Level",
-      "awards.level.hcmc": "HCMC City Level",
-      "awards.level.faeprime": "Faculty (FAEPRIME)",
-      "awards.level.university_short": "University",
-      "awards.level.hcmute": "University (HCMUTE)",
-      "awards.level.hcmc_vnu": "Ho Chi Minh City Level (Vietnam National University HCM)",
-      "awards.level.international": "International",
       "skills.kicker": "Toolkit",
       "skills.heading": "Skills",
       "skills.languages": "Languages",
@@ -179,16 +136,6 @@
       "details.external": "External link",
       "gallery.kicker": "Certificates",
       "gallery.heading": "Certificates & Gallery",
-      "gallery.item.running_1st": "1st Prize – 200m Sprint (HCMUTE Running 2024)",
-      "gallery.item.eureka": "Euréka XXVII 2025 – Scientific Research Prize",
-      "gallery.item.badminton": "3rd Prize – Men's Doubles Badminton (HCMUTE 2025)",
-      "gallery.item.five_merits": "Student of Five Merits (HCMC Level)",
-      "gallery.item.five_merits_uni": "Student of Five Merits (University Level)",
-      "gallery.item.scholarship": "Talented Student Scholarship",
-      "gallery.item.samsung": "Samsung Innovation Campus – AI Program",
-      "gallery.item.scrum": "Software Development with Scrum – Axon Active (2026)",
-      "gallery.item.bmw": "BMW Digital Twin Program – University of Ulsan (2026)",
-      "gallery.item.research": "HCMUTE Research – Good Rating Certificate",
       "footer.role": "- AI & Computer Vision Researcher",
       "footer.rights": "All rights reserved."
     },
@@ -216,24 +163,6 @@
       "hero.link.orcid": "ORCID",
       "news.kicker": "Cập nhật",
       "news.heading": "Tin tức",
-      "news.date.1": "06/2026",
-      "news.date.2": "04/2026",
-      "news.date.3": "03/2026",
-      "news.date.4": "01/2026",
-      "news.date.5": "01/2026",
-      "news.date.6": "05/2025",
-      "news.date.7": "07/2025",
-      "news.date.8": "09/2025",
-      "news.date.9": "12/2024",
-      "news.item.1": "Hoàn thành chứng chỉ Software Development with Scrum tại Axon Active – Công ty Phát triển Phần mềm Agile.",
-      "news.item.2": "Vinh dự nhận giải \"Sinh viên Xuất sắc trong Nghiên cứu Khoa học\" từ Faculty of Advanced Education (FAEPRIME) cho năm học 2024-2025.",
-      "news.item.3": "Đạt danh hiệu Sinh viên 5 tốt cấp trường.",
-      "news.item.4": "Đạt danh hiệu Sinh viên 5 tốt cấp Thành phố Hồ Chí Minh.",
-      "news.item.5": "Tham gia chương trình trao đổi BMW Digital Twin & AI-Based Industrial Simulation tại University of Ulsan, South Korea.",
-      "news.item.6": "Nhận danh hiệu Thanh niên tiên tiến làm theo lời Bác cấp trường.",
-      "news.item.7": "Đề tài nghiên cứu \"Advanced Retinal Blood Vessel Analysis Using Deep Learning for High-Resolution Image Segmentation\" được bảo vệ thành công với đánh giá Tốt.",
-      "news.item.8": "Hoàn thành khóa học chuyên sâu về Artificial Intelligence tại Samsung Innovation Campus, đồng tổ chức bởi LetuinEdu và VDCA.",
-      "news.item.9": "Được vinh danh là \"HCMUTE Talented Student 2024\" nhờ thành tích học tập và năng lực lãnh đạo nổi bật.",
       "news.see_all": "Xem tất cả tin tức",
       "news.collapse": "Thu gọn",
       "about.kicker": "Hồ sơ",
@@ -254,24 +183,11 @@
       "research.heading": "Nghiên cứu",
       "research.note.before": "Dòng tác giả tuân theo quy ước học thuật;",
       "research.note.after": "được in đậm xuyên suốt.",
-      "research.paper1.venue": "Nghiên cứu độc lập · 2026",
-      "research.paper1.desc": "Một phương pháp cắt tỉa dựa trên hình học cho mô hình tái dựng cảnh 3D. Phương pháp dùng ước lượng mật độ thích nghi để loại bỏ các thành phần dư thừa về mặt không gian trong khi vẫn giữ cấu trúc quan trọng, đạt kích thước mô hình nhỏ hơn 30% mà không giảm chất lượng trên 11 cảnh và hai bộ benchmark.",
-      "research.paper2.venue": "Nghiên cứu độc lập · 2026",
-      "research.paper2.desc": "Một phương pháp tự giám sát cho nội suy lát cắt CT theo trục through-plane bằng residual 3D Gaussian Splatting. Phương pháp tái dựng các chồng CT thể tích độ phân giải cao từ các lát cắt axial thưa mà không cần dữ liệu giám sát theo cặp.",
-      "research.paper3.venue": "Chương trình Nghiên cứu Sinh viên HCMUTE · 2024",
-      "research.paper3.desc": "Một hướng tiếp cận học sâu cho bài toán phân đoạn mạch máu võng mạc từ ảnh y khoa, áp dụng CNN và xử lý ảnh cho phân tích ảnh y sinh độ phân giải cao ở cấp độ pixel.",
       "research.corresponding_note": "* tác giả liên hệ",
       "badge.rated_good": "Đánh giá: Tốt",
       "link.code": "Mã nguồn",
       "projects.kicker": "Sản phẩm kỹ thuật",
       "projects.heading": "Dự án",
-      "projects.p1.desc": "Nén mô hình dựa trên hình học cho tái dựng cảnh 3D hiệu quả.",
-      "projects.p2.title": "Phân đoạn mạch máu võng mạc",
-      "projects.p2.desc": "Phân đoạn mạch máu võng mạc độ phân giải cao bằng học sâu cho ảnh y sinh.",
-      "projects.p3.title": "Phân loại bệnh lá sắn",
-      "projects.p3.desc": "Bộ phân loại MobileNetV3 với k-fold cross-validation, tăng cường dữ liệu và giao diện GUI.",
-      "projects.p4.title": "Skin Lesion Classification using Fusion HAM10000",
-      "projects.p4.desc": "Phương pháp kết hợp nhiều mô hình để phân loại tổn thương da trên bộ dữ liệu HAM10000, tích hợp các chiến lược trích xuất đặc trưng để cải thiện độ chính xác chẩn đoán.",
       "status.research": "Nghiên cứu",
       "status.completed": "Hoàn thành",
       "experience.kicker": "Hoạt động học thuật",
@@ -294,26 +210,6 @@
       "awards.table.award": "Giải thưởng",
       "awards.table.level": "Cấp / Đơn vị",
       "awards.table.details": "Chi tiết",
-      "awards.outstanding_research": "Sinh viên Xuất sắc trong Nghiên cứu Khoa học",
-      "awards.hcmute_talented": "Sinh viên Tài năng HCMUTE 2024",
-      "awards.advanced_youth": "Thanh niên tiên tiến làm theo lời Bác",
-      "awards.five_merits": "Sinh viên 5 tốt",
-      "awards.badminton_2025": "Giải Ba – Cầu lông đôi Nam",
-      "awards.eureka_2025": "Euréka XXVII 2025 – Giải thưởng Sinh viên Nghiên cứu Khoa học",
-      "awards.good_rating": "Đề tài nghiên cứu sinh viên đạt loại \"Tốt\"",
-      "awards.running": "HCMUTE Running - Hoàn thành 21km",
-      "awards.running_1st": "Giải Nhất – Chạy 200m (HCMUTE Running)",
-      "awards.scholarship": "Học bổng Sinh viên tài năng",
-      "awards.samsung": "Samsung Innovation Campus (Chương trình AI)",
-      "awards.scrum_certificate": "Chứng chỉ Scrum (Axon Active)",
-      "awards.ielts": "IELTS 6.0",
-      "awards.level.university": "Cấp trường",
-      "awards.level.hcmc": "Cấp Thành phố Hồ Chí Minh",
-      "awards.level.faeprime": "Cấp Khoa (FAEPRIME)",
-      "awards.level.university_short": "Cấp trường",
-      "awards.level.hcmute": "Cấp trường (HCMUTE)",
-      "awards.level.hcmc_vnu": "Cấp Thành phố Hồ Chí Minh (Vietnam National University HCM)",
-      "awards.level.international": "Quốc tế",
       "skills.kicker": "Công cụ",
       "skills.heading": "Kỹ năng",
       "skills.languages": "Ngôn ngữ lập trình",
@@ -337,330 +233,10 @@
       "details.external": "Liên kết ngoài",
       "gallery.kicker": "Chứng chỉ",
       "gallery.heading": "Chứng chỉ & Thư viện ảnh",
-      "gallery.item.running_1st": "Giải Nhất – Chạy 200m (HCMUTE Running 2024)",
-      "gallery.item.eureka": "Euréka XXVII 2025 – Giải thưởng NCKH Sinh viên",
-      "gallery.item.badminton": "Giải Ba – Cầu lông đôi Nam (HCMUTE 2025)",
-      "gallery.item.five_merits": "Sinh viên 5 tốt (Cấp Thành phố)",
-      "gallery.item.five_merits_uni": "Sinh viên 5 tốt (Cấp Trường)",
-      "gallery.item.scholarship": "Học bổng Sinh viên tài năng",
-      "gallery.item.samsung": "Samsung Innovation Campus – Chương trình AI",
-      "gallery.item.scrum": "Software Development with Scrum – Axon Active (2026)",
-      "gallery.item.bmw": "Chương trình BMW Digital Twin – ĐH Ulsan (2026)",
-      "gallery.item.research": "Nghiên cứu khoa học HCMUTE – Xếp loại Tốt",
       "footer.role": "- Nhà nghiên cứu AI & Thị giác máy tính",
       "footer.rights": "Bảo lưu mọi quyền."
     }
   };
-
-  const detailContent = {
-    "faeprime-research": {
-      images: ["./assets/awards/outstanding-research-26-1.webp", "./assets/awards/outstanding-research-26-2.webp"],
-      tags: ["Scientific Research", "Faculty Award", "AI"],
-      link: "",
-      en: {
-        title: "Outstanding Student in Scientific Research",
-        organization: "Faculty of Advanced Education (FAEPRIME), HCMUTE",
-        date: "April 2026",
-        description: "Honored as Outstanding Student in Scientific Research by the Faculty of Advanced Education (FAEPRIME) for the academic year 2024-2025, recognizing contributions to AI and Computer Vision research."
-      },
-      vi: {
-        title: "Sinh viên Xuất sắc trong Nghiên cứu Khoa học",
-        organization: "Khoa Đào tạo Tiên tiến (FAEPRIME), HCMUTE",
-        date: "Tháng 04/2026",
-        description: "Được vinh danh Sinh viên Xuất sắc trong Nghiên cứu Khoa học bởi Khoa Đào tạo Tiên tiến (FAEPRIME) cho năm học 2024-2025, ghi nhận đóng góp trong lĩnh vực AI và Thị giác máy tính."
-      }
-    },
-    "bmw-program": {
-      images: [
-        "./assets/experiences/bmw-2026/bmw26-1.webp",
-        "./assets/experiences/bmw-2026/bmw26-2.webp",
-        "./assets/experiences/bmw-2026/bmw26-3.webp"
-      ],
-      tags: ["Digital Twin", "Industrial Simulation", "AI", "International Collaboration"],
-      link: "https://www.ulsan.ac.kr/",
-      en: {
-        title: "BMW Program - Digital Twin & AI-Based Industrial Simulation",
-        organization: "University of Ulsan, South Korea",
-        date: "January 2026",
-        description: "Participated in hands-on sessions covering Digital Twin technology and AI-based industrial simulation. Collaborated with international students from South Korea and other countries."
-      },
-      vi: {
-        title: "BMW Program - Digital Twin & AI-Based Industrial Simulation",
-        organization: "University of Ulsan, South Korea",
-        date: "Tháng 01/2026",
-        description: "Tham gia các buổi thực hành về công nghệ Digital Twin và mô phỏng công nghiệp dựa trên AI. Hợp tác với sinh viên quốc tế từ South Korea và các quốc gia khác."
-      }
-    },
-    "youth-union": {
-      images: ["https://picsum.photos/seed/youth-union/400/300"],
-      tags: ["Leadership", "Communication", "Student Activities"],
-      link: "",
-      en: {
-        title: "Youth Union Secretary",
-        organization: "Class 23110FIE1, HCMUTE",
-        date: "2023-Present",
-        description: "Served as a class-level Youth Union Secretary, helping coordinate student activities, academic communication, class initiatives, and community engagement across the academic year."
-      },
-      vi: {
-        title: "Bí thư Chi đoàn",
-        organization: "Lớp 23110FIE1, HCMUTE",
-        date: "2023-Hiện tại",
-        description: "Đảm nhiệm vai trò Bí thư Chi đoàn cấp lớp, hỗ trợ điều phối hoạt động sinh viên, truyền thông học thuật, sáng kiến của lớp và hoạt động cộng đồng trong năm học."
-      }
-    },
-    "volunteer-community": {
-      images: ["https://picsum.photos/seed/community-volunteer/400/300"],
-      tags: ["Volunteerism", "Community Service", "Teamwork"],
-      link: "",
-      en: {
-        title: "Campus and Social Activities",
-        organization: "HCMUTE",
-        date: "2024-2025",
-        description: "Participated in Spring Volunteer Campaigns, Exam Season Support activities, and community events. Completed 21km at HCMUTE Running 2024 and earned a 99/100 volunteer social work score."
-      },
-      vi: {
-        title: "Hoạt động trường học và xã hội",
-        organization: "HCMUTE",
-        date: "2024-2025",
-        description: "Tham gia Chiến dịch Xuân tình nguyện, hoạt động Tiếp sức mùa thi và các sự kiện cộng đồng. Hoàn thành cự ly 21km tại HCMUTE Running 2024 và đạt điểm công tác xã hội tình nguyện 99/100."
-      }
-    },
-    "advanced-youth": {
-      images: ["./assets/certificates/following-uncle-Ho.webp"],
-      tags: ["Leadership", "Conduct", "Social Contribution"],
-      link: "",
-      en: {
-        title: "Advanced Youth \"Following Uncle Ho\"",
-        organization: "HCMUTE",
-        date: "May 2025",
-        description: "Recognized at university level for youth development, conduct, learning attitude, leadership, and contribution to student and community activities."
-      },
-      vi: {
-        title: "Thanh niên tiên tiến làm theo lời Bác",
-        organization: "HCMUTE",
-        date: "Tháng 05/2025",
-        description: "Được ghi nhận cấp trường về rèn luyện thanh niên, đạo đức, tinh thần học tập, năng lực lãnh đạo và đóng góp cho hoạt động sinh viên cũng như cộng đồng."
-      }
-    },
-    "student-five-merits": {
-      images: ["./assets/certificates/student5metric-citylevel26.webp", "./assets/awards/student5metric-citylevel26.webp"],
-      tags: ["Academic Performance", "Conduct", "Volunteerism", "Physical Fitness"],
-      link: "",
-      en: {
-        title: "Student of Five Merits - HCMC Level",
-        organization: "Ho Chi Minh City",
-        date: "January 2026",
-        description: "Awarded at Ho Chi Minh City level for outstanding academic performance, conduct, physical fitness, volunteerism, and social contribution."
-      },
-      vi: {
-        title: "Sinh viên 5 tốt - Cấp Thành phố Hồ Chí Minh",
-        organization: "Ho Chi Minh City",
-        date: "Tháng 01/2026",
-        description: "Được trao cấp Thành phố Hồ Chí Minh cho thành tích nổi bật về học tập, đạo đức, thể lực, tình nguyện và đóng góp xã hội."
-      }
-    },
-    "student-five-merits-university": {
-      images: ["./assets/awards/student5metric-unilevel26-1.webp", "./assets/awards/student5metric-unilevel26-2.webp"],
-      tags: ["Academic Performance", "Conduct", "Volunteerism"],
-      link: "",
-      en: {
-        title: "Student of Five Merits - University Level",
-        organization: "HCMUTE",
-        date: "March 2026",
-        description: "Recognized at university level for balanced development across academic performance, ethics, volunteer activities, integration, and physical fitness."
-      },
-      vi: {
-        title: "Sinh viên 5 tốt - Cấp trường",
-        organization: "HCMUTE",
-        date: "Tháng 03/2026",
-        description: "Được ghi nhận cấp trường cho sự phát triển toàn diện về học tập, đạo đức, hoạt động tình nguyện, hội nhập và thể lực."
-      }
-    },
-    "badminton-2025": {
-      images: ["./assets/certificates/badminton-3rd-sport.webp"],
-      tags: ["Sports", "Badminton", "University Games"],
-      link: "",
-      en: {
-        title: "3rd Prize – Men's Doubles Badminton",
-        organization: "HCMUTE Student Union",
-        date: "May 22, 2025",
-        description: "Awarded 3rd place in Men's Doubles Badminton at the HCMUTE Student Sports Festival 2025 (Hội thao Sinh viên HCMUTE – Năm 2025). Certificate No. 56/QD-BTK."
-      },
-      vi: {
-        title: "Giải Ba – Cầu lông đôi Nam",
-        organization: "Hội Sinh viên Trường HCMUTE",
-        date: "Ngày 22 tháng 5 năm 2025",
-        description: "Đạt giải Ba nội dung Cầu lông đôi Nam tại Hội thao Sinh viên HCMUTE – Năm 2025. Số: 56/QD-BTK."
-      }
-    },
-    "hcmute-talented-2024": {
-      images: ["./assets/awards/talented-student-24.webp"],
-      tags: ["Academic Excellence", "Leadership", "Recognition"],
-      link: "",
-      en: {
-        title: "HCMUTE Talented Student 2024",
-        organization: "HCMUTE",
-        date: "December 2024",
-        description: "Recognized as an HCMUTE Talented Student 2024 for outstanding academic performance and leadership excellence throughout the academic year."
-      },
-      vi: {
-        title: "Sinh viên Tài năng HCMUTE 2024",
-        organization: "HCMUTE",
-        date: "Tháng 12/2024",
-        description: "Được công nhận là Sinh viên Tài năng HCMUTE 2024 vì thành tích học tập xuất sắc và khả năng lãnh đạo nổi bật trong năm học."
-      }
-    },
-    "eureka-2025": {
-      images: ["./assets/certificates/CER_EUREKA25.webp", "./assets/projects/retinal_seg.webp"],
-      tags: ["Scientific Research", "Euréka", "Medical Image Analysis"],
-      link: "",
-      en: {
-        title: "Euréka XXVII 2025 – Student Scientific Research Prize",
-        organization: "Ho Chi Minh City Level (Vietnam National University HCM)",
-        date: "October 2025",
-        description: "Participated in the Student Scientific Research Prize at Euréka XXVII 2025, organized by Vietnam National University Ho Chi Minh City and the HCM Communist Youth Union. Held on October 29, 2025."
-      },
-      vi: {
-        title: "Euréka XXVII 2025 – Giải thưởng Sinh viên Nghiên cứu Khoa học",
-        organization: "Cấp Thành phố Hồ Chí Minh (Vietnam National University HCM)",
-        date: "Tháng 10/2025",
-        description: "Tham gia Giải thưởng Sinh viên Nghiên cứu Khoa học Euréka lần XXVII năm 2025, do Đại học Quốc gia TP.HCM và Thành Đoàn TP.HCM tổ chức, ngày 29/10/2025."
-      }
-    },
-    "hcmute-running": {
-      images: ["./assets/certificates/hcmute-running-1st-25.webp"],
-      tags: ["Sports", "Sprint", "University Games"],
-      link: "",
-      en: {
-        title: "1st Prize – 200m Sprint (HCMUTE Running)",
-        organization: "HCMUTE",
-        date: "October 2024",
-        description: "Awarded 1st place in the 200m sprint at HCMUTE Running – Vì Một HCMUTE Nghĩa Tình, held on October 8, 2024. Certificate No. 21/QD-BTK, issued by the HCMUTE Student Union."
-      },
-      vi: {
-        title: "Giải Nhất – Chạy 200m (HCMUTE Running)",
-        organization: "HCMUTE",
-        date: "Tháng 10/2024",
-        description: "Đạt giải Nhất nội dung chạy 200m tại HCMUTE Running – Vì Một HCMUTE Nghĩa Tình, ngày 08/10/2024. Số: 21/QD-BTK, do Ban Thư ký Hội Sinh viên Trường cấp."
-      }
-    },
-    "talented-scholarship": {
-      images: ["https://picsum.photos/seed/scholarship-detail/400/300"],
-      tags: ["Scholarship", "Academic Merit", "Recognition"],
-      link: "",
-      en: {
-        title: "Talented Student Scholarship",
-        organization: "HCMUTE",
-        date: "2024",
-        description: "Received scholarship recognition from HCMUTE for academic potential, learning effort, and contribution to the university community."
-      },
-      vi: {
-        title: "Học bổng Sinh viên tài năng",
-        organization: "HCMUTE",
-        date: "2024",
-        description: "Nhận học bổng từ HCMUTE cho tiềm năng học thuật, nỗ lực học tập và đóng góp cho cộng đồng đại học."
-      }
-    },
-    "samsung-campus": {
-      images: ["./assets/certificates/samsung_ic.jpg"],
-      tags: ["AI Program", "Technology", "Training"],
-      link: "",
-      en: {
-        title: "Samsung Innovation Campus (AI Program)",
-        organization: "Samsung",
-        date: "September 2025",
-        description: "Completed AI-oriented learning through Samsung Innovation Campus, strengthening foundations in modern technology, applied AI concepts, and practical problem solving."
-      },
-      vi: {
-        title: "Samsung Innovation Campus (Chương trình AI)",
-        organization: "Samsung",
-        date: "Tháng 09/2025",
-        description: "Hoàn thành chương trình học định hướng AI tại Samsung Innovation Campus, củng cố nền tảng công nghệ hiện đại, khái niệm AI ứng dụng và giải quyết vấn đề thực tế."
-      }
-    },
-    "scrum-axon-2026": {
-      images: ["./assets/certificates/SCRUM-cer.webp"],
-      tags: ["Scrum", "Agile", "Software Development"],
-      link: "",
-      en: {
-        title: "Software Development with Scrum",
-        organization: "Axon Active – Agile Software Development Company",
-        date: "June 2026",
-        description: "Completed Software Development with Scrum certification at Axon Active – Agile Software Development Company, strengthening Agile workflow, Scrum roles, sprint planning, and collaborative software delivery practice."
-      },
-      vi: {
-        title: "Software Development with Scrum",
-        organization: "Axon Active – Công ty Phát triển Phần mềm Agile",
-        date: "Tháng 06/2026",
-        description: "Hoàn thành chứng chỉ Software Development with Scrum tại Axon Active – Công ty Phát triển Phần mềm Agile, củng cố quy trình Agile, vai trò Scrum, lập kế hoạch sprint và thực hành phát triển phần mềm cộng tác."
-      }
-    },
-    "ielts": {
-      images: ["https://picsum.photos/seed/ielts-detail/400/300"],
-      tags: ["English", "Academic Communication", "IELTS 6.0"],
-      link: "",
-      en: {
-        title: "IELTS 6.0",
-        organization: "International English Certification",
-        date: "2024",
-        description: "Achieved IELTS 6.0, supporting academic communication, English research reading, and participation in international learning environments."
-      },
-      vi: {
-        title: "IELTS 6.0",
-        organization: "Chứng chỉ tiếng Anh quốc tế",
-        date: "2024",
-        description: "Đạt IELTS 6.0, hỗ trợ giao tiếp học thuật, đọc tài liệu nghiên cứu tiếng Anh và tham gia môi trường học tập quốc tế."
-      }
-    }
-  };
-
-  const galleryItems = [
-    {
-      src: "./assets/certificates/hcmute-running-1st-25.webp",
-      captionKey: "gallery.item.running_1st",
-      alt: "HCMUTE Running 1st Prize certificate"
-    },
-    {
-      src: "./assets/certificates/CER_EUREKA25.webp",
-      captionKey: "gallery.item.eureka",
-      alt: "Euréka XXVII 2025 certificate"
-    },
-    {
-      src: "./assets/certificates/badminton-3rd-sport.webp",
-      captionKey: "gallery.item.badminton",
-      alt: "Badminton 2025 certificate"
-    },
-    {
-      src: "./assets/certificates/student5metric-citylevel26.webp",
-      captionKey: "gallery.item.five_merits",
-      alt: "Student of Five Merits HCMC certificate"
-    },
-    {
-      src: "./assets/awards/student5metric-unilevel26-1.webp",
-      captionKey: "gallery.item.five_merits_uni",
-      alt: "Student of Five Merits University certificate"
-    },
-    {
-      src: "./assets/certificates/samsung_ic.jpg",
-      captionKey: "gallery.item.samsung",
-      alt: "Samsung Innovation Campus"
-    },
-    {
-      src: "./assets/certificates/SCRUM-cer.webp",
-      captionKey: "gallery.item.scrum",
-      alt: "Scrum Axon Active certificate"
-    },
-    {
-      src: "./assets/experiences/bmw-2026/bmw26-1.webp",
-      captionKey: "gallery.item.bmw",
-      alt: "BMW Program Certificate"
-    },
-    {
-      src: "./assets/certificates/retinal_seg_cer.jpg",
-      captionKey: "gallery.item.research",
-      alt: "HCMUTE Research Certificate"
-    }
-  ];
 
   const refreshIcons = () => {
     if (window.lucide) {
@@ -670,9 +246,316 @@
 
   const iconNameForTheme = (theme) => (theme === "dark" ? "sun" : "moon");
 
+  const localized = (item, enKey, viKey) => (
+    currentLanguage === "vi" ? item[viKey] || item[enKey] : item[enKey]
+  );
+
+  const renderNews = () => {
+    if (!newsList) return;
+
+    const expanded = newsToggle?.getAttribute("aria-expanded") === "true";
+    newsList.innerHTML = "";
+
+    siteData.news.forEach((item) => {
+      const listItem = document.createElement("li");
+      if (item.extra) {
+        listItem.classList.add("news-extra");
+        listItem.hidden = !expanded;
+      }
+
+      const time = document.createElement("time");
+      time.dateTime = item.datetime;
+      time.textContent = localized(item, "dateEn", "dateVi");
+
+      const text = document.createElement("span");
+      text.textContent = localized(item, "en", "vi");
+
+      listItem.append(time, text);
+      newsList.append(listItem);
+    });
+
+    newsExtras = Array.from(newsList.querySelectorAll(".news-extra"));
+  };
+
+  const attachDetailTriggers = (scope = document) => {
+    scope.querySelectorAll("[data-detail-id]").forEach((trigger) => {
+      if (trigger.dataset.detailBound === "true") return;
+      trigger.dataset.detailBound = "true";
+
+      trigger.addEventListener("click", (event) => {
+        const detailId = event.currentTarget.dataset.detailId;
+        if (detailId) {
+          event.stopPropagation();
+          openDetailModal(detailId);
+        }
+      });
+
+      trigger.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        const detailId = event.currentTarget.dataset.detailId;
+        if (detailId) {
+          event.preventDefault();
+          openDetailModal(detailId);
+        }
+      });
+    });
+  };
+
+  const renderAwards = () => {
+    if (!awardsTbody) return;
+
+    awardsTbody.innerHTML = "";
+
+    siteData.awards.forEach((item) => {
+      const row = document.createElement("tr");
+      row.className = "award-row";
+      row.dataset.detailId = item.detailId;
+      row.tabIndex = 0;
+      row.setAttribute("aria-haspopup", "dialog");
+
+      const year = document.createElement("td");
+      year.textContent = item.year;
+
+      const award = document.createElement("td");
+      award.textContent = localized(item, "awardEn", "awardVi");
+
+      const level = document.createElement("td");
+      level.textContent = localized(item, "levelEn", "levelVi");
+
+      const details = document.createElement("td");
+      const button = document.createElement("button");
+      button.className = "detail-link";
+      button.type = "button";
+      button.dataset.detailId = item.detailId;
+      button.dataset.i18n = "details.see";
+      button.textContent = translations[currentLanguage]["details.see"];
+      details.append(button);
+
+      row.append(year, award, level, details);
+      awardsTbody.append(row);
+    });
+
+    attachDetailTriggers(awardsTbody);
+  };
+
+  const renderAuthors = (authors) => {
+    const fragment = document.createDocumentFragment();
+
+    authors.forEach((author, index) => {
+      if (index > 0) {
+        fragment.append(document.createTextNode(", "));
+      }
+
+      const name = author.corresponding ? `${author.name}*` : author.name;
+      if (author.bold) {
+        const strong = document.createElement("strong");
+        strong.textContent = name;
+        fragment.append(strong);
+      } else {
+        fragment.append(document.createTextNode(name));
+      }
+    });
+
+    return fragment;
+  };
+
+  const renderPapers = () => {
+    if (!paperList) return;
+
+    paperList.innerHTML = "";
+
+    siteData.papers.forEach((item) => {
+      const article = document.createElement("article");
+      article.className = "paper";
+
+      const thumb = document.createElement("a");
+      thumb.className = "paper-thumb";
+      thumb.href = item.links.code || item.links.pdf || "#";
+      thumb.target = "_blank";
+      thumb.rel = "noopener";
+      thumb.setAttribute("aria-label", item.codeAriaLabel);
+
+      const image = document.createElement("img");
+      image.src = item.image;
+      image.alt = item.imageAlt;
+      image.width = 320;
+      image.height = 240;
+      image.loading = "lazy";
+      thumb.append(image);
+
+      const content = document.createElement("div");
+      content.className = "paper-content";
+
+      const heading = document.createElement("h3");
+      const titleLink = document.createElement("a");
+      titleLink.href = item.links.code || item.links.pdf || "#";
+      titleLink.target = "_blank";
+      titleLink.rel = "noopener";
+      titleLink.textContent = localized(item, "titleEn", "titleVi");
+      heading.append(titleLink);
+
+      const authors = document.createElement("p");
+      authors.className = "authors";
+      authors.append(renderAuthors(item.authors));
+
+      const venue = document.createElement("p");
+      venue.className = "venue";
+      const venueText = document.createElement("span");
+      venueText.textContent = localized(item, "venueEn", "venueVi");
+      venue.append(venueText);
+
+      if (item.hasBadge && item.badgeKey) {
+        venue.append(document.createTextNode(" "));
+        const badge = document.createElement("span");
+        badge.className = "badge";
+        badge.dataset.i18n = item.badgeKey;
+        badge.textContent = translations[currentLanguage][item.badgeKey];
+        venue.append(badge);
+      }
+
+      const description = document.createElement("p");
+      description.textContent = localized(item, "descEn", "descVi");
+
+      const links = document.createElement("div");
+      links.className = "inline-links";
+
+      if (item.links.pdf) {
+        const pdf = document.createElement("a");
+        pdf.href = item.links.pdf;
+        pdf.target = "_blank";
+        pdf.rel = "noopener";
+        pdf.textContent = "PDF";
+        links.append(pdf);
+      } else {
+        const pdf = document.createElement("a");
+        pdf.href = "#";
+        pdf.className = "pdf-placeholder";
+        pdf.dataset.pdfPlaceholder = "true";
+        pdf.setAttribute("aria-disabled", "true");
+        pdf.title = "Coming soon";
+        pdf.innerHTML = '<i data-lucide="lock" aria-hidden="true"></i>PDF';
+        links.append(pdf);
+      }
+
+      if (item.links.code) {
+        const code = document.createElement("a");
+        code.href = item.links.code;
+        code.target = "_blank";
+        code.rel = "noopener";
+        code.dataset.i18n = "link.code";
+        code.textContent = translations[currentLanguage]["link.code"];
+        links.append(code);
+      }
+
+      content.append(heading, authors, venue, description, links);
+      article.append(thumb, content);
+      paperList.append(article);
+    });
+
+    refreshIcons();
+  };
+
+  const renderProjects = () => {
+    if (!projectGrid) return;
+
+    projectGrid.innerHTML = "";
+
+    siteData.projects.forEach((item) => {
+      const article = document.createElement("article");
+      article.className = "project-card reveal";
+
+      const image = document.createElement("img");
+      image.src = item.image;
+      image.alt = item.imageAlt;
+      image.width = 320;
+      image.height = 240;
+      image.loading = "lazy";
+
+      const body = document.createElement("div");
+      body.className = "project-body";
+
+      const meta = document.createElement("p");
+      meta.className = "project-meta";
+      meta.append(document.createTextNode(`${item.year} `));
+      const status = document.createElement("span");
+      status.className = `status ${item.status}`;
+      status.dataset.i18n = `status.${item.status}`;
+      status.textContent = translations[currentLanguage][`status.${item.status}`];
+      meta.append(status);
+
+      const title = document.createElement("h3");
+      if (item.titleI18n) {
+        title.dataset.i18n = item.titleI18n;
+      }
+      title.textContent = localized(item, "titleEn", "titleVi");
+
+      const description = document.createElement("p");
+      if (item.descI18n) {
+        description.dataset.i18n = item.descI18n;
+      }
+      description.textContent = localized(item, "descEn", "descVi");
+
+      const tags = document.createElement("div");
+      tags.className = "tag-list compact";
+      item.tags.forEach((tag) => {
+        const tagElement = document.createElement("span");
+        tagElement.textContent = tag;
+        tags.append(tagElement);
+      });
+
+      const link = document.createElement("a");
+      link.className = "project-link";
+      link.href = item.github;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.innerHTML = '<i data-lucide="github" aria-hidden="true"></i><span data-i18n="hero.link.github">GitHub</span>';
+
+      body.append(meta, title, description, tags, link);
+      article.append(image, body);
+      projectGrid.append(article);
+    });
+
+    refreshIcons();
+  };
+
+  const renderGallery = () => {
+    if (!galleryTrack) return;
+
+    galleryItems = siteData.gallery || [];
+    galleryTrack.innerHTML = "";
+
+    galleryItems.forEach((item, index) => {
+      const slide = document.createElement("button");
+      slide.className = "cert-carousel__slide reveal";
+      slide.type = "button";
+      slide.dataset.galleryIndex = String(index);
+
+      const image = document.createElement("img");
+      image.src = item.src;
+      image.alt = item.alt;
+      image.width = 400;
+      image.height = 280;
+      image.loading = "lazy";
+
+      const caption = document.createElement("span");
+      caption.textContent = localized(item, "captionEn", "captionVi");
+
+      slide.append(image, caption);
+      galleryTrack.append(slide);
+    });
+
+    initCertCarousel();
+  };
+
   const applyLanguage = (language) => {
     currentLanguage = language;
     root.setAttribute("lang", language);
+
+    renderNews();
+    renderAwards();
+    renderPapers();
+    renderProjects();
+    renderGallery();
 
     document.querySelectorAll("[data-i18n]").forEach((element) => {
       const key = element.dataset.i18n;
@@ -705,6 +588,9 @@
     if (lightbox && !lightbox.hidden) {
       renderLightbox(activeGalleryIndex);
     }
+
+    refreshIcons();
+    setupRevealObserver();
   };
 
   const getFocusableElements = (container) => Array.from(container.querySelectorAll(
@@ -762,7 +648,7 @@
 
     const image = lightbox.querySelector("[data-lightbox-image]");
     const caption = lightbox.querySelector("[data-lightbox-caption]");
-    const captionText = translations[currentLanguage]?.[item.captionKey] || translations.en[item.captionKey];
+    const captionText = localized(item, "captionEn", "captionVi");
 
     image.src = item.src;
     image.alt = item.alt;
@@ -840,16 +726,21 @@
       dot.addEventListener("click", () => scrollToSlide(index));
     });
 
-    prevButton?.addEventListener("click", () => scrollToSlide(activeIndex - 1));
-    nextButton?.addEventListener("click", () => scrollToSlide(activeIndex + 1));
+    if (prevButton) {
+      prevButton.onclick = () => scrollToSlide(activeIndex - 1);
+    }
 
-    track.addEventListener("scroll", () => {
+    if (nextButton) {
+      nextButton.onclick = () => scrollToSlide(activeIndex + 1);
+    }
+
+    track.onscroll = () => {
       if (scrollFrame) return;
       scrollFrame = window.requestAnimationFrame(() => {
         scrollFrame = null;
         setActiveDot(getNearestSlideIndex());
       });
-    }, { passive: true });
+    };
 
     setActiveDot(0);
   };
@@ -976,6 +867,10 @@
 
     if (!revealItems.length) return;
 
+    if (revealObserver) {
+      revealObserver.disconnect();
+    }
+
     if (reduceMotion.matches) {
       revealItems.forEach((item) => item.classList.add("visible"));
       return;
@@ -987,7 +882,7 @@
       }
     });
 
-    const revealObserver = new IntersectionObserver((entries, observer) => {
+    revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         entry.target.classList.add("visible");
@@ -1555,10 +1450,9 @@
 
   applyTheme(getPreferredTheme());
   applyLanguage(currentLanguage);
-  initCertCarousel();
+  attachDetailTriggers();
   refreshIcons();
   setScrolledState();
-  setupRevealObserver();
   setupActiveSectionObserver();
   initStarryCanvas();
 
@@ -1603,33 +1497,8 @@
     });
   });
 
-  document.querySelectorAll("[data-detail-id]").forEach((trigger) => {
-    trigger.addEventListener("click", (event) => {
-      const detailId = event.currentTarget.dataset.detailId;
-      if (detailId) {
-        event.stopPropagation();
-        openDetailModal(detailId);
-      }
-    });
-
-    trigger.addEventListener("keydown", (event) => {
-      if (event.key !== "Enter" && event.key !== " ") return;
-      const detailId = event.currentTarget.dataset.detailId;
-      if (detailId) {
-        event.preventDefault();
-        openDetailModal(detailId);
-      }
-    });
-  });
-
   detailModal?.querySelectorAll("[data-modal-close]").forEach((closeButton) => {
     closeButton.addEventListener("click", closeDetailModal);
-  });
-
-  galleryTriggers.forEach((trigger) => {
-    trigger.addEventListener("click", () => {
-      openLightbox(Number(trigger.dataset.galleryIndex));
-    });
   });
 
   lightbox?.querySelectorAll("[data-lightbox-close]").forEach((closeButton) => {
