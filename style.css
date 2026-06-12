@@ -649,6 +649,16 @@ h3 {
   margin: 0;
 }
 
+.research-statement {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--color-accent);
+  border-left: 3px solid currentColor;
+  padding-left: 1rem;
+  margin-bottom: 1.5rem;
+}
+
 .about-figure {
   position: relative;
   overflow: hidden;
@@ -691,6 +701,75 @@ h3 {
 .skills-grid h3 {
   margin-bottom: var(--space-4);
   font-size: 1rem;
+}
+
+.education-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.education-item {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+.education-logo {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-surface-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.education-body {
+  flex: 1;
+}
+
+.education-body h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.education-school {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.education-meta {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.education-stats {
+  display: flex;
+  gap: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.education-stat {
+  font-size: 0.875rem;
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+  color: var(--color-text-muted);
+}
+
+.education-stat strong {
+  color: var(--color-text);
+  font-weight: 600;
 }
 
 .tag-list {
@@ -1358,6 +1437,12 @@ tbody tr:last-child td {
   margin: 0;
   color: color-mix(in srgb, var(--color-bg) 82%, transparent);
   font-size: var(--text-sm);
+}
+
+.footer p.footer-updated {
+  font-size: 0.8125rem;
+  color: var(--color-text-faint);
+  margin-top: 0.5rem;
 }
 
 .footer nav {

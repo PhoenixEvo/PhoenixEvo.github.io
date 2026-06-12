@@ -89,6 +89,7 @@
         <a class="nav-link" href="#home" data-i18n="nav.home">Home</a>
         <a class="nav-link" href="#news" data-i18n="nav.news">News</a>
         <a class="nav-link" href="#about" data-i18n="nav.about">About</a>
+        <a class="nav-link" href="#education" data-i18n="nav.education">Education</a>
         <a class="nav-link" href="#research" data-i18n="nav.research">Research</a>
         <a class="nav-link" href="#projects" data-i18n="nav.projects">Projects</a>
         <a class="nav-link" href="#experience" data-i18n="nav.experience">Experience</a>
@@ -156,6 +157,15 @@
               </svg>
               <span data-i18n="hero.link.orcid">ORCID</span>
             </a>
+            <a href="#" aria-label="Google Scholar profile (coming soon)" title="Google Scholar – coming soon"
+              style="pointer-events: none; opacity: 0.5;">
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5h3.6v8H6v-8h.8L12 5.8l5.2 3.7H18v8h2.4v-8H24L12 0z" />
+              </svg>
+              <span data-i18n="hero.link.scholar">Scholar</span>
+            </a>
             <a href="https://facebook.com/nhatphst1203" target="_blank" rel="noopener"><svg class="brand-icon"
                 aria-hidden="true" viewBox="0 0 24 24" fill="currentColor">
                 <path
@@ -185,6 +195,7 @@
           <h2 id="about-title" data-i18n="about.heading">About</h2>
         </div>
         <div class="prose">
+          <p class="research-statement" data-i18n="about.statement">My research focuses on efficient 3D scene understanding and medical image analysis — using geometry-aware deep learning to make visual AI systems more compact, accurate, and clinically useful.</p>
           <p data-i18n="about.p1">I am a final-year B.Eng. Student in Information Technology at HCMC University of Technology and Engineering, concentrating in Artificial Intelligence and Computer Vision. My academic work focuses on intelligent visual systems that can analyze, reconstruct, and reason about complex visual data.</p>
           <p><span data-i18n="about.publish_name.before">I publish under the name</span> <strong>Nhat-Phat Nguyen</strong><span data-i18n="about.publish_name.after">.</span></p>
           <p data-i18n="about.p2">My current research spans efficient 3D reconstruction with 3D Gaussian Splatting, geometry-aware model compression, and medical image analysis. I have completed independent research on adaptive density pruning for 3DGS and university research on retinal vessel segmentation using deep learning.</p>
@@ -205,6 +216,47 @@
             <span data-i18n="interest.object_detection">Object Detection</span>
             <span data-i18n="interest.computer_vision">Computer Vision</span>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-anchor" id="education" aria-labelledby="education-title">
+      <div class="container reveal">
+        <div class="section-heading">
+          <p class="section-kicker" data-i18n="education.kicker">Background</p>
+          <h2 id="education-title" data-i18n="education.heading">Education</h2>
+        </div>
+        <div class="education-list">
+          <article class="education-item">
+            <div class="education-logo">
+              <img src="./assets/images/hcmute-logo.webp" alt="HCMUTE logo" width="56" height="56" loading="lazy"
+                onerror="this.style.display='none'">
+            </div>
+            <div class="education-body">
+              <h3 data-i18n="education.degree">B.Eng. in Information Technology (Specialization: Artificial Intelligence)</h3>
+              <p class="education-school">
+                <a href="https://hcmute.edu.vn/" target="_blank" rel="noopener">Ho Chi Minh City University of Technology and Engineering (HCMUTE)</a>
+              </p>
+              <p class="education-meta" data-i18n="education.meta">2023 – Expected 2027 · Faculty of Advanced Education (FAE)</p>
+              <div class="education-stats">
+                <span class="education-stat">
+                  <span data-i18n="education.gpa_label">GPA</span>
+                  <strong>3.64 / 4.0</strong>
+                </span>
+                <span class="education-stat">
+                  <span data-i18n="education.ielts_label">IELTS</span>
+                  <strong>6.0</strong>
+                </span>
+              </div>
+              <div class="tag-list compact">
+                <span>Machine Learning</span>
+                <span>Computer Vision</span>
+                <span>Data Structures & Algorithms</span>
+                <span>Linear Algebra</span>
+                <span>Probability & Statistics</span>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -409,6 +461,7 @@
         <a href="#contact" data-i18n="nav.contact">Contact</a>
       </nav>
       <p>&copy; 2026 Nguyen Nhat Phat. <span data-i18n="footer.rights">All rights reserved.</span></p>
+      <p class="footer-updated"><span data-i18n="footer.updated">Last updated:</span> <time datetime="2026-06">June 2026</time></p>
     </div>
   </footer>
 
