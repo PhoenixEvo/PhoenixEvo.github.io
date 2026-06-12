@@ -653,9 +653,45 @@
     detailModal.querySelector("[data-modal-description]").textContent = copy.description;
 
     const gallery = detailModal.querySelector("[data-modal-gallery]");
-    gallery.innerHTML = item.images.map((src, index) => (
-      `<img src="${src}" alt="${copy.title} image ${index + 1}" width="400" height="300" loading="lazy">`
-    )).join("");
+    gallery.innerHTML = "";
+    item.images.forEach((src, index) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "modal-gallery__zoom-btn";
+      btn.setAttribute("aria-label", `Zoom image ${index + 1}`);
+
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = `${copy.title} image ${index + 1}`;
+      img.width = 400;
+      img.height = 300;
+      img.loading = "lazy";
+
+      btn.appendChild(img);
+      btn.addEventListener("click", () => {
+        // Find index in galleryItems; if not found, open a one-off lightbox
+        const galleryIndex = galleryItems.findIndex((g) => g.src === src);
+        if (galleryIndex !== -1) {
+          openLightbox(galleryIndex);
+        } else {
+          // Temporarily inject into galleryItems for lightbox display
+          const tempItem = { src, alt: img.alt, captionEn: copy.title, captionVi: copy.title };
+          const tempIndex = galleryItems.length;
+          galleryItems.push(tempItem);
+          openLightbox(tempIndex);
+          // Clean up after lightbox closes — attach one-time listener
+          const cleanup = () => {
+            if (lightbox && lightbox.hidden) {
+              galleryItems.splice(tempIndex, 1);
+              lightbox.removeEventListener("transitionend", cleanup);
+            }
+          };
+          lightbox?.addEventListener("transitionend", cleanup, { once: true });
+        }
+      });
+
+      gallery.appendChild(btn);
+    });
 
     const tags = detailModal.querySelector("[data-modal-tags]");
     tags.innerHTML = item.tags.map((tag) => `<span>${tag}</span>`).join("");

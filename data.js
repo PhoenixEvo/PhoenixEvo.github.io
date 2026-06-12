@@ -554,6 +554,62 @@ const SiteData = {
       captionEn: "HCMUTE Research – Good Rating Certificate",
       captionVi: "Nghiên cứu khoa học HCMUTE – Xếp loại Tốt",
       captionI18nKey: "gallery.item.research"
+    },
+    {
+      src: "./assets/awards/outstanding-research-26-1.webp",
+      alt: "Outstanding Student in Scientific Research award 1",
+      captionEn: "Outstanding Student in Scientific Research – FAEPRIME (2026)",
+      captionVi: "Sinh viên Xuất sắc NCKH – FAEPRIME (2026)",
+      captionI18nKey: "gallery.item.faeprime_1"
+    },
+    {
+      src: "./assets/awards/outstanding-research-26-2.webp",
+      alt: "Outstanding Student in Scientific Research award 2",
+      captionEn: "Outstanding Student in Scientific Research – FAEPRIME (2026)",
+      captionVi: "Sinh viên Xuất sắc NCKH – FAEPRIME (2026)",
+      captionI18nKey: "gallery.item.faeprime_2"
+    },
+    {
+      src: "./assets/awards/student5metric-unilevel26-2.webp",
+      alt: "Student of Five Merits University certificate 2",
+      captionEn: "Student of Five Merits (University Level)",
+      captionVi: "Sinh viên 5 tốt (Cấp Trường)",
+      captionI18nKey: "gallery.item.five_merits_uni_2"
+    },
+    {
+      src: "./assets/certificates/following-uncle-Ho.webp",
+      alt: "Advanced Youth Following Uncle Ho certificate",
+      captionEn: "Advanced Youth \"Following Uncle Ho\" (2025)",
+      captionVi: "Thanh niên tiên tiến làm theo lời Bác (2025)",
+      captionI18nKey: "gallery.item.uncle_ho"
+    },
+    {
+      src: "./assets/awards/talented-student-24.webp",
+      alt: "HCMUTE Talented Student Scholarship 2024",
+      captionEn: "HCMUTE Talented Student Scholarship (2024)",
+      captionVi: "Học bổng Sinh viên Tài năng HCMUTE (2024)",
+      captionI18nKey: "gallery.item.talented"
+    },
+    {
+      src: "./assets/certificates/spring-volunteer-25.webp",
+      alt: "Spring Volunteer Campaign certificate",
+      captionEn: "Spring Volunteer Campaign (2025)",
+      captionVi: "Chiến dịch Xuân tình nguyện (2025)",
+      captionI18nKey: "gallery.item.volunteer"
+    },
+    {
+      src: "./assets/experiences/bmw-2026/bmw26-2.webp",
+      alt: "BMW Digital Twin Program activity photo 2",
+      captionEn: "BMW Digital Twin Program – University of Ulsan (2026)",
+      captionVi: "Chương trình BMW Digital Twin – ĐH Ulsan (2026)",
+      captionI18nKey: "gallery.item.bmw_2"
+    },
+    {
+      src: "./assets/experiences/bmw-2026/bmw26-3.webp",
+      alt: "BMW Digital Twin Program activity photo 3",
+      captionEn: "BMW Digital Twin Program – University of Ulsan (2026)",
+      captionVi: "Chương trình BMW Digital Twin – ĐH Ulsan (2026)",
+      captionI18nKey: "gallery.item.bmw_3"
     }
   ]
 };

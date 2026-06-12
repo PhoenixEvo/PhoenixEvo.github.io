@@ -1940,3 +1940,18 @@ tbody tr:last-child td {
     padding: var(--space-4) var(--space-4);
   }
 }
+
+.modal-gallery__zoom-btn {
+  display: contents;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: zoom-in;
+}
+
+.modal-gallery__zoom-btn img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: inherit;
+}
