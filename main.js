@@ -31,7 +31,33 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const siteData = window.SiteData || { news: [], awards: [], details: {}, papers: [], projects: [], gallery: [] };
   const detailContent = siteData.details || {};
-  let galleryItems = siteData.gallery || [];
+  // Auto-build gallery from all details.images + siteData.gallery overrides
+  const buildGalleryFromDetails = () => {
+    const seen = new Set();
+    const items = [];
+
+    // First, keep manually curated gallery entries (siteData.gallery)
+    (siteData.gallery || []).forEach((item) => {
+      seen.add(item.src);
+      items.push(item);
+    });
+
+    // Then append any images in details not already in gallery
+    Object.values(siteData.details || {}).forEach((detail) => {
+      (detail.images || []).forEach((src) => {
+        if (!seen.has(src)) {
+          seen.add(src);
+          const titleEn = detail.en?.title || "";
+          const titleVi = detail.vi?.title || titleEn;
+          items.push({ src, alt: titleEn, captionEn: titleEn, captionVi: titleVi });
+        }
+      });
+    });
+
+    return items;
+  };
+
+  let galleryItems = buildGalleryFromDetails();
   let newsExtras = Array.from(document.querySelectorAll(".news-extra"));
   let activeTheme = "light";
   let currentLanguage = "en";
