@@ -980,18 +980,37 @@ tbody tr:last-child td {
   margin-top: 0;
 }
 
-.masonry-grid {
-  columns: 3 260px;
-  column-gap: var(--space-5);
+.cert-carousel {
+  position: relative;
+  overflow: hidden;
+  margin-top: var(--space-6);
+  border-radius: var(--radius-lg);
+  user-select: none;
 }
 
-.gallery-item {
-  display: inline-grid;
-  width: 100%;
-  margin: 0 0 var(--space-5);
+.cert-carousel__track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.cert-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.cert-carousel__slide {
+  display: flex;
+  flex: 0 0 calc(33.333% - 14px);
+  flex-direction: column;
+  min-width: 260px;
   padding: 0;
   overflow: hidden;
-  break-inside: avoid;
+  scroll-snap-align: start;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   background: var(--color-surface);
@@ -1001,23 +1020,84 @@ tbody tr:last-child td {
   transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
 }
 
-.gallery-item:hover {
-  transform: scale(1.03);
+.cert-carousel__slide:hover {
+  transform: translateY(-2px);
   border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-border));
   box-shadow: var(--shadow-md);
 }
 
-.gallery-item img {
+.cert-carousel__slide img {
   width: 100%;
-  aspect-ratio: 10 / 7;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
+  display: block;
 }
 
-.gallery-item span {
-  padding: var(--space-4);
+.cert-carousel__slide span {
+  padding: 12px 16px;
   color: var(--color-text-muted);
-  font-size: var(--text-sm);
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.cert-carousel__btn {
+  position: absolute;
+  top: 42%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: rgb(255 255 255 / 0.88);
+  color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: transform var(--transition), box-shadow var(--transition), background-color var(--transition);
+}
+
+[data-theme="dark"] .cert-carousel__btn {
+  background: rgb(18 24 30 / 0.88);
+}
+
+.cert-carousel__btn:hover {
+  transform: translateY(-50%) scale(1.04);
+  box-shadow: var(--shadow-md);
+}
+
+.cert-carousel__btn--prev {
+  left: -1.1rem;
+}
+
+.cert-carousel__btn--next {
+  right: -1.1rem;
+}
+
+.cert-carousel__dots {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.cert-carousel__dots .dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--color-text-muted) 42%, transparent);
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition), width var(--transition);
+}
+
+.cert-carousel__dots .dot.active {
+  width: 1.6rem;
+  background: var(--color-primary);
 }
 
 .detail-modal,
@@ -1403,8 +1483,24 @@ tbody tr:last-child td {
     grid-template-columns: 1fr;
   }
 
-  .masonry-grid {
-    columns: 2 220px;
+  .cert-carousel__track {
+    gap: var(--space-4);
+  }
+
+  .cert-carousel__slide {
+    flex-basis: 80%;
+  }
+
+  .cert-carousel__btn {
+    display: none;
+  }
+
+  .cert-carousel__btn--prev {
+    left: 0.25rem;
+  }
+
+  .cert-carousel__btn--next {
+    right: 0.25rem;
   }
 
   .badge {
@@ -1433,8 +1529,8 @@ tbody tr:last-child td {
     overflow-wrap: anywhere;
   }
 
-  .masonry-grid {
-    columns: 1;
+  .cert-carousel__slide {
+    flex-basis: 88%;
   }
 
   .detail-modal,

@@ -24,7 +24,7 @@
   const detailPanel = document.querySelector(".detail-modal__panel");
   const lightbox = document.querySelector("[data-lightbox]");
   const lightboxFigure = document.querySelector(".lightbox__figure");
-  const galleryTriggers = Array.from(document.querySelectorAll("[data-gallery-index]"));
+  const galleryTriggers = Array.from(document.querySelectorAll(".gallery-item[data-gallery-index]"));
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let activeTheme = "light";
   let currentLanguage = "en";
@@ -58,22 +58,24 @@
       "hero.link.orcid": "ORCID",
       "news.kicker": "Updates",
       "news.heading": "News",
-      "news.date.1": "Apr 2026",
-      "news.date.2": "Mar 2026",
-      "news.date.3": "Jan 2026",
+      "news.date.1": "Jun 2026",
+      "news.date.2": "Apr 2026",
+      "news.date.3": "Mar 2026",
       "news.date.4": "Jan 2026",
-      "news.date.5": "May 2025",
-      "news.date.6": "Jul 2025",
-      "news.date.7": "Sep 2025",
-      "news.date.8": "Dec 2024",
-      "news.item.1": "Honored to receive the \"Outstanding Student in Scientific Research\" award from the Faculty of Advanced Education (FAEPRIME) for the academic year 2024-2025.",
-      "news.item.2": "Awarded Student of Five Merits at University level.",
-      "news.item.3": "Awarded Student of Five Merits at Ho Chi Minh City level.",
-      "news.item.4": "Participated in the BMW Digital Twin & AI-Based Industrial Simulation exchange at University of Ulsan, South Korea.",
-      "news.item.5": "Received the Advanced Youth \"Following Uncle Ho\" award at university level.",
-      "news.item.6": "Our research project \"Advanced Retinal Blood Vessel Analysis Using Deep Learning for High-Resolution Image Segmentation\" was successfully defended with a Good rating.",
-      "news.item.7": "Successfully completed the intensive Artificial Intelligence course at Samsung Innovation Campus, co-organized by LetuinEdu and VDCA.",
-      "news.item.8": "Honored as an \"HCMUTE Talented Student 2024\" for outstanding academic and leadership excellence.",
+      "news.date.5": "Jan 2026",
+      "news.date.6": "May 2025",
+      "news.date.7": "Jul 2025",
+      "news.date.8": "Sep 2025",
+      "news.date.9": "Dec 2024",
+      "news.item.1": "Completed Software Development with Scrum certification at Axon Active – Agile Software Development Company.",
+      "news.item.2": "Honored to receive the \"Outstanding Student in Scientific Research\" award from the Faculty of Advanced Education (FAEPRIME) for the academic year 2024-2025.",
+      "news.item.3": "Awarded Student of Five Merits at University level.",
+      "news.item.4": "Awarded Student of Five Merits at Ho Chi Minh City level.",
+      "news.item.5": "Participated in the BMW Digital Twin & AI-Based Industrial Simulation exchange at University of Ulsan, South Korea.",
+      "news.item.6": "Received the Advanced Youth \"Following Uncle Ho\" award at university level.",
+      "news.item.7": "Our research project \"Advanced Retinal Blood Vessel Analysis Using Deep Learning for High-Resolution Image Segmentation\" was successfully defended with a Good rating.",
+      "news.item.8": "Successfully completed the intensive Artificial Intelligence course at Samsung Innovation Campus, co-organized by LetuinEdu and VDCA.",
+      "news.item.9": "Honored as an \"HCMUTE Talented Student 2024\" for outstanding academic and leadership excellence.",
       "news.see_all": "See all news",
       "news.collapse": "Show less",
       "about.kicker": "Profile",
@@ -138,15 +140,21 @@
       "awards.hcmute_talented": "HCMUTE Talented Student 2024",
       "awards.advanced_youth": "Advanced Youth \"Following Uncle Ho\"",
       "awards.five_merits": "Student of Five Merits",
+      "awards.badminton_2025": "3rd Prize – Men's Doubles Badminton",
+      "awards.eureka_2025": "Euréka XXVII 2025 – Student Scientific Research Prize",
       "awards.good_rating": "University Research \"Good\" Rating",
       "awards.running": "HCMUTE Running - 21km Completion",
+      "awards.running_1st": "1st Prize – 200m Sprint (HCMUTE Running)",
       "awards.scholarship": "Talented Student Scholarship",
       "awards.samsung": "Samsung Innovation Campus (AI Program)",
+      "awards.scrum_certificate": "Scrum Certificate (Axon Active)",
       "awards.ielts": "IELTS 6.0",
       "awards.level.university": "University Level",
       "awards.level.hcmc": "HCMC City Level",
       "awards.level.faeprime": "Faculty (FAEPRIME)",
       "awards.level.university_short": "University",
+      "awards.level.hcmute": "University (HCMUTE)",
+      "awards.level.hcmc_vnu": "Ho Chi Minh City Level (Vietnam National University HCM)",
       "awards.level.international": "International",
       "skills.kicker": "Toolkit",
       "skills.heading": "Skills",
@@ -171,12 +179,16 @@
       "details.external": "External link",
       "gallery.kicker": "Certificates",
       "gallery.heading": "Certificates & Gallery",
-      "gallery.item.ielts": "IELTS 6.0 Certificate",
-      "gallery.item.five_merits": "Student of Five Merits (HCMC)",
+      "gallery.item.running_1st": "1st Prize – 200m Sprint (HCMUTE Running 2024)",
+      "gallery.item.eureka": "Euréka XXVII 2025 – Scientific Research Prize",
+      "gallery.item.badminton": "3rd Prize – Men's Doubles Badminton (HCMUTE 2025)",
+      "gallery.item.five_merits": "Student of Five Merits (HCMC Level)",
+      "gallery.item.five_merits_uni": "Student of Five Merits (University Level)",
       "gallery.item.scholarship": "Talented Student Scholarship",
-      "gallery.item.samsung": "Samsung Innovation Campus",
-      "gallery.item.bmw": "BMW Program Certificate",
-      "gallery.item.research": "HCMUTE Research Certificate",
+      "gallery.item.samsung": "Samsung Innovation Campus – AI Program",
+      "gallery.item.scrum": "Software Development with Scrum – Axon Active (2026)",
+      "gallery.item.bmw": "BMW Digital Twin Program – University of Ulsan (2026)",
+      "gallery.item.research": "HCMUTE Research – Good Rating Certificate",
       "footer.role": "- AI & Computer Vision Researcher",
       "footer.rights": "All rights reserved."
     },
@@ -204,22 +216,24 @@
       "hero.link.orcid": "ORCID",
       "news.kicker": "Cập nhật",
       "news.heading": "Tin tức",
-      "news.date.1": "04/2026",
-      "news.date.2": "03/2026",
-      "news.date.3": "01/2026",
+      "news.date.1": "06/2026",
+      "news.date.2": "04/2026",
+      "news.date.3": "03/2026",
       "news.date.4": "01/2026",
-      "news.date.5": "05/2025",
-      "news.date.6": "07/2025",
-      "news.date.7": "09/2025",
-      "news.date.8": "12/2024",
-      "news.item.1": "Vinh dự nhận giải \"Sinh viên Xuất sắc trong Nghiên cứu Khoa học\" từ Faculty of Advanced Education (FAEPRIME) cho năm học 2024-2025.",
-      "news.item.2": "Đạt danh hiệu Sinh viên 5 tốt cấp trường.",
-      "news.item.3": "Đạt danh hiệu Sinh viên 5 tốt cấp Thành phố Hồ Chí Minh.",
-      "news.item.4": "Tham gia chương trình trao đổi BMW Digital Twin & AI-Based Industrial Simulation tại University of Ulsan, South Korea.",
-      "news.item.5": "Nhận danh hiệu Thanh niên tiên tiến làm theo lời Bác cấp trường.",
-      "news.item.6": "Đề tài nghiên cứu \"Advanced Retinal Blood Vessel Analysis Using Deep Learning for High-Resolution Image Segmentation\" được bảo vệ thành công với đánh giá Tốt.",
-      "news.item.7": "Hoàn thành khóa học chuyên sâu về Artificial Intelligence tại Samsung Innovation Campus, đồng tổ chức bởi LetuinEdu và VDCA.",
-      "news.item.8": "Được vinh danh là \"HCMUTE Talented Student 2024\" nhờ thành tích học tập và năng lực lãnh đạo nổi bật.",
+      "news.date.5": "01/2026",
+      "news.date.6": "05/2025",
+      "news.date.7": "07/2025",
+      "news.date.8": "09/2025",
+      "news.date.9": "12/2024",
+      "news.item.1": "Hoàn thành chứng chỉ Software Development with Scrum tại Axon Active – Công ty Phát triển Phần mềm Agile.",
+      "news.item.2": "Vinh dự nhận giải \"Sinh viên Xuất sắc trong Nghiên cứu Khoa học\" từ Faculty of Advanced Education (FAEPRIME) cho năm học 2024-2025.",
+      "news.item.3": "Đạt danh hiệu Sinh viên 5 tốt cấp trường.",
+      "news.item.4": "Đạt danh hiệu Sinh viên 5 tốt cấp Thành phố Hồ Chí Minh.",
+      "news.item.5": "Tham gia chương trình trao đổi BMW Digital Twin & AI-Based Industrial Simulation tại University of Ulsan, South Korea.",
+      "news.item.6": "Nhận danh hiệu Thanh niên tiên tiến làm theo lời Bác cấp trường.",
+      "news.item.7": "Đề tài nghiên cứu \"Advanced Retinal Blood Vessel Analysis Using Deep Learning for High-Resolution Image Segmentation\" được bảo vệ thành công với đánh giá Tốt.",
+      "news.item.8": "Hoàn thành khóa học chuyên sâu về Artificial Intelligence tại Samsung Innovation Campus, đồng tổ chức bởi LetuinEdu và VDCA.",
+      "news.item.9": "Được vinh danh là \"HCMUTE Talented Student 2024\" nhờ thành tích học tập và năng lực lãnh đạo nổi bật.",
       "news.see_all": "Xem tất cả tin tức",
       "news.collapse": "Thu gọn",
       "about.kicker": "Hồ sơ",
@@ -284,15 +298,21 @@
       "awards.hcmute_talented": "Sinh viên Tài năng HCMUTE 2024",
       "awards.advanced_youth": "Thanh niên tiên tiến làm theo lời Bác",
       "awards.five_merits": "Sinh viên 5 tốt",
+      "awards.badminton_2025": "Giải Ba – Cầu lông đôi Nam",
+      "awards.eureka_2025": "Euréka XXVII 2025 – Giải thưởng Sinh viên Nghiên cứu Khoa học",
       "awards.good_rating": "Đề tài nghiên cứu sinh viên đạt loại \"Tốt\"",
       "awards.running": "HCMUTE Running - Hoàn thành 21km",
+      "awards.running_1st": "Giải Nhất – Chạy 200m (HCMUTE Running)",
       "awards.scholarship": "Học bổng Sinh viên tài năng",
       "awards.samsung": "Samsung Innovation Campus (Chương trình AI)",
+      "awards.scrum_certificate": "Chứng chỉ Scrum (Axon Active)",
       "awards.ielts": "IELTS 6.0",
       "awards.level.university": "Cấp trường",
       "awards.level.hcmc": "Cấp Thành phố Hồ Chí Minh",
       "awards.level.faeprime": "Cấp Khoa (FAEPRIME)",
       "awards.level.university_short": "Cấp trường",
+      "awards.level.hcmute": "Cấp trường (HCMUTE)",
+      "awards.level.hcmc_vnu": "Cấp Thành phố Hồ Chí Minh (Vietnam National University HCM)",
       "awards.level.international": "Quốc tế",
       "skills.kicker": "Công cụ",
       "skills.heading": "Kỹ năng",
@@ -317,12 +337,16 @@
       "details.external": "Liên kết ngoài",
       "gallery.kicker": "Chứng chỉ",
       "gallery.heading": "Chứng chỉ & Thư viện ảnh",
-      "gallery.item.ielts": "Chứng chỉ IELTS 6.0",
-      "gallery.item.five_merits": "Sinh viên 5 tốt cấp TP.HCM",
+      "gallery.item.running_1st": "Giải Nhất – Chạy 200m (HCMUTE Running 2024)",
+      "gallery.item.eureka": "Euréka XXVII 2025 – Giải thưởng NCKH Sinh viên",
+      "gallery.item.badminton": "Giải Ba – Cầu lông đôi Nam (HCMUTE 2025)",
+      "gallery.item.five_merits": "Sinh viên 5 tốt (Cấp Thành phố)",
+      "gallery.item.five_merits_uni": "Sinh viên 5 tốt (Cấp Trường)",
       "gallery.item.scholarship": "Học bổng Sinh viên tài năng",
-      "gallery.item.samsung": "Samsung Innovation Campus",
-      "gallery.item.bmw": "Chứng chỉ BMW Program",
-      "gallery.item.research": "Chứng nhận nghiên cứu HCMUTE",
+      "gallery.item.samsung": "Samsung Innovation Campus – Chương trình AI",
+      "gallery.item.scrum": "Software Development with Scrum – Axon Active (2026)",
+      "gallery.item.bmw": "Chương trình BMW Digital Twin – ĐH Ulsan (2026)",
+      "gallery.item.research": "Nghiên cứu khoa học HCMUTE – Xếp loại Tốt",
       "footer.role": "- Nhà nghiên cứu AI & Thị giác máy tính",
       "footer.rights": "Bảo lưu mọi quyền."
     }
@@ -330,7 +354,7 @@
 
   const detailContent = {
     "faeprime-research": {
-      images: ["https://picsum.photos/seed/faeprime-research/400/300"],
+      images: ["./assets/awards/outstanding-research-26-1.webp", "./assets/awards/outstanding-research-26-2.webp"],
       tags: ["Scientific Research", "Faculty Award", "AI"],
       link: "",
       en: {
@@ -348,8 +372,9 @@
     },
     "bmw-program": {
       images: [
-        "https://picsum.photos/seed/korea1/400/300",
-        "https://picsum.photos/seed/korea2/400/300"
+        "./assets/experiences/bmw-2026/bmw26-1.webp",
+        "./assets/experiences/bmw-2026/bmw26-2.webp",
+        "./assets/experiences/bmw-2026/bmw26-3.webp"
       ],
       tags: ["Digital Twin", "Industrial Simulation", "AI", "International Collaboration"],
       link: "https://www.ulsan.ac.kr/",
@@ -401,7 +426,7 @@
       }
     },
     "advanced-youth": {
-      images: ["https://picsum.photos/seed/advanced-youth/400/300"],
+      images: ["./assets/certificates/following-uncle-Ho.webp"],
       tags: ["Leadership", "Conduct", "Social Contribution"],
       link: "",
       en: {
@@ -418,7 +443,7 @@
       }
     },
     "student-five-merits": {
-      images: ["https://picsum.photos/seed/award-ceremony/400/300"],
+      images: ["./assets/certificates/student5metric-citylevel26.webp", "./assets/awards/student5metric-citylevel26.webp"],
       tags: ["Academic Performance", "Conduct", "Volunteerism", "Physical Fitness"],
       link: "",
       en: {
@@ -435,7 +460,7 @@
       }
     },
     "student-five-merits-university": {
-      images: ["https://picsum.photos/seed/five-merits-campus/400/300"],
+      images: ["./assets/awards/student5metric-unilevel26-1.webp", "./assets/awards/student5metric-unilevel26-2.webp"],
       tags: ["Academic Performance", "Conduct", "Volunteerism"],
       link: "",
       en: {
@@ -451,8 +476,25 @@
         description: "Được ghi nhận cấp trường cho sự phát triển toàn diện về học tập, đạo đức, hoạt động tình nguyện, hội nhập và thể lực."
       }
     },
+    "badminton-2025": {
+      images: ["./assets/certificates/badminton-3rd-sport.webp"],
+      tags: ["Sports", "Badminton", "University Games"],
+      link: "",
+      en: {
+        title: "3rd Prize – Men's Doubles Badminton",
+        organization: "HCMUTE Student Union",
+        date: "May 22, 2025",
+        description: "Awarded 3rd place in Men's Doubles Badminton at the HCMUTE Student Sports Festival 2025 (Hội thao Sinh viên HCMUTE – Năm 2025). Certificate No. 56/QD-BTK."
+      },
+      vi: {
+        title: "Giải Ba – Cầu lông đôi Nam",
+        organization: "Hội Sinh viên Trường HCMUTE",
+        date: "Ngày 22 tháng 5 năm 2025",
+        description: "Đạt giải Ba nội dung Cầu lông đôi Nam tại Hội thao Sinh viên HCMUTE – Năm 2025. Số: 56/QD-BTK."
+      }
+    },
     "hcmute-talented-2024": {
-      images: ["https://picsum.photos/seed/hcmute-talented/400/300"],
+      images: ["./assets/awards/talented-student-24.webp"],
       tags: ["Academic Excellence", "Leadership", "Recognition"],
       link: "",
       en: {
@@ -468,38 +510,38 @@
         description: "Được công nhận là Sinh viên Tài năng HCMUTE 2024 vì thành tích học tập xuất sắc và khả năng lãnh đạo nổi bật trong năm học."
       }
     },
-    "hcmute-research-good": {
-      images: ["./assets/certificates/retinal_seg_cer.jpg", "./assets/projects/retinal_seg.webp"],
-      tags: ["Deep Learning", "Medical Image Analysis", "Research Defense"],
-      link: "https://github.com/PhoenixEvo/retinal-vessel-segmentation",
+    "eureka-2025": {
+      images: ["./assets/certificates/CER_EUREKA25.webp", "./assets/projects/retinal_seg.webp"],
+      tags: ["Scientific Research", "Euréka", "Medical Image Analysis"],
+      link: "",
       en: {
-        title: "HCMUTE University Research - Rated Good",
-        organization: "HCMUTE University Research Program",
-        date: "2024",
-        description: "Successfully defended the research project on retinal vessel segmentation using deep learning. Evaluated by university academic committee."
+        title: "Euréka XXVII 2025 – Student Scientific Research Prize",
+        organization: "Ho Chi Minh City Level (Vietnam National University HCM)",
+        date: "October 2025",
+        description: "Participated in the Student Scientific Research Prize at Euréka XXVII 2025, organized by Vietnam National University Ho Chi Minh City and the HCM Communist Youth Union. Held on October 29, 2025."
       },
       vi: {
-        title: "Nghiên cứu sinh viên HCMUTE - Đánh giá Tốt",
-        organization: "HCMUTE University Research Program",
-        date: "2024",
-        description: "Bảo vệ thành công đề tài nghiên cứu về phân đoạn mạch máu võng mạc bằng học sâu. Đề tài được hội đồng học thuật cấp trường đánh giá."
+        title: "Euréka XXVII 2025 – Giải thưởng Sinh viên Nghiên cứu Khoa học",
+        organization: "Cấp Thành phố Hồ Chí Minh (Vietnam National University HCM)",
+        date: "Tháng 10/2025",
+        description: "Tham gia Giải thưởng Sinh viên Nghiên cứu Khoa học Euréka lần XXVII năm 2025, do Đại học Quốc gia TP.HCM và Thành Đoàn TP.HCM tổ chức, ngày 29/10/2025."
       }
     },
     "hcmute-running": {
-      images: ["https://picsum.photos/seed/running-21k/400/300"],
-      tags: ["Discipline", "Endurance", "Campus Activity"],
+      images: ["./assets/certificates/hcmute-running-1st-25.webp"],
+      tags: ["Sports", "Sprint", "University Games"],
       link: "",
       en: {
-        title: "HCMUTE Running - 21km Completion",
+        title: "1st Prize – 200m Sprint (HCMUTE Running)",
         organization: "HCMUTE",
-        date: "2024",
-        description: "Completed the 21km community running event at HCMUTE, reflecting consistency, discipline, and commitment to student life beyond academics."
+        date: "October 2024",
+        description: "Awarded 1st place in the 200m sprint at HCMUTE Running – Vì Một HCMUTE Nghĩa Tình, held on October 8, 2024. Certificate No. 21/QD-BTK, issued by the HCMUTE Student Union."
       },
       vi: {
-        title: "HCMUTE Running - Hoàn thành 21km",
+        title: "Giải Nhất – Chạy 200m (HCMUTE Running)",
         organization: "HCMUTE",
-        date: "2024",
-        description: "Hoàn thành sự kiện chạy cộng đồng cự ly 21km tại HCMUTE, thể hiện sự bền bỉ, kỷ luật và tinh thần tham gia đời sống sinh viên ngoài học thuật."
+        date: "Tháng 10/2024",
+        description: "Đạt giải Nhất nội dung chạy 200m tại HCMUTE Running – Vì Một HCMUTE Nghĩa Tình, ngày 08/10/2024. Số: 21/QD-BTK, do Ban Thư ký Hội Sinh viên Trường cấp."
       }
     },
     "talented-scholarship": {
@@ -536,6 +578,23 @@
         description: "Hoàn thành chương trình học định hướng AI tại Samsung Innovation Campus, củng cố nền tảng công nghệ hiện đại, khái niệm AI ứng dụng và giải quyết vấn đề thực tế."
       }
     },
+    "scrum-axon-2026": {
+      images: ["./assets/certificates/SCRUM-cer.webp"],
+      tags: ["Scrum", "Agile", "Software Development"],
+      link: "",
+      en: {
+        title: "Software Development with Scrum",
+        organization: "Axon Active – Agile Software Development Company",
+        date: "June 2026",
+        description: "Completed Software Development with Scrum certification at Axon Active – Agile Software Development Company, strengthening Agile workflow, Scrum roles, sprint planning, and collaborative software delivery practice."
+      },
+      vi: {
+        title: "Software Development with Scrum",
+        organization: "Axon Active – Công ty Phát triển Phần mềm Agile",
+        date: "Tháng 06/2026",
+        description: "Hoàn thành chứng chỉ Software Development with Scrum tại Axon Active – Công ty Phát triển Phần mềm Agile, củng cố quy trình Agile, vai trò Scrum, lập kế hoạch sprint và thực hành phát triển phần mềm cộng tác."
+      }
+    },
     "ielts": {
       images: ["https://picsum.photos/seed/ielts-detail/400/300"],
       tags: ["English", "Academic Communication", "IELTS 6.0"],
@@ -557,19 +616,29 @@
 
   const galleryItems = [
     {
-      src: "https://picsum.photos/seed/ielts-cert/400/280",
-      captionKey: "gallery.item.ielts",
-      alt: "IELTS 6.0 Certificate"
+      src: "./assets/certificates/hcmute-running-1st-25.webp",
+      captionKey: "gallery.item.running_1st",
+      alt: "HCMUTE Running 1st Prize certificate"
     },
     {
-      src: "https://picsum.photos/seed/certificate-1/400/280",
+      src: "./assets/certificates/CER_EUREKA25.webp",
+      captionKey: "gallery.item.eureka",
+      alt: "Euréka XXVII 2025 certificate"
+    },
+    {
+      src: "./assets/certificates/badminton-3rd-sport.webp",
+      captionKey: "gallery.item.badminton",
+      alt: "Badminton 2025 certificate"
+    },
+    {
+      src: "./assets/certificates/student5metric-citylevel26.webp",
       captionKey: "gallery.item.five_merits",
-      alt: "Student of Five Merits certificate"
+      alt: "Student of Five Merits HCMC certificate"
     },
     {
-      src: "https://picsum.photos/seed/scholarship/400/280",
-      captionKey: "gallery.item.scholarship",
-      alt: "Talented Student Scholarship"
+      src: "./assets/awards/student5metric-unilevel26-1.webp",
+      captionKey: "gallery.item.five_merits_uni",
+      alt: "Student of Five Merits University certificate"
     },
     {
       src: "./assets/certificates/samsung_ic.jpg",
@@ -577,7 +646,12 @@
       alt: "Samsung Innovation Campus"
     },
     {
-      src: "https://picsum.photos/seed/bmw-cert/400/280",
+      src: "./assets/certificates/SCRUM-cer.webp",
+      captionKey: "gallery.item.scrum",
+      alt: "Scrum Axon Active certificate"
+    },
+    {
+      src: "./assets/experiences/bmw-2026/bmw26-1.webp",
       captionKey: "gallery.item.bmw",
       alt: "BMW Program Certificate"
     },
@@ -716,6 +790,68 @@
     const nextIndex = (activeGalleryIndex + direction + galleryItems.length) % galleryItems.length;
     activeGalleryIndex = nextIndex;
     renderLightbox(nextIndex);
+  };
+
+  const initCertCarousel = () => {
+    const carousel = document.querySelector("[data-cert-carousel]");
+    if (!carousel) return;
+
+    const track = carousel.querySelector("[data-carousel-track]");
+    const slides = Array.from(carousel.querySelectorAll(".cert-carousel__slide"));
+    const prevButton = carousel.querySelector("[data-carousel-prev]");
+    const nextButton = carousel.querySelector("[data-carousel-next]");
+    const dotsWrap = carousel.querySelector("[data-carousel-dots]");
+    if (!track || !slides.length || !dotsWrap) return;
+
+    let activeIndex = 0;
+    let scrollFrame = null;
+
+    const setActiveDot = (index) => {
+      activeIndex = Math.max(0, Math.min(index, slides.length - 1));
+      dotsWrap.querySelectorAll("button").forEach((dot, dotIndex) => {
+        dot.classList.toggle("active", dotIndex === activeIndex);
+        dot.setAttribute("aria-selected", String(dotIndex === activeIndex));
+      });
+    };
+
+    const getNearestSlideIndex = () => slides.reduce((nearest, slide, index) => {
+      const distance = Math.abs(slide.offsetLeft - track.scrollLeft);
+      return distance < nearest.distance ? { index, distance } : nearest;
+    }, { index: 0, distance: Number.POSITIVE_INFINITY }).index;
+
+    const scrollToSlide = (index) => {
+      const nextIndex = (index + slides.length) % slides.length;
+      const behavior = reduceMotion.matches ? "auto" : "smooth";
+      track.scrollTo({ left: slides[nextIndex].offsetLeft, behavior });
+      setActiveDot(nextIndex);
+    };
+
+    dotsWrap.innerHTML = slides.map((_, index) => (
+      `<button class="dot${index === 0 ? " active" : ""}" type="button" aria-label="Go to slide ${index + 1}" aria-selected="${index === 0 ? "true" : "false"}"></button>`
+    )).join("");
+
+    slides.forEach((slide) => {
+      slide.addEventListener("click", () => {
+        openLightbox(Number(slide.dataset.galleryIndex));
+      });
+    });
+
+    dotsWrap.querySelectorAll("button").forEach((dot, index) => {
+      dot.addEventListener("click", () => scrollToSlide(index));
+    });
+
+    prevButton?.addEventListener("click", () => scrollToSlide(activeIndex - 1));
+    nextButton?.addEventListener("click", () => scrollToSlide(activeIndex + 1));
+
+    track.addEventListener("scroll", () => {
+      if (scrollFrame) return;
+      scrollFrame = window.requestAnimationFrame(() => {
+        scrollFrame = null;
+        setActiveDot(getNearestSlideIndex());
+      });
+    }, { passive: true });
+
+    setActiveDot(0);
   };
 
   const trapFocus = (event, container) => {
@@ -1419,6 +1555,7 @@
 
   applyTheme(getPreferredTheme());
   applyLanguage(currentLanguage);
+  initCertCarousel();
   refreshIcons();
   setScrolledState();
   setupRevealObserver();
