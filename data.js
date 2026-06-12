@@ -462,34 +462,6 @@ const SiteData = {
 
   projects: [
     {
-      year: "2026",
-      status: "research",
-      titleEn: "Adaptive Density Pruning for 3D Gaussian Splatting",
-      titleVi: "Adaptive Density Pruning for 3D Gaussian Splatting",
-      titleI18n: null,
-      descEn: "Geometry-aware model compression for efficient 3D scene reconstruction. Achieves ~30% model size reduction with no visual quality loss across 11 scenes.",
-      descVi: "Nén mô hình dựa trên hình học cho tái dựng cảnh 3D hiệu quả. Giảm ~30% kích thước mô hình mà không giảm chất lượng hình ảnh trên 11 cảnh.",
-      descI18n: "projects.p1.desc",
-      tags: ["PyTorch", "Computer Vision", "3DGS"],
-      github: "https://github.com/PhoenixEvo",
-      image: "./assets/projects/ADP.webp",
-      imageAlt: "Adaptive Density Pruning for 3D Gaussian Splatting result"
-    },
-    {
-      year: "2024",
-      status: "research",
-      titleEn: "Retinal Vessel Segmentation",
-      titleVi: "Phân đoạn mạch máu võng mạc",
-      titleI18n: "projects.p2.title",
-      descEn: "High-resolution retinal blood vessel segmentation using deep learning. Achieved strong F1-score performance on the DRIVE benchmark dataset.",
-      descVi: "Phân đoạn mạch máu võng mạc độ phân giải cao bằng học sâu. Đạt hiệu suất F1-score tốt trên bộ dữ liệu chuẩn DRIVE.",
-      descI18n: "projects.p2.desc",
-      tags: ["PyTorch", "Medical AI", "CNN", "OpenCV"],
-      github: "https://github.com/PhoenixEvo/retinal-vessel-segmentation",
-      image: "./assets/projects/retinal_seg.webp",
-      imageAlt: "Retinal vessel segmentation project result"
-    },
-    {
       year: "2024",
       status: "completed",
       titleEn: "Cassava Leaf Disease Classification",
