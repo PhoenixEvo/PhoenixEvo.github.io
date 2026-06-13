@@ -1609,6 +1609,7 @@
 
   newsToggle?.addEventListener("click", () => {
     const expanded = newsToggle.getAttribute("aria-expanded") === "true";
+    newsExtras = Array.from(newsList?.querySelectorAll(".news-extra") || []);
     newsExtras.forEach((item) => {
       item.hidden = expanded;
     });

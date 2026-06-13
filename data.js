@@ -40,7 +40,7 @@ const SiteData = {
       dateVi: "01/2026",
       en: "Participated in the BMW Digital Twin & AI-Based Industrial Simulation exchange at University of Ulsan, South Korea.",
       vi: "Tham gia chương trình trao đổi BMW Digital Twin & AI-Based Industrial Simulation tại University of Ulsan, South Korea.",
-      extra: true
+      extra: false
     },
     {
       datetime: "2025-05",
@@ -73,7 +73,15 @@ const SiteData = {
       en: "Honored as an \"HCMUTE Talented Student 2024\" for outstanding academic and leadership excellence.",
       vi: "Được vinh danh là \"HCMUTE Talented Student 2024\" nhờ thành tích học tập và năng lực lãnh đạo nổi bật.",
       extra: true
-    }
+    },
+    {
+      datetime: "2024-12",
+      dateEn: "Dec 2024",
+      dateVi: "12/2024",
+      en: "Received the Academic Excellence Scholarship (Good standing) from HCMUTE for Semester 1, academic year 2024–2025, with a conduct score of 100/100.",
+      vi: "Nhận Học bổng Khuyến khích Học tập loại Giỏi từ HCMUTE cho Học kỳ 1 năm học 2024–2025, điểm rèn luyện 100/100.",
+      extra: true
+    },
   ],
 
   awards: [
@@ -166,7 +174,16 @@ const SiteData = {
     levelEn: "Cu Chi District",
     levelVi: "Huyện Củ Chi",
     detailId: "excellent-student-district-2020"
-    }
+    },
+    {
+    year: "Dec 2024",
+    sortDate: "2024-12",
+    awardEn: "Academic Excellence Scholarship – Good Standing",
+    awardVi: "Học bổng Khuyến khích Học tập loại Giỏi",
+    levelEn: "University (HCMUTE)",
+    levelVi: "Cấp trường (HCMUTE)",
+    detailId: "scholarship-kkht-2024"
+  }
   ],
 
   details: {
@@ -445,7 +462,24 @@ const SiteData = {
         date: "Ngày 05 tháng 01 năm 2020",
         description: "Đạt danh hiệu Học sinh Giỏi Cấp Huyện môn Vật lý lớp 9A3, năm học 2019–2020, trường THCS Phước Thạnh, Huyện Củ Chi."
       }
-    }
+    },
+    "scholarship-kkht-2024": {
+      images: ["./assets/certificates/scholarship-kkht-2024.webp"],
+      tags: ["Scholarship", "Academic Excellence", "HCMUTE"],
+      link: "",
+      en: {
+        title: "Academic Excellence Scholarship – Good Standing (HK1 2024–2025)",
+        organization: "HCMUTE – Ho Chi Minh City University of Technology and Education",
+        date: "December 12, 2024",
+        description: "Awarded the Academic Excellence Scholarship (Good standing) for Semester 1, academic year 2024–2025, based on academic performance in Semester 2 of 2023–2024. Conduct score: 100/100. Total credits: 40. Faculty of International Education, Information Technology major."
+      },
+      vi: {
+        title: "Học bổng Khuyến khích Học tập loại Giỏi (HK1 2024–2025)",
+        organization: "Trường Đại học Sư phạm Kỹ thuật TP. Hồ Chí Minh (HCMUTE)",
+        date: "Ngày 12 tháng 12 năm 2024",
+        description: "Nhận Học bổng Khuyến khích Học tập loại Giỏi cho Học kỳ 1 năm học 2024–2025, xét theo kết quả Học kỳ 2 năm học 2023–2024. Điểm rèn luyện: 100. Số tín chỉ: 40. Khoa Đào tạo Quốc tế, ngành Công nghệ thông tin."
+      }
+    },
   },
 
   papers: [
@@ -703,13 +737,22 @@ const SiteData = {
       src: "./assets/certificates/excellent-student-city-2023.webp",
       alt: "2nd Prize City-Level Excellent Student Physics 2023",
       captionEn: "2nd Prize – Excellent Student City Level · Physics (2023)",
-      captionVi: "Giải Nhì – Học sinh Giỏi Cấp TP · Vật lý (2023)"
+      captionVi: "Giải Nhì – Học sinh Giỏi Cấp TP · Vật lý (2023)",
+      captionI18nKey: "gallery.item.excellent_student_city"
     },
     {
       src: "./assets/certificates/excellent-student-district-2020.webp",
       alt: "Excellent Student District Level Physics 2020",
       captionEn: "Excellent Student – District Level · Physics (2020)",
-      captionVi: "Học sinh Giỏi Cấp Huyện · Vật lý (2020)"
+      captionVi: "Học sinh Giỏi Cấp Huyện · Vật lý (2020)",
+      captionI18nKey: "gallery.item.excellent_student_district"
+    },
+    {
+      src: "./assets/certificates/scholarship-kkht-2024.webp",
+      alt: "Academic Excellence Scholarship HCMUTE 2024",
+      captionEn: "Academic Excellence Scholarship – Good Standing (HCMUTE 2024)",
+      captionVi: "Học bổng Khuyến khích Học tập loại Giỏi (HCMUTE 2024)",
+      captionI18nKey: "gallery.item.scholarship"
     }
   ]
 };
