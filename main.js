@@ -999,6 +999,10 @@
     });
 
     revealItems.forEach((item) => revealObserver.observe(item));
+
+    setTimeout(() => {
+      document.querySelectorAll(".reveal:not(.visible)").forEach((el) => el.classList.add("visible"));
+    }, 3000);
   };
 
   /*
@@ -1561,6 +1565,7 @@
   attachDetailTriggers();
   refreshIcons();
   setScrolledState();
+  setupRevealObserver();
   setupActiveSectionObserver();
   initStarryCanvas();
 
