@@ -881,11 +881,11 @@
     const videoLight = document.querySelector(".hero-video--light");
 
     if (activeTheme === "dark") {
-      videoDark?.play().catch(() => {});
-      videoLight?.pause();
+      if (videoDark) { videoDark.preload = "auto"; videoDark.load(); videoDark.play().catch(() => {}); }
+      if (videoLight) { videoLight.pause(); videoLight.preload = "none"; }
     } else {
-      videoLight?.play().catch(() => {});
-      videoDark?.pause();
+      if (videoLight) { videoLight.preload = "auto"; videoLight.load(); videoLight.play().catch(() => {}); }
+      if (videoDark) { videoDark.pause(); videoDark.preload = "none"; }
     }
 
     if (themeToggle) {

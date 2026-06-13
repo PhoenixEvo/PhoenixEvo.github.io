@@ -26,6 +26,7 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:url" content="https://phoenixevo.github.io/">
+  <meta property="og:locale" content="en_US">
   <meta property="og:site_name" content="Nguyen Nhat Phat">
   <meta name="twitter:title" content="Nguyen Nhat Phat | AI & Computer Vision Researcher">
   <meta name="twitter:description"
@@ -33,6 +34,7 @@
   <meta name="twitter:image"
         content="https://phoenixevo.github.io/assets/images/og-cover.png">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@nguyennhatphat">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,8 +53,8 @@
     "alternateName": "Nguyen Nhat Phat",
     "url": "https://phoenixevo.github.io/",
     "email": [
-      "mailto:23110053@student.hcmute.edu.vn",
-      "mailto:nhatphatnguyen.ai@gmail.com"
+      "23110053@student.hcmute.edu.vn",
+      "nhatphatnguyen.ai@gmail.com"
     ],
     "jobTitle": "B.Eng. Student in Information Technology, specializing in Artificial Intelligence",
     "affiliation": {
@@ -122,16 +124,16 @@
       <div class="hero-video-bg" aria-hidden="true">
         <video class="hero-video--dark"
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260217_030345_246c0224-10a4-422c-b324-070b7c0eceda.mp4"
-          autoplay loop muted playsinline preload="auto"></video>
+          autoplay loop muted playsinline preload="none"></video>
         <video class="hero-video--light"
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260228_065522_522e2295-ba22-457e-8fdb-fbcd68109c73.mp4"
-          autoplay loop muted playsinline preload="auto"></video>
+          autoplay loop muted playsinline preload="none"></video>
         <div class="hero-video-overlay" aria-hidden="true"></div>
       </div>
       <canvas id="starry-canvas"></canvas>
       <div class="hero-inner reveal">
         <div class="hero-photo-frame">
-          <img class="hero-photo" src="./assets/images/profile.png" alt="Portrait of Nguyen Nhat Phat" width="260"
+          <img class="hero-photo" src="./assets/images/profile.webp" alt="Portrait of Nguyen Nhat Phat" width="260"
             height="260">
         </div>
         <div class="hero-copy">
@@ -213,7 +215,7 @@
           <p data-i18n="about.p3">I am building a research foundation toward graduate study and international collaboration, with an interest in practical AI systems that remain rigorous, efficient, and useful in real-world scientific and clinical contexts.</p>
         </div>
         <figure class="about-figure">
-          <img src="./assets/images/about.png" alt="Nguyen Nhat Phat presenting academic and AI research work"
+          <img src="./assets/images/about.webp" alt="Nguyen Nhat Phat presenting academic and AI research work"
             width="2315" height="1101" loading="lazy">
         </figure>
         <div class="interest-block">
@@ -309,7 +311,7 @@
             aria-haspopup="dialog">
             <p class="experience-type" data-i18n="experience.exchange.type">International Exchange</p>
             <h3>BMW Program - Digital Twin & AI-Based Industrial Simulation</h3>
-            <p data-i18n="experience.exchange.meta">University of Ulsan, South Korea &middot; January 2026</p>
+            <p data-i18n="experience.exchange.meta">University of Ulsan, South Korea &middot; <time datetime="2026-01">January 2026</time></p>
             <p data-i18n="experience.exchange.desc">Inbound academic exchange focused on digital twins and AI-based
               industrial simulation.</p>
             <button class="detail-link" type="button" data-detail-id="bmw-program"
@@ -319,7 +321,7 @@
             aria-haspopup="dialog">
             <p class="experience-type" data-i18n="experience.leadership.type">Leadership</p>
             <h3 data-i18n="experience.leadership.title">Youth Union Secretary</h3>
-            <p data-i18n="experience.leadership.meta">Class 23110FIE1, HCMUTE &middot; 2023-Present</p>
+            <p data-i18n="experience.leadership.meta">Class 23110FIE1, HCMUTE &middot; <time datetime="2023">2023</time>–Present</p>
             <p data-i18n="experience.leadership.desc">Class-level youth leadership role supporting student activities,
               academic communication, and community engagement.</p>
             <button class="detail-link" type="button" data-detail-id="youth-union"
@@ -482,7 +484,7 @@
         <a href="#contact" data-i18n="nav.contact">Contact</a>
       </nav>
       <p>&copy; 2026 Nguyen Nhat Phat. <span data-i18n="footer.rights">All rights reserved.</span></p>
-      <p class="footer-updated"><span data-i18n="footer.updated">Last updated:</span> <time datetime="2026-06">June 2026</time></p>
+      <p class="footer-updated"><span data-i18n="footer.updated">Last updated:</span> <time datetime="2026-06-01">June 2026</time></p>
     </div>
   </footer>
 
@@ -492,7 +494,9 @@
       tabindex="-1">
       <header class="detail-modal__header">
         <h2 id="detail-modal-title" data-modal-title></h2>
-        <button class="modal-close" type="button" aria-label="Close details" data-modal-close>&times;</button>
+        <button class="modal-close" type="button" aria-label="Close details" data-modal-close>
+          <i data-lucide="x" aria-hidden="true"></i>
+        </button>
       </header>
       <div class="detail-gallery" data-modal-gallery></div>
       <div class="detail-meta">
@@ -511,14 +515,14 @@
     <div class="lightbox__backdrop" data-lightbox-close></div>
     <button class="lightbox__close" type="button" aria-label="Close gallery" data-lightbox-close>&times;</button>
     <button class="lightbox__arrow lightbox__arrow--prev" type="button" aria-label="Previous image"
-      data-lightbox-prev>&larr;</button>
+      data-lightbox-prev><i data-lucide="chevron-left" aria-hidden="true"></i></button>
     <figure class="lightbox__figure" role="dialog" aria-modal="true" aria-label="Certificate image viewer"
       tabindex="-1">
       <img src="" alt="" data-lightbox-image>
       <figcaption data-lightbox-caption></figcaption>
     </figure>
     <button class="lightbox__arrow lightbox__arrow--next" type="button" aria-label="Next image"
-      data-lightbox-next>&rarr;</button>
+      data-lightbox-next><i data-lucide="chevron-right" aria-hidden="true"></i></button>
   </div>
 
   <!-- <script>var exports = {};</script>
