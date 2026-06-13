@@ -592,7 +592,6 @@
   const renderGallery = () => {
     if (!galleryTrack) return;
 
-    galleryItems = siteData.gallery || [];
     galleryTrack.innerHTML = "";
 
     galleryItems.forEach((item, index) => {
@@ -659,9 +658,6 @@
     if (lightbox && !lightbox.hidden) {
       renderLightbox(activeGalleryIndex);
     }
-
-    refreshIcons();
-    setupRevealObserver();
   };
 
   const getFocusableElements = (container) => Array.from(container.querySelectorAll(
@@ -707,12 +703,9 @@
           openLightbox(tempIndex);
           // Clean up after lightbox closes — attach one-time listener
           const cleanup = () => {
-            if (lightbox && lightbox.hidden) {
-              galleryItems.splice(tempIndex, 1);
-              lightbox.removeEventListener("transitionend", cleanup);
-            }
+            galleryItems.splice(tempIndex, 1);
           };
-          lightbox?.addEventListener("transitionend", cleanup, { once: true });
+          lightbox?.addEventListener("lightbox:closed", cleanup, { once: true });
         }
       });
 
@@ -720,7 +713,12 @@
     });
 
     const tags = detailModal.querySelector("[data-modal-tags]");
-    tags.innerHTML = item.tags.map((tag) => `<span>${tag}</span>`).join("");
+    tags.innerHTML = "";
+    item.tags.forEach((tag) => {
+      const span = document.createElement("span");
+      span.textContent = tag;
+      tags.appendChild(span);
+    });
 
     const external = detailModal.querySelector("[data-modal-link]");
     if (item.link) {
@@ -775,6 +773,7 @@
   const closeLightbox = () => {
     if (!lightbox || lightbox.hidden) return;
     lightbox.hidden = true;
+    lightbox.dispatchEvent(new Event("lightbox:closed"));
     document.body.classList.remove("lightbox-open");
     previousFocus?.focus?.();
   };
@@ -1467,7 +1466,9 @@
 
     const drawStatic = () => {
       const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-      ctx.fillStyle = isDark ? "rgb(10, 14, 26)" : "rgb(245, 247, 252)";
+      const bgColor = getComputedStyle(document.documentElement)
+        .getPropertyValue("--color-bg").trim();
+      ctx.fillStyle = bgColor || (isDark ? "rgb(10, 14, 26)" : "rgb(245, 247, 252)");
       ctx.fillRect(0, 0, width, height);
 
       splats.forEach((splat) => {
