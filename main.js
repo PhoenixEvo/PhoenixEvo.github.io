@@ -286,6 +286,10 @@
     }
   };
 
+  Object.keys(translations.vi).forEach((key) => {
+    translations.vi[key] = translations.vi[key].normalize("NFC");
+  });
+
   const STATUS_LABELS = {
     en: {
       preprint: "Preprint",
