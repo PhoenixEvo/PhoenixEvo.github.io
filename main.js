@@ -533,11 +533,35 @@
   const renderProjects = () => {
     if (!projectGrid) return;
 
-    projectGrid.innerHTML = "";
+    const sortedProjects = [...siteData.projects].sort((a, b) => b.year.localeCompare(a.year));
 
-    siteData.projects.forEach((item) => {
+    if (projectGrid.children.length > 0) {
+      Array.from(projectGrid.children).forEach((article) => {
+        const item = sortedProjects[Number(article.dataset.projectIndex)];
+        if (!item) return;
+
+        const status = article.querySelector(".status");
+        if (status) {
+          status.textContent = translations[currentLanguage][`status.${item.status}`];
+        }
+
+        const title = article.querySelector("h3");
+        if (title) {
+          title.textContent = localized(item, "titleEn", "titleVi");
+        }
+
+        const description = article.querySelector(".project-body p:nth-of-type(2)");
+        if (description) {
+          description.textContent = localized(item, "descEn", "descVi");
+        }
+      });
+      return;
+    }
+
+    sortedProjects.forEach((item, index) => {
       const article = document.createElement("article");
       article.className = "project-card reveal";
+      article.dataset.projectIndex = String(index);
 
       const image = document.createElement("img");
       image.src = item.image;

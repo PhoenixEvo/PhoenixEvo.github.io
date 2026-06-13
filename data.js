@@ -82,8 +82,8 @@ const SiteData = {
       sortDate: "2026-04",
       awardEn: "Outstanding Student in Scientific Research",
       awardVi: "Sinh viên Xuất sắc trong Nghiên cứu Khoa học",
-      levelEn: "Faculty (FAEPRIME)",
-      levelVi: "Cấp Khoa (FAEPRIME)",
+      levelEn: "Faculty (FAE)",
+      levelVi: "Cấp Khoa (FAE)",
       detailId: "faeprime-research"
     },
     {
@@ -91,8 +91,8 @@ const SiteData = {
       sortDate: "2026-03",
       awardEn: "Student of Five Merits",
       awardVi: "Sinh viên 5 tốt",
-      levelEn: "University Level",
-      levelVi: "Cấp trường",
+      levelEn: "University (HCMUTE)",
+      levelVi: "Cấp trường (HCMUTE)",
       detailId: "student-five-merits-university"
     },
     {
@@ -118,8 +118,8 @@ const SiteData = {
       sortDate: "2024-12",
       awardEn: "HCMUTE Talented Student Scholarship 2024",
       awardVi: "Học bổng Sinh viên Tài năng HCMUTE 2024",
-      levelEn: "University",
-      levelVi: "Cấp trường",
+      levelEn: "University (HCMUTE)",
+      levelVi: "Cấp trường (HCMUTE)",
       detailId: "hcmute-talented-2024"
     },
     {
@@ -136,8 +136,8 @@ const SiteData = {
       sortDate: "2024-10",
       awardEn: "1st Prize – 200m Sprint (HCMUTE Running)",
       awardVi: "Giải Nhất – Chạy 200m (HCMUTE Running)",
-      levelEn: "University",
-      levelVi: "Cấp trường",
+      levelEn: "University (HCMUTE)",
+      levelVi: "Cấp trường (HCMUTE)",
       detailId: "hcmute-running"
     },
     {
@@ -145,9 +145,27 @@ const SiteData = {
       sortDate: "2025-05",
       awardEn: "Advanced Youth \"Following Uncle Ho\"",
       awardVi: "Thanh niên tiên tiến làm theo lời Bác",
-      levelEn: "University Level",
-      levelVi: "Cấp trường",
+      levelEn: "University (HCMUTE)",
+      levelVi: "Cấp trường (HCMUTE)",
       detailId: "advanced-youth"
+    },
+    {
+    year: "May 2023",
+    sortDate: "2023-05",
+    awardEn: "2nd Prize – City-Level Excellent Student (Physics)",
+    awardVi: "Giải Nhì – Học sinh Giỏi Cấp Thành phố (Vật lý)",
+    levelEn: "Ho Chi Minh City",
+    levelVi: "Cấp Thành phố Hồ Chí Minh",
+    detailId: "excellent-student-city-2023"
+    },
+    {
+    year: "Jan 2020",
+    sortDate: "2020-01",
+    awardEn: "Excellent Student – District Level (Physics)",
+    awardVi: "Học sinh Giỏi Cấp Huyện (Vật lý)",
+    levelEn: "Cu Chi District",
+    levelVi: "Huyện Củ Chi",
+    detailId: "excellent-student-district-2020"
     }
   ],
 
@@ -158,15 +176,15 @@ const SiteData = {
       link: "",
       en: {
         title: "Outstanding Student in Scientific Research",
-        organization: "Faculty of Advanced Education (FAEPRIME), HCMUTE",
+        organization: "Faculty of Advanced Education (FAE), HCMUTE",
         date: "April 2026",
         description: "Honored as Outstanding Student in Scientific Research by the Faculty of Advanced Education (FAEPRIME) for the academic year 2024-2025, recognizing contributions to AI and Computer Vision research."
       },
       vi: {
         title: "Sinh viên Xuất sắc trong Nghiên cứu Khoa học",
-        organization: "Khoa Đào tạo Tiên tiến (FAEPRIME), HCMUTE",
+        organization: "Khoa Đào tạo Tiên tiến (FAE), HCMUTE",
         date: "Tháng 04/2026",
-        description: "Được vinh danh Sinh viên Xuất sắc trong Nghiên cứu Khoa học bởi Khoa Đào tạo Tiên tiến (FAEPRIME) cho năm học 2024-2025, ghi nhận đóng góp trong lĩnh vực AI và Thị giác máy tính."
+        description: "Được vinh danh Sinh viên Xuất sắc trong Nghiên cứu Khoa học bởi Khoa Đào tạo Tiên tiến (FAE) cho năm học 2024-2025, ghi nhận đóng góp trong lĩnh vực AI và Thị giác máy tính."
       }
     },
     "bmw-program": {
@@ -393,6 +411,40 @@ const SiteData = {
         date: "2024",
         description: "Đạt IELTS 6.0, hỗ trợ giao tiếp học thuật, đọc tài liệu nghiên cứu tiếng Anh và tham gia môi trường học tập quốc tế."
       }
+    },
+    "excellent-student-city-2023": {
+      images: ["./assets/certificates/excellent-student-city-2023.webp"],
+      tags: ["Physics", "Academic Excellence", "City Level"],
+      link: "",
+      en: {
+        title: "2nd Prize – City-Level Excellent Student in Physics",
+        organization: "Ho Chi Minh City Department of Education and Training",
+        date: "May 18, 2023",
+        description: "Awarded 2nd Prize in the City-Level Excellent Student competition in Physics for Grade 12, academic year 2022–2023, at Quang Trung Senior High School. Decision No. 1341/QĐ-SGDĐT."
+      },
+      vi: {
+        title: "Giải Nhì – Học sinh Giỏi Cấp Thành phố môn Vật lý",
+        organization: "Sở Giáo dục và Đào tạo Thành phố Hồ Chí Minh",
+        date: "Ngày 18 tháng 5 năm 2023",
+        description: "Đạt Giải Nhì kỳ thi Học sinh Giỏi Cấp Thành phố môn Vật lý lớp 12, năm học 2022–2023, trường THPT Quang Trung. Số QĐ: 1341/QĐ-SGDĐT."
+      }
+    },
+    "excellent-student-district-2020": {
+      images: ["./assets/certificates/excellent-student-district-2020.webp"],
+      tags: ["Physics", "Academic Excellence", "District Level"],
+      link: "",
+      en: {
+        title: "Excellent Student – District Level in Physics",
+        organization: "Cu Chi District Department of Education and Training",
+        date: "January 5, 2020",
+        description: "Awarded the title of Excellent Student at District Level in Physics for Grade 9A3, academic year 2019–2020, at Phuoc Thanh Junior High School, Cu Chi District."
+      },
+      vi: {
+        title: "Học sinh Giỏi Cấp Huyện môn Vật lý",
+        organization: "Phòng Giáo dục và Đào tạo Huyện Củ Chi",
+        date: "Ngày 05 tháng 01 năm 2020",
+        description: "Đạt danh hiệu Học sinh Giỏi Cấp Huyện môn Vật lý lớp 9A3, năm học 2019–2020, trường THCS Phước Thạnh, Huyện Củ Chi."
+      }
     }
   },
 
@@ -488,6 +540,42 @@ const SiteData = {
       github: "https://github.com/FlynnBui399/skin-lession-classification-using-fusion-ham10000",
       image: "./assets/projects/skin-lession-classification.webp",
       imageAlt: "Skin lesion classification project"
+    },
+    {
+      year: "2026",
+      status: "completed",
+      titleEn: "AI Coach – Scrum Skill Assessment & Goal Planning App",
+      titleVi: "AI Coach – Ứng dụng Đánh giá Kỹ năng & Lập kế hoạch học tập Scrum",
+      descEn: "A full-stack Scrum coaching app with AI-powered goal suggestions and action plans. Built with React + FastAPI + Supabase + Groq. Role: Product Owner.",
+      descVi: "Ứng dụng huấn luyện Scrum full-stack với gợi ý mục tiêu và kế hoạch hành động bằng AI. Xây dựng với React + FastAPI + Supabase + Groq. Vai trò: Product Owner.",
+      tags: ["FastAPI", "React", "Supabase", "Groq", "Scrum"],
+      github: "https://github.com/lhtruc/AI-Coach",
+      image: "./assets/projects/ai-coach.webp",
+      imageAlt: "AI Coach application screenshot"
+    },
+    {
+      year: "2026",
+      status: "completed",
+      titleEn: "Construction PPE Safety Detection – Edge Computing System",
+      titleVi: "Hệ thống Phát hiện An toàn PPE Công trường – Edge Computing",
+      descEn: "Real-time zone-aware PPE compliance detection on edge hardware (Jetson Xavier NX). YOLO26n-based model achieving 0.677 mAP@0.5 at 131 FPS with 99.93% bandwidth reduction. Role: AI/ML Lead.",
+      descVi: "Hệ thống phát hiện tuân thủ PPE theo vùng thời gian thực trên phần cứng edge (Jetson Xavier NX). Mô hình YOLO26n đạt 0.677 mAP@0.5 tại 131 FPS, giảm băng thông 99.93%. Vai trò: AI/ML Lead.",
+      tags: ["YOLO", "Edge AI", "Computer Vision", "ONNX", "IoT"],
+      github: "https://github.com/RidoziKishito/construction-ppe-safety-edge-computing",
+      image: "./assets/projects/ppe-safety.webp",
+      imageAlt: "PPE safety detection system on construction site"
+    },
+    {
+      year: "2026",
+      status: "completed",
+      titleEn: "Speech Emotion Recognition – CNN–BiLSTM–Attention on RAVDESS",
+      titleVi: "Nhận dạng Cảm xúc Giọng nói – CNN–BiLSTM–Attention trên RAVDESS",
+      descEn: "Hybrid dual-branch architecture combining CNN on Mel spectrograms and BiLSTM on MFCC sequences with attention mechanisms. Includes a Gradio real-time demo. Trained on RAVDESS (1,440 samples, 8 emotions).",
+      descVi: "Kiến trúc dual-branch kết hợp CNN trên Mel spectrogram và BiLSTM trên MFCC với cơ chế attention. Bao gồm demo Gradio thời gian thực. Huấn luyện trên RAVDESS (1.440 mẫu, 8 cảm xúc).",
+      tags: ["PyTorch", "Deep Learning", "Audio AI", "Gradio", "RAVDESS"],
+      github: "https://github.com/PhoenixEvo/ser-ravdess-cnn-transformer-attention",
+      image: "./assets/projects/ser-ravdess.webp",
+      imageAlt: "Speech emotion recognition model architecture"
     }
   ],
 
@@ -610,6 +698,18 @@ const SiteData = {
       captionEn: "BMW Digital Twin Program – University of Ulsan (2026)",
       captionVi: "Chương trình BMW Digital Twin – ĐH Ulsan (2026)",
       captionI18nKey: "gallery.item.bmw_3"
+    },
+    {
+      src: "./assets/certificates/excellent-student-city-2023.webp",
+      alt: "2nd Prize City-Level Excellent Student Physics 2023",
+      captionEn: "2nd Prize – Excellent Student City Level · Physics (2023)",
+      captionVi: "Giải Nhì – Học sinh Giỏi Cấp TP · Vật lý (2023)"
+    },
+    {
+      src: "./assets/certificates/excellent-student-district-2020.webp",
+      alt: "Excellent Student District Level Physics 2020",
+      captionEn: "Excellent Student – District Level · Physics (2020)",
+      captionVi: "Học sinh Giỏi Cấp Huyện · Vật lý (2020)"
     }
   ]
 };
