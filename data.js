@@ -82,6 +82,14 @@ const SiteData = {
       vi: "Nhận Học bổng Khuyến khích Học tập loại Giỏi từ HCMUTE cho Học kỳ 1 năm học 2024–2025, điểm rèn luyện 100/100.",
       extra: true
     },
+    {
+      datetime: "2024-01",
+      dateEn: "Jan 2024",
+      dateVi: "01/2024",
+      en: "Honored with the title \"Young Leader Face of Ho Chi Minh City 2023\" by the Standing Committee of the Ho Chi Minh City Youth Union, recognizing outstanding Youth Union work and conduct at Quang Trung High School, Cu Chi District.",
+      vi: "Được vinh danh danh hiệu \"Gương Mặt Thủ Lĩnh Trẻ Thành phố Hồ Chí Minh năm 2023\" bởi Ban Thường vụ Thành Đoàn TP. Hồ Chí Minh, ghi nhận thành tích Đoàn xuất sắc tại THPT Quang Trung, Huyện Củ Chi.",
+      extra: true
+    },
   ],
 
   awards: [
@@ -158,32 +166,41 @@ const SiteData = {
       detailId: "advanced-youth"
     },
     {
-    year: "May 2023",
-    sortDate: "2023-05",
-    awardEn: "2nd Prize – City-Level Excellent Student (Physics)",
-    awardVi: "Giải Nhì – Học sinh Giỏi Cấp Thành phố (Vật lý)",
-    levelEn: "Ho Chi Minh City",
-    levelVi: "Cấp Thành phố Hồ Chí Minh",
-    detailId: "excellent-student-city-2023"
+      year: "May 2023",
+      sortDate: "2023-05",
+      awardEn: "2nd Prize – City-Level Excellent Student (Physics)",
+      awardVi: "Giải Nhì – Học sinh Giỏi Cấp Thành phố (Vật lý)",
+      levelEn: "Ho Chi Minh City",
+      levelVi: "Cấp Thành phố Hồ Chí Minh",
+      detailId: "excellent-student-city-2023"
     },
     {
-    year: "Jan 2020",
-    sortDate: "2020-01",
-    awardEn: "Excellent Student – District Level (Physics)",
-    awardVi: "Học sinh Giỏi Cấp Huyện (Vật lý)",
-    levelEn: "Cu Chi District",
-    levelVi: "Huyện Củ Chi",
-    detailId: "excellent-student-district-2020"
+      year: "Jan 2020",
+      sortDate: "2020-01",
+      awardEn: "Excellent Student – District Level (Physics)",
+      awardVi: "Học sinh Giỏi Cấp Huyện (Vật lý)",
+      levelEn: "Cu Chi District",
+      levelVi: "Huyện Củ Chi",
+      detailId: "excellent-student-district-2020"
     },
     {
-    year: "Dec 2024",
-    sortDate: "2024-12",
-    awardEn: "Academic Excellence Scholarship – Good Standing",
-    awardVi: "Học bổng Khuyến khích Học tập loại Giỏi",
-    levelEn: "University (HCMUTE)",
-    levelVi: "Cấp trường (HCMUTE)",
-    detailId: "scholarship-kkht-2024"
-  }
+      year: "Dec 2024",
+      sortDate: "2024-12",
+      awardEn: "Academic Excellence Scholarship – Good Standing",
+      awardVi: "Học bổng Khuyến khích Học tập loại Giỏi",
+      levelEn: "University (HCMUTE)",
+      levelVi: "Cấp trường (HCMUTE)",
+      detailId: "scholarship-kkht-2024"
+    },
+    {
+      year: "Jan 2024",
+      sortDate: "2024-01",
+      awardEn: "Young Leader Face of Ho Chi Minh City",
+      awardVi: "Gương Mặt Thủ Lĩnh Trẻ Thành phố Hồ Chí Minh",
+      levelEn: "Ho Chi Minh City (City Youth Union)",
+      levelVi: "Cấp Thành phố (Thành Đoàn TP. HCM)",
+      detailId: "young-leader-2023"
+    },
   ],
 
   details: {
@@ -480,6 +497,27 @@ const SiteData = {
         description: "Nhận Học bổng Khuyến khích Học tập loại Giỏi cho Học kỳ 1 năm học 2024–2025, xét theo kết quả Học kỳ 2 năm học 2023–2024. Điểm rèn luyện: 100. Số tín chỉ: 40. Khoa Đào tạo Quốc tế, ngành Công nghệ thông tin."
       }
     },
+    "young-leader-2023": {
+      images: [
+        "./assets/certificates/guong-mat-thu-linh-tre-2023.webp",
+        "./assets/awards/guong-mat-thu-linh-tre-2023-event.webp",
+        "./assets/awards/guong-mat-thu-linh-tre-2023-items.webp"
+      ],
+      tags: ["Youth Union", "Leadership", "City Level", "High School"],
+      link: "",
+      en: {
+        title: "Young Leader Face of Ho Chi Minh City 2023",
+        organization: "Standing Committee of the Ho Chi Minh City Youth Union (Thành Đoàn TP. HCM)",
+        date: "January 6, 2024",
+        description: "Awarded the title of 'Young Leader Face of Ho Chi Minh City 2023' for exemplary Youth Union work, outstanding academic achievement, and conduct as Former Vice Secretary of the Youth Union at Quang Trung High School, Cu Chi District. Signed by Secretary Phan Thi Thanh Phuong."
+      },
+      vi: {
+        title: "Gương Mặt Thủ Lĩnh Trẻ Thành phố Hồ Chí Minh năm 2023",
+        organization: "Ban Thường vụ Thành Đoàn TP. Hồ Chí Minh",
+        date: "Ngày 06 tháng 01 năm 2024",
+        description: "Được tuyên dương danh hiệu 'Gương Mặt Thủ Lĩnh Trẻ Thành phố Hồ Chí Minh năm 2023' vì thành tích công tác Đoàn xuất sắc, học tập và rèn luyện tốt với vai trò Nguyên Phó Bí thư Đoàn trường THPT Quang Trung, Huyện Đoàn Củ Chi. Ký bởi Bí thư Phan Thị Thanh Phương."
+      }
+    },
   },
 
   papers: [
@@ -753,7 +791,28 @@ const SiteData = {
       captionEn: "Academic Excellence Scholarship – Good Standing (HCMUTE 2024)",
       captionVi: "Học bổng Khuyến khích Học tập loại Giỏi (HCMUTE 2024)",
       captionI18nKey: "gallery.item.scholarship"
-    }
+    },
+    {
+      src: "./assets/certificates/guong-mat-thu-linh-tre-2023.webp",
+      alt: "Young Leader Face of Ho Chi Minh City 2023 certificate",
+      captionEn: "Young Leader Face – Ho Chi Minh City (2023)",
+      captionVi: "Gương Mặt Thủ Lĩnh Trẻ TP. HCM (2023)",
+      captionI18nKey: "gallery.item.young_leader"
+    },
+    {
+      src: "./assets/awards/guong-mat-thu-linh-tre-2023-event.webp",
+      alt: "Young Leader Face – Lien hoan HCMC 2023 event photo",
+      captionEn: "Young Leader Face – Liên hoan TP. HCM (2023)",
+      captionVi: "Liên hoan Gương Mặt Thủ Lĩnh Trẻ TP. HCM (2023)",
+      captionI18nKey: "gallery.item.young_leader_event"
+    },
+    {
+      src: "./assets/awards/guong-mat-thu-linh-tre-2023-items.webp",
+      alt: "Young Leader Face certificate and trophy 2023",
+      captionEn: "Young Leader Face – Certificate & Trophy (2023)",
+      captionVi: "Gương Mặt Thủ Lĩnh Trẻ – Giấy khen & Kỷ niệm chương (2023)",
+      captionI18nKey: "gallery.item.young_leader_items"
+    },
   ]
 };
 

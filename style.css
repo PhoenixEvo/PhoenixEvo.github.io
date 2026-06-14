@@ -1330,20 +1330,18 @@ tbody tr:last-child td {
 }
 
 .detail-gallery {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-3);
   margin-bottom: var(--space-5);
-  overflow-x: auto;
-  padding-bottom: var(--space-2);
 }
 
 .detail-gallery img {
-  flex: 0 0 13rem;
-  width: 13rem;
+  width: 100%;
   aspect-ratio: 4 / 3;
+  object-fit: cover;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  object-fit: cover;
 }
 
 .detail-meta {
@@ -1783,12 +1781,10 @@ tbody tr:last-child td {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.35) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.35) 50%,
+      transparent 100%);
   animation: shimmer 1.4s infinite;
   will-change: transform;
   transform: translateX(-100%);
@@ -1805,12 +1801,10 @@ tbody tr:last-child td {
 }
 
 [data-theme="dark"] .skeleton::after {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.07) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.07) 50%,
+      transparent 100%);
 }
 
 .skeleton-paper {
