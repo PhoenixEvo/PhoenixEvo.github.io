@@ -125,7 +125,7 @@ const SiteData = {
       sortDate: "2026-01",
       awardEn: "Student of Five Merits",
       awardVi: "Sinh viên 5 tốt",
-      levelEn: "HCMC City Level",
+      levelEn: "Ho Chi Minh City",
       levelVi: "Cấp Thành phố Hồ Chí Minh",
       detailId: "student-five-merits"
     },
@@ -143,7 +143,7 @@ const SiteData = {
       sortDate: "2025-10",
       awardEn: "Euréka XXVII 2025 – Student Scientific Research Prize",
       awardVi: "Euréka XXVII 2025 – Giải thưởng Sinh viên Nghiên cứu Khoa học",
-      levelEn: "Ho Chi Minh City Level (Vietnam National University HCM)",
+      levelEn: "Ho Chi Minh City (Vietnam National University HCM)",
       levelVi: "Cấp Thành phố Hồ Chí Minh (Vietnam National University HCM)",
       detailId: "eureka-2025"
     },
