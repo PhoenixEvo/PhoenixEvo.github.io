@@ -2,6 +2,13 @@
 <html lang="en" data-theme="light">
 
 <head>
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      var preferred = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.dataset.theme = preferred;
+    })();
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
@@ -18,10 +25,10 @@
   <meta name="theme-color" content="#0ea5e9">
   <link rel="canonical" href="https://phoenixevo.github.io/">
 
-  <meta property="og:type" content="profile">
-  <meta property="og:title" content="Nguyen Nhat Phat | AI & Computer Vision Researcher">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Nguyen Nhat Phat — AI & Computer Vision Researcher">
   <meta property="og:description"
-    content="Third-year AI student at HCMUTE specializing in 3D Reconstruction, 3D Gaussian Splatting, Deep Learning, and Medical Image Analysis.">
+    content="B.Eng. student at HCMUTE specializing in AI and Computer Vision. Research in 3D Gaussian Splatting, medical image analysis, and deep learning.">
   <meta property="og:image"
         content="https://phoenixevo.github.io/assets/images/og-cover.png">
   <meta property="og:image:width" content="1200">
@@ -29,9 +36,9 @@
   <meta property="og:url" content="https://phoenixevo.github.io/">
   <meta property="og:locale" content="en_US">
   <meta property="og:site_name" content="Nguyen Nhat Phat">
-  <meta name="twitter:title" content="Nguyen Nhat Phat | AI & Computer Vision Researcher">
+  <meta name="twitter:title" content="Nguyen Nhat Phat — AI & Computer Vision Researcher">
   <meta name="twitter:description"
-    content="Academic portfolio focused on 3D reconstruction, 3D Gaussian Splatting, and medical image analysis.">
+    content="B.Eng. student at HCMUTE specializing in AI and Computer Vision. Research in 3D Gaussian Splatting, medical image analysis, and deep learning.">
   <meta name="twitter:image"
         content="https://phoenixevo.github.io/assets/images/og-cover.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -53,13 +60,15 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Nguyen Nhat Phat",
-    "alternateName": "Nguyen Nhat Phat",
+    "alternateName": "Nguyễn Nhật Phát",
     "url": "https://phoenixevo.github.io/",
+    "image": "https://phoenixevo.github.io/assets/images/profile.webp",
     "email": [
       "23110053@student.hcmute.edu.vn",
       "nhatphatnguyen.ai@gmail.com"
     ],
     "jobTitle": "B.Eng. Student in Information Technology, specializing in Artificial Intelligence",
+    "description": "AI and Computer Vision researcher specializing in 3D Gaussian Splatting and medical image analysis.",
     "affiliation": {
       "@type": "EducationalOrganization",
       "name": "HCMC University of Technology and Engineering",

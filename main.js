@@ -61,7 +61,7 @@
   let galleryItems = buildGalleryFromDetails();
   let newsExtras = Array.from(document.querySelectorAll(".news-extra"));
   let activeTheme = "light";
-  let currentLanguage = "en";
+  let currentLanguage = localStorage.getItem("lang") || "en";
   let activeDetailId = null;
   let activeGalleryIndex = 0;
   let activeSectionFrame = null;
@@ -736,6 +736,7 @@
   };
 
   const applyLanguage = (language) => {
+    localStorage.setItem("lang", language);
     currentLanguage = language;
     root.setAttribute("lang", language);
 
@@ -967,6 +968,34 @@
       });
     };
 
+    if (track._carouselTouchHandlers) {
+      track.removeEventListener("touchstart", track._carouselTouchHandlers.start);
+      track.removeEventListener("touchend", track._carouselTouchHandlers.end);
+    }
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+    const handleTouchStart = (event) => {
+      const touch = event.touches[0];
+      if (!touch) return;
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+    };
+    const handleTouchEnd = (event) => {
+      const touch = event.changedTouches[0];
+      if (!touch) return;
+      const dx = touch.clientX - touchStartX;
+      const dy = touch.clientY - touchStartY;
+
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        scrollToSlide(dx < 0 ? activeIndex + 1 : activeIndex - 1);
+      }
+    };
+
+    track.addEventListener("touchstart", handleTouchStart, { passive: true });
+    track.addEventListener("touchend", handleTouchEnd, { passive: true });
+    track._carouselTouchHandlers = { start: handleTouchStart, end: handleTouchEnd };
+
     setActiveDot(0);
   };
 
@@ -993,6 +1022,7 @@
   };
 
   const applyTheme = (theme) => {
+    localStorage.setItem("theme", theme);
     activeTheme = theme;
     root.dataset.theme = theme;
     const videoDark = document.querySelector(".hero-video--dark");
@@ -1015,7 +1045,8 @@
   };
 
   const getPreferredTheme = () => (
-    window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+    localStorage.getItem("theme") ||
+    (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
   );
 
   const closeNav = () => {
