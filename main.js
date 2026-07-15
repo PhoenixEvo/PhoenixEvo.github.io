@@ -23,13 +23,14 @@
   const awardsTbody = document.getElementById("awards-tbody");
   const paperList = document.getElementById("paper-list");
   const projectGrid = document.getElementById("project-grid");
+  const experienceList = document.getElementById("experience-list");
   const galleryTrack = document.querySelector("[data-carousel-track]");
   const detailModal = document.querySelector("[data-detail-modal]");
   const detailPanel = document.querySelector(".detail-modal__panel");
   const lightbox = document.querySelector("[data-lightbox]");
   const lightboxFigure = document.querySelector(".lightbox__figure");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const siteData = window.SiteData || { news: [], awards: [], details: {}, papers: [], projects: [], gallery: [] };
+  const siteData = window.SiteData || { news: [], experiences: [], awards: [], details: {}, papers: [], projects: [], gallery: [] };
   const detailContent = siteData.details || {};
   // Auto-build gallery from all details.images + siteData.gallery overrides
   const buildGalleryFromDetails = () => {
@@ -80,6 +81,7 @@
       "nav.awards": "Awards",
       "nav.contact": "Contact",
       "nav.cv": "CV",
+      "hero.name": "Nguyen Nhat Phat",
       "hero.eyebrow": "AI & Computer Vision Researcher",
       "hero.title": "B.Eng. Student in Information Technology, specializing in Artificial Intelligence",
       "hero.tagline": "Pursuing Computer Vision is like chasing the holy grail of perception — where optimization meets understanding.",
@@ -188,6 +190,7 @@
       "nav.awards": "Giải thưởng",
       "nav.contact": "Liên hệ",
       "nav.cv": "CV",
+      "hero.name": "Nguyễn Nhật Phát",
       "hero.eyebrow": "Nhà nghiên cứu AI & Thị giác máy tính",
       "hero.title": "Sinh viên B.Eng. ngành Công nghệ thông tin, chuyên ngành Trí tuệ nhân tạo",
       "hero.tagline": "Theo đuổi Thị giác máy tính giống như tìm kiếm chén thánh của tri giác — nơi tối ưu hóa gặp gỡ sự thấu hiểu.",
@@ -617,6 +620,93 @@
     refreshIcons();
   };
 
+  const renderExperiences = (language = currentLanguage) => {
+    if (!experienceList || !Array.isArray(siteData.experiences)) return;
+
+    experienceList.innerHTML = "";
+
+    siteData.experiences.forEach((experience) => {
+      const copy = experience[language] || experience.en;
+      if (!copy) return;
+
+      const article = document.createElement("article");
+      article.className = "experience-card detail-card";
+      article.dataset.detailId = experience.detailId;
+      article.tabIndex = 0;
+      article.setAttribute("role", "button");
+      article.setAttribute("aria-haspopup", "dialog");
+
+      if (experience.coverImage) {
+        const cover = document.createElement("div");
+        cover.className = "experience-cover";
+        const coverImage = document.createElement("img");
+        coverImage.src = experience.coverImage;
+        coverImage.alt = copy.title;
+        coverImage.loading = "lazy";
+        cover.append(coverImage);
+        article.append(cover);
+      }
+
+      const body = document.createElement("div");
+      body.className = "experience-card__body";
+      const header = document.createElement("div");
+      header.className = "experience-card__header";
+
+      if (experience.logo) {
+        const logo = document.createElement("div");
+        logo.className = "experience-logo";
+        const logoImage = document.createElement("img");
+        logoImage.src = experience.logo;
+        logoImage.alt = `${copy.org} logo`;
+        logoImage.loading = "lazy";
+        logoImage.addEventListener("error", () => logo.remove(), { once: true });
+        logo.append(logoImage);
+        header.append(logo);
+      }
+
+      const meta = document.createElement("div");
+      meta.className = "experience-card__meta";
+      const type = document.createElement("p");
+      type.className = "experience-type";
+      type.textContent = copy.type;
+      const title = document.createElement("h3");
+      title.textContent = copy.title;
+      const organization = document.createElement("p");
+      organization.className = "experience-org";
+      organization.append(document.createTextNode(`${copy.org} · `));
+      const period = document.createElement("time");
+      period.textContent = copy.period;
+      organization.append(period);
+      meta.append(type, title, organization);
+      header.append(meta);
+
+      const description = document.createElement("p");
+      description.className = "experience-desc";
+      description.textContent = copy.desc;
+
+      const tags = document.createElement("div");
+      tags.className = "tag-list compact";
+      (experience.tags || []).forEach((tag) => {
+        const tagElement = document.createElement("span");
+        tagElement.textContent = tag;
+        tags.append(tagElement);
+      });
+
+      const details = document.createElement("button");
+      details.className = "detail-link";
+      details.type = "button";
+      details.dataset.detailId = experience.detailId;
+      details.dataset.i18n = "details.see";
+      details.textContent = translations[language]["details.see"];
+
+      body.append(header, description, tags, details);
+      article.append(body);
+      experienceList.append(article);
+    });
+
+    attachDetailTriggers(experienceList);
+  };
+
   const renderGallery = () => {
     if (!galleryTrack) return;
 
@@ -653,6 +743,7 @@
     renderAwards();
     renderPapers();
     renderProjects();
+    renderExperiences(language);
     renderGallery();
 
     document.querySelectorAll("[data-i18n]").forEach((element) => {

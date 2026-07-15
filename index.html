@@ -42,6 +42,7 @@
   <link rel="preconnect" href="https://api.fontshare.com">
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./print.css" media="print">
@@ -140,7 +141,7 @@
         </div>
         <div class="hero-copy">
           <p class="eyebrow" data-i18n="hero.eyebrow">AI & Computer Vision Researcher</p>
-          <h1>Nguyen Nhat Phat</h1>
+          <h1 data-i18n="hero.name">Nguyen Nhat Phat</h1>
           <p class="hero-title" data-i18n="hero.title">B.Eng. Student in Information Technology, specializing in Artificial Intelligence</p>
           <p class="hero-affiliation">
             <a href="https://hcmute.edu.vn/" target="_blank" rel="noopener">Ho Chi Minh City University of Technology
@@ -308,38 +309,7 @@
           <p class="section-kicker" data-i18n="experience.kicker">Academic Life</p>
           <h2 id="experience-title" data-i18n="experience.heading">Experience</h2>
         </div>
-        <div class="experience-grid">
-          <article class="experience-item detail-card" data-detail-id="bmw-program" tabindex="0" role="button"
-            aria-haspopup="dialog">
-            <p class="experience-type" data-i18n="experience.exchange.type">International Exchange</p>
-            <h3>BMW Program - Digital Twin & AI-Based Industrial Simulation</h3>
-            <p data-i18n="experience.exchange.meta">University of Ulsan, South Korea &middot; <time datetime="2026-01">January 2026</time></p>
-            <p data-i18n="experience.exchange.desc">Inbound academic exchange focused on digital twins and AI-based
-              industrial simulation.</p>
-            <button class="detail-link" type="button" data-detail-id="bmw-program"
-              data-i18n="details.see">See details</button>
-          </article>
-          <article class="experience-item detail-card" data-detail-id="youth-union" tabindex="0" role="button"
-            aria-haspopup="dialog">
-            <p class="experience-type" data-i18n="experience.leadership.type">Leadership</p>
-            <h3 data-i18n="experience.leadership.title">Youth Union Secretary</h3>
-            <p data-i18n="experience.leadership.meta">Class 23110FIE1, HCMUTE &middot; <time datetime="2023">2023</time>–Present</p>
-            <p data-i18n="experience.leadership.desc">Class-level youth leadership role supporting student activities,
-              academic communication, and community engagement.</p>
-            <button class="detail-link" type="button" data-detail-id="youth-union"
-              data-i18n="details.see">See details</button>
-          </article>
-          <article class="experience-item detail-card" data-detail-id="volunteer-community" tabindex="0" role="button"
-            aria-haspopup="dialog">
-            <p class="experience-type" data-i18n="experience.volunteer.type">Volunteer & Community</p>
-            <h3 data-i18n="experience.volunteer.title">Campus and Social Activities</h3>
-            <p data-i18n="experience.volunteer.desc">Spring Volunteer Campaigns, Exam Season Support Program, and HCMUTE
-              Running 21km completion in 2024.</p>
-            <p data-i18n="experience.volunteer.score">Volunteer social work score: 99/100 for 2024-2025.</p>
-            <button class="detail-link" type="button" data-detail-id="volunteer-community"
-              data-i18n="details.see">See details</button>
-          </article>
-        </div>
+        <div class="experience-list" id="experience-list"></div>
       </div>
     </section>
 

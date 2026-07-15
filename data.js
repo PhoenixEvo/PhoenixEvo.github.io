@@ -92,6 +92,69 @@ const SiteData = {
     },
   ],
 
+  experiences: [
+    {
+      detailId: "bmw-program",
+      logo: "./assets/experiences/bmw-2026/bmw26-logo.webp",
+      coverImage: "./assets/experiences/bmw-2026/bmw26-2.webp",
+      tags: ["Digital Twin", "Industrial Simulation", "AI", "International"],
+      en: {
+        type: "International Exchange",
+        title: "BMW Program – Digital Twin & AI-Based Industrial Simulation",
+        org: "University of Ulsan, South Korea",
+        period: "January 2026",
+        desc: "Inbound academic exchange focused on digital twins and AI-based industrial simulation. Collaborated with international students from South Korea and other countries."
+      },
+      vi: {
+        type: "Trao đổi Quốc tế",
+        title: "BMW Program – Digital Twin & AI-Based Industrial Simulation",
+        org: "ĐH Ulsan, Hàn Quốc",
+        period: "Tháng 01/2026",
+        desc: "Chương trình trao đổi học thuật về Digital Twin và mô phỏng công nghiệp AI. Hợp tác với sinh viên quốc tế từ Hàn Quốc và các nước khác."
+      }
+    },
+    {
+      detailId: "youth-union",
+      logo: null,
+      coverImage: "./assets/awards/outstanding-research-26-2.webp",
+      tags: ["Leadership", "Communication", "Student Activities"],
+      en: {
+        type: "Leadership",
+        title: "Youth Union Secretary",
+        org: "Class 23110FIE1, HCMUTE",
+        period: "2023 – Present",
+        desc: "Served as class-level Youth Union Secretary, coordinating student activities, academic communication, class initiatives, and community engagement."
+      },
+      vi: {
+        type: "Lãnh đạo",
+        title: "Bí thư Chi đoàn",
+        org: "Lớp 23110FIE1, HCMUTE",
+        period: "2023 – Hiện tại",
+        desc: "Đảm nhiệm vai trò Bí thư Chi đoàn cấp lớp, điều phối hoạt động sinh viên, truyền thông học thuật và hoạt động cộng đồng."
+      }
+    },
+    {
+      detailId: "volunteer-community",
+      logo: null,
+      coverImage: "./assets/experiences/volunteer-community/tsmt-volunteer.webp",
+      tags: ["Volunteerism", "Community Service", "Sports"],
+      en: {
+        type: "Volunteer & Community",
+        title: "Campus and Social Activities",
+        org: "HCMUTE",
+        period: "2024 – 2025",
+        desc: "Spring Volunteer Campaigns, Exam Season Support, and HCMUTE Running 21km. Volunteer social work score: 99/100."
+      },
+      vi: {
+        type: "Tình nguyện & Cộng đồng",
+        title: "Hoạt động trường học và xã hội",
+        org: "HCMUTE",
+        period: "2024 – 2025",
+        desc: "Chiến dịch Xuân tình nguyện, Tiếp sức mùa thi, hoàn thành 21km HCMUTE Running. Điểm công tác xã hội: 99/100."
+      }
+    }
+  ],
+
   awards: [
     {
       year: "Apr 2026",
@@ -225,7 +288,8 @@ const SiteData = {
       images: [
         "./assets/experiences/bmw-2026/bmw26-1.webp",
         "./assets/experiences/bmw-2026/bmw26-2.webp",
-        "./assets/experiences/bmw-2026/bmw26-3.webp"
+        "./assets/experiences/bmw-2026/bmw26-3.webp",
+        "./assets/experiences/bmw-2026/bmw26-4.webp"
       ],
       tags: ["Digital Twin", "Industrial Simulation", "AI", "International Collaboration"],
       link: "https://www.ulsan.ac.kr/",
@@ -260,7 +324,10 @@ const SiteData = {
       }
     },
     "volunteer-community": {
-      images: ["./assets/certificates/spring-volunteer-25.webp"],
+      images: [
+        "./assets/certificates/spring-volunteer-25.webp",
+        "./assets/experiences/volunteer-community/tsmt-volunteer.webp"
+      ],
       tags: ["Volunteerism", "Community Service", "Teamwork"],
       link: "",
       en: {
