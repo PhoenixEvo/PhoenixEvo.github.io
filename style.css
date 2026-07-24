@@ -194,11 +194,12 @@ button {
 .nav-logo {
   margin-right: auto;
   color: var(--color-text);
-  font-family: var(--font-display);
+  font-family: "Instrument Serif", "Lora", "Noto Serif", Georgia, serif;
   font-size: 1.45rem;
   font-weight: 400;
   letter-spacing: 0;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .nav-menu {
