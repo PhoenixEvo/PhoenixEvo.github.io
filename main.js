@@ -194,7 +194,7 @@
       "hero.name": "Nguyễn Nhật Phát",
       "hero.eyebrow": "Nhà nghiên cứu AI & Thị giác máy tính",
       "hero.title": "Sinh viên B.Eng. ngành Công nghệ thông tin, chuyên ngành Trí tuệ nhân tạo",
-      "hero.tagline": "Theo đuổi Thị giác máy tính giống như tìm kiếm chén thánh của tri giác — nơi tối ưu hóa gặp gỡ sự thấu hiểu.",
+      "hero.tagline": "Dấn thân vào Thị giác Máy tính tựa như hành trình tìm kiếm chén thánh của tri giác — nơi tiến trình tối ưu tiến đến sự giác ngộ.",
       "hero.link.email": "Email",
       "hero.link.personal_email": "Email cá nhân",
       "hero.link.university_email": "Email trường",
