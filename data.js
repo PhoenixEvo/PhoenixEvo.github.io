@@ -626,7 +626,7 @@ const SiteData = {
 
   papers: [
     {
-      status: "preprint",
+      status: "accepted",
       titleEn: "Adaptive Density Pruning for Efficient 3D Gaussian Splatting",
       titleVi: "Adaptive Density Pruning for Efficient 3D Gaussian Splatting",
       authors: [
@@ -634,12 +634,13 @@ const SiteData = {
         { name: "Quoc-Hung Pham", bold: false, corresponding: false },
         { name: "Van-Dung Hoang", bold: false, corresponding: true, supervisor: true }
       ],
-      venueEn: "Independent Research · 2026",
-      venueVi: "Nghiên cứu độc lập · 2026",
+      venueEn: "The 8th International Conference on Green Technology and Sustainable Development (GTSD 2026) · Springer Track",
+      venueVi: "Hội nghị Khoa học Quốc tế về Công nghệ Xanh và Phát triển Bền vững lần thứ 8 (GTSD 2026) · Track Springer",
+      venueUrl: "https://gtsd2026.hcmute.edu.vn",
       descEn: "A geometry-aware pruning method for 3D scene reconstruction models. Uses adaptive density estimation to remove spatially redundant components while preserving critical structures, achieving 30% smaller model size with no quality loss across 11 scenes and two benchmarks.",
       descVi: "Một phương pháp cắt tỉa dựa trên hình học cho mô hình tái dựng cảnh 3D. Phương pháp dùng ước lượng mật độ thích nghi để loại bỏ các thành phần dư thừa về mặt không gian trong khi vẫn giữ cấu trúc quan trọng, đạt kích thước mô hình nhỏ hơn 30% mà không giảm chất lượng trên 11 cảnh và hai bộ benchmark.",
-      hasBadge: false,
-      badgeKey: null,
+      hasBadge: true,
+      badgeKey: "badge.conference",
       links: { code: "https://github.com/PhoenixEvo/3dgs-adp", pdf: "https://1drv.ms/b/c/D4E310767890E57B/IQBObjQAFLoBRJpiBHYHjvb3AZo0r7o-LHkfBChWfIChrMo?e=bPmocy" },
       image: "./assets/projects/ADP.webp",
       imageAlt: "Adaptive Density Pruning for 3D Gaussian Splatting result",

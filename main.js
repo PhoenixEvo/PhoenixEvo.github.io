@@ -126,6 +126,7 @@
       "research.supervisor_note": "† Corresponding author is also the research supervisor.",
       "research.corresponding_note": "* corresponding author  ·  † research supervisor",
       "badge.rated_good": "Rated: Good",
+      "badge.conference": "Conference",
       "link.code": "Code",
       "projects.kicker": "Open-Source & Coursework",
       "projects.heading": "Projects",
@@ -235,6 +236,7 @@
       "research.supervisor_note": "† Tác giả liên lạc cũng là người hướng dẫn nghiên cứu.",
       "research.corresponding_note": "* tác giả liên lạc  ·  † người hướng dẫn nghiên cứu",
       "badge.rated_good": "Đánh giá: Tốt",
+      "badge.conference": "Hội nghị",
       "link.code": "Mã nguồn",
       "projects.kicker": "Mã nguồn mở & Đồ án",
       "projects.heading": "Dự án",
@@ -297,12 +299,14 @@
     en: {
       preprint: "Preprint",
       under_review: "Under Review",
+      accepted: "Accepted",
       published: "Published",
       defended: "Defended ✓"
     },
     vi: {
       preprint: "Bản thảo",
       under_review: "Đang phản biện",
+      accepted: "Đã chấp nhận",
       published: "Đã công bố",
       defended: "Đã bảo vệ ✓"
     }
@@ -474,7 +478,15 @@
 
       const venue = document.createElement("p");
       venue.className = "venue";
-      const venueText = document.createElement("span");
+      let venueText;
+      if (item.venueUrl) {
+        venueText = document.createElement("a");
+        venueText.href = item.venueUrl;
+        venueText.target = "_blank";
+        venueText.rel = "noopener";
+      } else {
+        venueText = document.createElement("span");
+      }
       venueText.textContent = localized(item, "venueEn", "venueVi");
       venue.append(venueText);
 
