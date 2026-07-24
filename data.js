@@ -3,6 +3,14 @@
 const SiteData = {
   news: [
     {
+      datetime: "2026-07",
+      dateEn: "Jul 2026",
+      dateVi: "07/2026",
+      en: "Awarded 3rd Prize at the Edge Computing Innovation competition with project \"Real-Time Construction Site Safety Monitoring System Based on Edge Computing and Computer Vision\".",
+      vi: "Đạt Giải Ba cuộc thi Edge Computing Innovation với dự án \"Hệ thống giám sát an toàn công trường thời gian thực dựa trên Edge Computing và Computer Vision\".",
+      extra: false
+    },
+    {
       datetime: "2026-06",
       dateEn: "Jun 2026",
       dateVi: "06/2026",
@@ -157,6 +165,15 @@ const SiteData = {
 
   awards: [
     {
+      year: "Jul 2026",
+      sortDate: "2026-07",
+      awardEn: "3rd Prize – Edge Computing Innovation",
+      awardVi: "Giải Ba – Cuộc thi Edge Computing Innovation",
+      levelEn: "Faculty (FAE)",
+      levelVi: "Cấp Khoa (FAE)",
+      detailId: "edge-computing-innovation-2026"
+    },
+    {
       year: "Apr 2026",
       sortDate: "2026-04",
       awardEn: "Outstanding Student in Scientific Research",
@@ -267,10 +284,30 @@ const SiteData = {
   ],
 
   details: {
+    "edge-computing-innovation-2026": {
+      images: [
+        "./assets/awards/edge-computing-2026-1.webp",
+        "./assets/awards/edge-computing-2026-2.webp"
+      ],
+      tags: ["Edge AI", "Computer Vision", "PPE Safety"],
+      link: "",
+      en: {
+        title: "3rd Prize – Edge Computing Innovation",
+        organization: "Faculty of Advanced Education (FAE), HCMUTE",
+        date: "July 2026",
+        description: "<strong>🏆 Awarded 3rd Prize</strong> at the <strong>Edge Computing Innovation</strong> competition (<em>\"Limitless Smart Solution\"</em>).<br><br><strong>Project:</strong> Real-Time Construction Site Safety Monitoring System Based on Edge Computing and Computer Vision.<br><strong>Team Members:</strong> <strong>Nguyen Nhat Phat</strong> (Lead), Tran Quoc Huy, Le Huu Truc."
+      },
+      vi: {
+        title: "Giải Ba – Cuộc thi Edge Computing Innovation",
+        organization: "Khoa Đào tạo Tiên tiến (FAE), HCMUTE",
+        date: "Tháng 07/2026",
+        description: "<strong>🏆 Đạt Giải Ba</strong> cuộc thi <strong>Edge Computing Innovation</strong> (<em>\"Limitless Smart Solution\"</em>).<br><br><strong>Dự án:</strong> Hệ thống giám sát an toàn công trường thời gian thực dựa trên Edge Computing và Computer Vision.<br><strong>Nhóm tác giả:</strong> <strong>Nguyễn Nhật Phát</strong> (Trưởng nhóm), Trần Quốc Huy, Lê Hữu Trực."
+      }
+    },
     "faeprime-research": {
       images: ["./assets/awards/outstanding-research-26-1.webp", "./assets/awards/outstanding-research-26-2.webp"],
       tags: ["Scientific Research", "Faculty Award", "AI"],
-      link: "",
+      link: "https://www.facebook.com/share/17zcHAx6KX/",
       en: {
         title: "Outstanding Student in Scientific Research",
         organization: "Faculty of Advanced Education (FAE), HCMUTE",
@@ -346,7 +383,7 @@ const SiteData = {
     "advanced-youth": {
       images: ["./assets/certificates/following-uncle-Ho.webp"],
       tags: ["Leadership", "Conduct", "Social Contribution"],
-      link: "",
+      link: "https://www.facebook.com/share/1CVSU12FsD/",
       en: {
         title: "Advanced Youth \"Following Uncle Ho\"",
         organization: "HCMUTE",
@@ -414,7 +451,7 @@ const SiteData = {
     "hcmute-talented-2024": {
       images: ["./assets/awards/talented-student-24.webp"],
       tags: ["Academic Excellence", "Leadership", "Recognition"],
-      link: "",
+      link: "https://www.facebook.com/share/1Bsx7bFJkQ/",
       en: {
         title: "HCMUTE Talented Student Scholarship 2024",
         organization: "HCMUTE",
@@ -603,7 +640,7 @@ const SiteData = {
       descVi: "Một phương pháp cắt tỉa dựa trên hình học cho mô hình tái dựng cảnh 3D. Phương pháp dùng ước lượng mật độ thích nghi để loại bỏ các thành phần dư thừa về mặt không gian trong khi vẫn giữ cấu trúc quan trọng, đạt kích thước mô hình nhỏ hơn 30% mà không giảm chất lượng trên 11 cảnh và hai bộ benchmark.",
       hasBadge: false,
       badgeKey: null,
-      links: { code: "https://github.com/PhoenixEvo/3dgs-adp", pdf: null },
+      links: { code: "https://github.com/PhoenixEvo/3dgs-adp", pdf: "https://1drv.ms/b/c/D4E310767890E57B/IQBObjQAFLoBRJpiBHYHjvb3AZo0r7o-LHkfBChWfIChrMo?e=bPmocy" },
       image: "./assets/projects/ADP.webp",
       imageAlt: "Adaptive Density Pruning for 3D Gaussian Splatting result",
       codeAriaLabel: "View code for Adaptive Density Pruning"
@@ -697,8 +734,8 @@ const SiteData = {
       status: "completed",
       titleEn: "Construction PPE Safety Detection – Edge Computing System",
       titleVi: "Hệ thống Phát hiện An toàn PPE Công trường – Edge Computing",
-      descEn: "Real-time zone-aware PPE compliance detection on edge hardware (Jetson Xavier NX). YOLO26n-based model achieving 0.677 mAP@0.5 at 131 FPS with 99.93% bandwidth reduction. Role: AI/ML Lead.",
-      descVi: "Hệ thống phát hiện tuân thủ PPE theo vùng thời gian thực trên phần cứng edge (Jetson Xavier NX). Mô hình YOLO26n đạt 0.677 mAP@0.5 tại 131 FPS, giảm băng thông 99.93%. Vai trò: AI/ML Lead.",
+      descEn: "<strong>🏆 3rd Prize – Edge Computing Innovation (2026).</strong> Real-time zone-aware PPE compliance detection on edge hardware (Jetson Xavier NX). YOLO26n-based model achieving <strong>0.677 mAP@0.5 at 131 FPS</strong> with <strong>99.93% bandwidth reduction</strong>.<br><strong>Role:</strong> AI/ML Lead.",
+      descVi: "<strong>🏆 Giải Ba – Cuộc thi Edge Computing Innovation (2026).</strong> Hệ thống phát hiện tuân thủ PPE theo vùng thời gian thực trên phần cứng edge (Jetson Xavier NX). Mô hình YOLO26n đạt <strong>0.677 mAP@0.5 tại 131 FPS</strong>, giảm <strong>99.93% băng thông</strong>.<br><strong>Vai trò:</strong> AI/ML Lead.",
       tags: ["YOLO", "Edge AI", "Computer Vision", "ONNX", "IoT"],
       github: "https://github.com/RidoziKishito/construction-ppe-safety-edge-computing",
       image: "./assets/projects/ppe-safety.webp",
@@ -719,6 +756,20 @@ const SiteData = {
   ],
 
   gallery: [
+    {
+      src: "./assets/awards/edge-computing-2026-1.webp",
+      alt: "3rd Prize Edge Computing Innovation 2026 Certificate Board",
+      captionEn: "3rd Prize – Edge Computing Innovation (2026)",
+      captionVi: "Giải Ba – Edge Computing Innovation (2026)",
+      captionI18nKey: "gallery.item.edge_computing_1"
+    },
+    {
+      src: "./assets/awards/edge-computing-2026-2.webp",
+      alt: "3rd Prize Edge Computing Innovation 2026 Team Photo",
+      captionEn: "3rd Prize Team – Edge Computing Innovation (2026)",
+      captionVi: "Nhóm đạt Giải Ba – Edge Computing Innovation (2026)",
+      captionI18nKey: "gallery.item.edge_computing_2"
+    },
     {
       src: "./assets/certificates/hcmute-running-1st-25.webp",
       alt: "1st Prize 200m Sprint HCMUTE Running 2024",

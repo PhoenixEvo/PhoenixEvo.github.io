@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   const root = document.documentElement;
   const header = document.querySelector("[data-header]");
   const themeToggle = document.querySelector("[data-theme-toggle]");
@@ -555,7 +555,7 @@
 
         const description = article.querySelector(".project-body p:nth-of-type(2)");
         if (description) {
-          description.textContent = localized(item, "descEn", "descVi");
+          description.innerHTML = localized(item, "descEn", "descVi");
         }
       });
       return;
@@ -595,7 +595,7 @@
       if (item.descI18n) {
         description.dataset.i18n = item.descI18n;
       }
-      description.textContent = localized(item, "descEn", "descVi");
+      description.innerHTML = localized(item, "descEn", "descVi");
 
       const tags = document.createElement("div");
       tags.className = "tag-list compact";
@@ -792,7 +792,7 @@
     detailModal.querySelector("[data-modal-title]").textContent = copy.title;
     detailModal.querySelector("[data-modal-org]").textContent = copy.organization;
     detailModal.querySelector("[data-modal-date]").textContent = copy.date;
-    detailModal.querySelector("[data-modal-description]").textContent = copy.description;
+    detailModal.querySelector("[data-modal-description]").innerHTML = copy.description;
 
     const gallery = detailModal.querySelector("[data-modal-gallery]");
     gallery.innerHTML = "";
