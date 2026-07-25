@@ -6,6 +6,14 @@ const SiteData = {
       datetime: "2026-07",
       dateEn: "Jul 2026",
       dateVi: "07/2026",
+      en: "Awarded 1st Prize at Project Showcase 2026 (Academic Pathways track) organized by HCMUTE & Faculty of Advanced Education.",
+      vi: "Đạt Giải Nhất cuộc thi Project Showcase 2026 (Hạng mục Hướng nghiên cứu) do HCMUTE & Khoa Đào tạo Tiên tiến tổ chức.",
+      extra: false
+    },
+    {
+      datetime: "2026-07",
+      dateEn: "Jul 2026",
+      dateVi: "07/2026",
       en: "Awarded 3rd Prize at the Edge Computing Innovation competition with project \"Real-Time Construction Site Safety Monitoring System Based on Edge Computing and Computer Vision\".",
       vi: "Đạt Giải Ba cuộc thi Edge Computing Innovation với dự án \"Hệ thống giám sát an toàn công trường thời gian thực dựa trên Edge Computing và Computer Vision\".",
       extra: false
@@ -166,6 +174,15 @@ const SiteData = {
   awards: [
     {
       year: "Jul 2026",
+      sortDate: "2026-07-25",
+      awardEn: "1st Prize – Project Showcase 2026 (Academic Pathways)",
+      awardVi: "Giải Nhất – Project Showcase 2026 (Hướng nghiên cứu)",
+      levelEn: "University (HCMUTE)",
+      levelVi: "Cấp trường (HCMUTE)",
+      detailId: "project-showcase-2026"
+    },
+    {
+      year: "Jul 2026",
       sortDate: "2026-07",
       awardEn: "3rd Prize – Edge Computing Innovation",
       awardVi: "Giải Ba – Cuộc thi Edge Computing Innovation",
@@ -284,6 +301,26 @@ const SiteData = {
   ],
 
   details: {
+    "project-showcase-2026": {
+      images: [
+        "./assets/awards/project-showcase-2026-1.webp",
+        "./assets/awards/project-showcase-2026-2.webp"
+      ],
+      tags: ["1st Prize", "Academic Pathways", "Project Showcase", "AI"],
+      link: "",
+      en: {
+        title: "1st Prize – Project Showcase 2026 (Academic Pathways)",
+        organization: "HCMUTE & Faculty of Advanced Education (FAE)",
+        date: "July 2026",
+        description: "<strong>🏆 Awarded 1st Prize</strong> in the <strong>Academic Pathways</strong> track at <strong>Project Showcase 2026</strong>, organized by HCMUTE in collaboration with the Faculty of Advanced Education and industry partners."
+      },
+      vi: {
+        title: "Giải Nhất – Project Showcase 2026 (Hướng nghiên cứu)",
+        organization: "HCMUTE & Khoa Đào tạo Tiên tiến (FAE)",
+        date: "Tháng 07/2026",
+        description: "<strong>🏆 Đạt Giải Nhất</strong> hạng mục <strong>Hướng nghiên cứu</strong> tại cuộc thi <strong>Project Showcase 2026</strong>, do Trường Đại học Sư phạm Kỹ thuật TP.HCM (HCMUTE) phối hợp cùng Khoa Đào tạo Tiên tiến và các đối tác doanh nghiệp tổ chức."
+      }
+    },
     "edge-computing-innovation-2026": {
       images: [
         "./assets/awards/edge-computing-2026-1.webp",
@@ -757,6 +794,20 @@ const SiteData = {
   ],
 
   gallery: [
+    {
+      src: "./assets/awards/project-showcase-2026-1.webp",
+      alt: "1st Prize Project Showcase 2026 Academic Pathways Award Ceremony",
+      captionEn: "1st Prize – Project Showcase 2026 (Academic Pathways)",
+      captionVi: "Giải Nhất – Project Showcase 2026 (Hướng nghiên cứu)",
+      captionI18nKey: "gallery.item.project_showcase_1"
+    },
+    {
+      src: "./assets/awards/project-showcase-2026-2.webp",
+      alt: "1st Prize Project Showcase 2026 Posters Showcase",
+      captionEn: "1st Prize – Project Showcase 2026 (Poster Showcase)",
+      captionVi: "Giải Nhất – Project Showcase 2026 (Trưng bày Poster)",
+      captionI18nKey: "gallery.item.project_showcase_2"
+    },
     {
       src: "./assets/awards/edge-computing-2026-1.webp",
       alt: "3rd Prize Edge Computing Innovation 2026 Certificate Board",
