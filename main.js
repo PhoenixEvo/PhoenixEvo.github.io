@@ -641,11 +641,28 @@
       link.rel = "noopener";
       link.innerHTML = '<i data-lucide="github" aria-hidden="true"></i><span data-i18n="hero.link.github">GitHub</span>';
 
-      body.append(meta, title, description, tags, link);
+      body.append(meta, title);
+
+      if (item.detailId) {
+        const awardContainer = document.createElement("p");
+        awardContainer.className = "paper-award-container";
+
+        const awardButton = document.createElement("button");
+        awardButton.type = "button";
+        awardButton.className = "paper-award-btn";
+        awardButton.dataset.detailId = item.detailId;
+        awardButton.innerHTML = `<i data-lucide="trophy" aria-hidden="true"></i> <span>${localized(item, "awardBadgeEn", "awardBadgeVi")}</span>`;
+
+        awardContainer.append(awardButton);
+        body.append(awardContainer);
+      }
+
+      body.append(description, tags, link);
       article.append(image, body);
       projectGrid.append(article);
     });
 
+    attachDetailTriggers(projectGrid);
     refreshIcons();
   };
 
