@@ -307,7 +307,7 @@ const SiteData = {
         "./assets/awards/project-showcase-2026-2.webp"
       ],
       tags: ["1st Prize", "Academic Pathways", "Project Showcase", "AI"],
-      link: "",
+      link: "https://www.facebook.com/share/p/19Mohh9Cvb/",
       en: {
         title: "1st Prize – Project Showcase 2026 (Academic Pathways)",
         organization: "HCMUTE & Faculty of Advanced Education (FAE)",
@@ -678,6 +678,9 @@ const SiteData = {
       descVi: "Một phương pháp cắt tỉa dựa trên hình học cho mô hình tái dựng cảnh 3D. Phương pháp dùng ước lượng mật độ thích nghi để loại bỏ các thành phần dư thừa về mặt không gian trong khi vẫn giữ cấu trúc quan trọng, đạt kích thước mô hình nhỏ hơn 30% mà không giảm chất lượng trên 11 cảnh và hai bộ benchmark.",
       hasBadge: true,
       badgeKey: "badge.conference",
+      detailId: "project-showcase-2026",
+      awardBadgeEn: "1st Prize – Project Showcase 2026 (Academic Pathways)",
+      awardBadgeVi: "Giải Nhất – Project Showcase 2026 (Hướng nghiên cứu)",
       links: { code: "https://github.com/PhoenixEvo/3dgs-adp", pdf: "https://1drv.ms/b/c/D4E310767890E57B/IQBObjQAFLoBRJpiBHYHjvb3AZo0r7o-LHkfBChWfIChrMo?e=bPmocy" },
       image: "./assets/projects/ADP.webp",
       imageAlt: "Adaptive Density Pruning for 3D Gaussian Splatting result",

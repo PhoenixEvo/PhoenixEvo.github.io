@@ -969,6 +969,51 @@ h3 {
   color: #d8b4fe;
 }
 
+.paper-award-container {
+  margin-top: var(--space-2);
+  margin-bottom: 0.25rem;
+}
+
+.paper-award-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #b45309;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 180ms ease;
+  text-align: left;
+}
+
+.paper-award-btn:hover {
+  background: #fde68a;
+  color: #92400e;
+  transform: translateY(-1px);
+}
+
+.paper-award-btn svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  flex-shrink: 0;
+  color: #d97706;
+}
+
+[data-theme="dark"] .paper-award-btn {
+  color: #fde68a;
+  background: #451a03;
+  border-color: #78350f;
+}
+
+[data-theme="dark"] .paper-award-btn:hover {
+  background: #78350f;
+  color: #fff;
+}
+
 .inline-links {
   display: flex;
   flex-wrap: wrap;

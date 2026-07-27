@@ -537,11 +537,28 @@
         links.append(code);
       }
 
-      content.append(heading, authors, venue, statusBadge, description, links);
+      content.append(heading, authors, venue, statusBadge);
+
+      if (item.detailId) {
+        const awardContainer = document.createElement("p");
+        awardContainer.className = "paper-award-container";
+
+        const awardButton = document.createElement("button");
+        awardButton.type = "button";
+        awardButton.className = "paper-award-btn";
+        awardButton.dataset.detailId = item.detailId;
+        awardButton.innerHTML = `<i data-lucide="trophy" aria-hidden="true"></i> <span>${localized(item, "awardBadgeEn", "awardBadgeVi")}</span>`;
+
+        awardContainer.append(awardButton);
+        content.append(awardContainer);
+      }
+
+      content.append(description, links);
       article.append(thumb, content);
       paperList.append(article);
     });
 
+    attachDetailTriggers(paperList);
     refreshIcons();
   };
 
