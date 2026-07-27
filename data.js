@@ -664,8 +664,8 @@ const SiteData = {
   papers: [
     {
       status: "accepted",
-      titleEn: "Adaptive Density Pruning for Efficient 3D Gaussian Splatting",
-      titleVi: "Adaptive Density Pruning for Efficient 3D Gaussian Splatting",
+      titleEn: "Adaptive Density-Based Geometry Compression for Efficient 3D Gaussian Splatting",
+      titleVi: "Adaptive Density-Based Geometry Compression for Efficient 3D Gaussian Splatting",
       authors: [
         { name: "Nhat-Phat Nguyen", bold: true, corresponding: false },
         { name: "Quoc-Hung Pham", bold: false, corresponding: false },
