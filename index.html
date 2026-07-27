@@ -120,8 +120,32 @@
         <a class="nav-link" href="#experience" data-i18n="nav.experience">Experience</a>
         <a class="nav-link" href="#awards" data-i18n="nav.awards">Awards</a>
         <a class="nav-link" href="#contact" data-i18n="nav.contact">Contact</a>
-        <a class="nav-cv" href="./assets/cv/nguyen-nhat-phat-cv-2026.pdf" target="_blank" rel="noopener"
-          data-i18n="nav.cv">CV</a>
+        <div class="cv-dropdown" data-cv-dropdown>
+          <button class="nav-cv" type="button" aria-expanded="false" aria-haspopup="true" data-i18n="nav.cv">CV</button>
+          <div class="cv-dropdown__menu" role="menu">
+            <a href="./assets/cv/nguyen-nhat-phat-cv-2026.pdf" target="_blank" rel="noopener" role="menuitem">
+              <i data-lucide="file-user" aria-hidden="true"></i>
+              <div>
+                <strong data-i18n="cv.canva_title">General CV (2026)</strong>
+                <small data-i18n="cv.canva_sub">Canva · Visual Profile</small>
+              </div>
+            </a>
+            <a href="./assets/cv/CV_Industry_NguyenNhatPhat.pdf" target="_blank" rel="noopener" role="menuitem">
+              <i data-lucide="briefcase" aria-hidden="true"></i>
+              <div>
+                <strong data-i18n="cv.industry_title">Industry CV</strong>
+                <small data-i18n="cv.industry_sub">LaTeX · Software & Industry</small>
+              </div>
+            </a>
+            <a href="./assets/cv/CV_Research_NguyenNhatPhat.pdf" target="_blank" rel="noopener" role="menuitem">
+              <i data-lucide="graduation-cap" aria-hidden="true"></i>
+              <div>
+                <strong data-i18n="cv.research_title">Research CV</strong>
+                <small data-i18n="cv.research_sub">LaTeX · Academia & Grants</small>
+              </div>
+            </a>
+          </div>
+        </div>
       </div>
 
       <button class="language-toggle" type="button" aria-label="Switch to Vietnamese" data-lang-toggle>VI</button>
@@ -162,8 +186,35 @@
                 data-i18n="hero.link.personal_email">Personal Email</span></a>
             <a href="mailto:23110053@student.hcmute.edu.vn"><i data-lucide="graduation-cap" aria-hidden="true"></i><span
                 data-i18n="hero.link.university_email">University Email</span></a>
-            <a href="./assets/cv/nguyen-nhat-phat-cv-2026.pdf" target="_blank" rel="noopener"><i data-lucide="file-text"
-                aria-hidden="true"></i><span data-i18n="hero.link.cv">CV</span></a>
+            <div class="cv-dropdown cv-dropdown--hero" data-cv-dropdown>
+              <button class="cv-hero-btn" type="button" aria-expanded="false" aria-haspopup="true">
+                <i data-lucide="file-text" aria-hidden="true"></i><span data-i18n="hero.link.cv">CV</span>
+                <i data-lucide="chevron-down" class="cv-chevron" aria-hidden="true"></i>
+              </button>
+              <div class="cv-dropdown__menu" role="menu">
+                <a href="./assets/cv/nguyen-nhat-phat-cv-2026.pdf" target="_blank" rel="noopener" role="menuitem">
+                  <i data-lucide="file-user" aria-hidden="true"></i>
+                  <div>
+                    <strong data-i18n="cv.canva_title">General CV (2026)</strong>
+                    <small data-i18n="cv.canva_sub">Canva · Visual Profile</small>
+                  </div>
+                </a>
+                <a href="./assets/cv/CV_Industry_NguyenNhatPhat.pdf" target="_blank" rel="noopener" role="menuitem">
+                  <i data-lucide="briefcase" aria-hidden="true"></i>
+                  <div>
+                    <strong data-i18n="cv.industry_title">Industry CV</strong>
+                    <small data-i18n="cv.industry_sub">LaTeX · Software & Industry</small>
+                  </div>
+                </a>
+                <a href="./assets/cv/CV_Research_NguyenNhatPhat.pdf" target="_blank" rel="noopener" role="menuitem">
+                  <i data-lucide="graduation-cap" aria-hidden="true"></i>
+                  <div>
+                    <strong data-i18n="cv.research_title">Research CV</strong>
+                    <small data-i18n="cv.research_sub">LaTeX · Academia & Grants</small>
+                  </div>
+                </a>
+              </div>
+            </div>
             <a href="https://github.com/PhoenixEvo" target="_blank" rel="noopener"><svg class="brand-icon"
                 aria-hidden="true" viewBox="0 0 24 24" fill="currentColor">
                 <path
@@ -266,7 +317,7 @@
               <div class="education-stats">
                 <span class="education-stat">
                   <span data-i18n="education.gpa_label">GPA</span>
-                  <strong>3.64 / 4.0</strong>
+                  <strong>3.65 / 4.0</strong>
                 </span>
                 <span class="education-stat">
                   <span data-i18n="education.ielts_label">IELTS</span>

@@ -234,10 +234,107 @@ button {
   color: var(--color-primary);
 }
 
-.nav-cv:hover {
+.nav-cv:hover,
+.cv-dropdown.open .nav-cv {
   background: var(--color-primary);
   color: var(--color-surface);
   text-decoration: none;
+}
+
+.cv-dropdown {
+  position: relative;
+  display: inline-flex;
+}
+
+.cv-hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.cv-hero-btn:hover,
+.cv-dropdown.open .cv-hero-btn {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.cv-chevron {
+  width: 0.85rem;
+  height: 0.85rem;
+  transition: transform 180ms ease;
+}
+
+.cv-dropdown.open .cv-chevron {
+  transform: rotate(180deg);
+}
+
+.cv-dropdown__menu {
+  position: absolute;
+  top: calc(100% + 0.45rem);
+  right: 0;
+  z-index: 120;
+  min-width: 250px;
+  padding: 0.4rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
+}
+
+.cv-dropdown.open .cv-dropdown__menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.cv-dropdown__menu a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: background 140ms ease, color 140ms ease;
+}
+
+.cv-dropdown__menu a:hover {
+  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  color: var(--color-primary);
+}
+
+.cv-dropdown__menu a svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex-shrink: 0;
+  color: var(--color-primary);
+}
+
+.cv-dropdown__menu a strong {
+  display: block;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.cv-dropdown__menu a small {
+  display: block;
+  font-size: 0.73rem;
+  color: var(--color-text-muted);
+  margin-top: 0.1rem;
 }
 
 .language-toggle,

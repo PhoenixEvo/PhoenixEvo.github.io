@@ -89,6 +89,12 @@
       "hero.link.personal_email": "Personal Email",
       "hero.link.university_email": "University Email",
       "hero.link.cv": "CV",
+      "cv.canva_title": "General CV (Canva)",
+      "cv.canva_sub": "Visual profile with photo",
+      "cv.industry_title": "Industry CV (LaTeX)",
+      "cv.industry_sub": "Software & Engineering",
+      "cv.research_title": "Research CV (LaTeX)",
+      "cv.research_sub": "Academia & Scholarships",
       "hero.link.github": "GitHub",
       "hero.link.linkedin": "LinkedIn",
       "hero.link.facebook": "Facebook",
@@ -199,6 +205,12 @@
       "hero.link.personal_email": "Email cá nhân",
       "hero.link.university_email": "Email trường",
       "hero.link.cv": "CV",
+      "cv.canva_title": "CV Tổng quan (Canva)",
+      "cv.canva_sub": "Hồ sơ trực quan có ảnh đại diện",
+      "cv.industry_title": "CV Doanh nghiệp (LaTeX)",
+      "cv.industry_sub": "Phát triển phần mềm & Công nghiệp",
+      "cv.research_title": "CV Nghiên cứu (LaTeX)",
+      "cv.research_sub": "Học thuật & Học bổng",
       "hero.link.github": "GitHub",
       "hero.link.linkedin": "LinkedIn",
       "hero.link.facebook": "Facebook",
@@ -1756,9 +1768,41 @@
     }
   };
 
+  const initCvDropdowns = () => {
+    document.querySelectorAll("[data-cv-dropdown]").forEach((dropdown) => {
+      const toggleBtn = dropdown.querySelector("button, .nav-cv");
+      if (!toggleBtn || toggleBtn.dataset.cvBound === "true") return;
+      toggleBtn.dataset.cvBound = "true";
+
+      toggleBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const isOpen = dropdown.classList.contains("open");
+        document.querySelectorAll("[data-cv-dropdown].open").forEach((d) => d.classList.remove("open"));
+        if (!isOpen) {
+          dropdown.classList.add("open");
+          toggleBtn.setAttribute("aria-expanded", "true");
+        } else {
+          toggleBtn.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest("[data-cv-dropdown]")) {
+        document.querySelectorAll("[data-cv-dropdown].open").forEach((d) => {
+          d.classList.remove("open");
+          const toggleBtn = d.querySelector("button, .nav-cv");
+          if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "false");
+        });
+      }
+    });
+  };
+
   applyTheme(getPreferredTheme());
   applyLanguage(currentLanguage);
   attachDetailTriggers();
+  initCvDropdowns();
   refreshIcons();
   setScrolledState();
   setupRevealObserver();
