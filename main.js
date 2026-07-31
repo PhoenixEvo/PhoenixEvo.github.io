@@ -134,6 +134,7 @@
       "badge.rated_good": "Rated: Good",
       "badge.conference": "Conference",
       "link.code": "Code",
+      "link.presentation": "Presentation Details",
       "projects.kicker": "Open-Source & Coursework",
       "projects.heading": "Projects",
       "status.research": "Research",
@@ -250,6 +251,7 @@
       "badge.rated_good": "Đánh giá: Tốt",
       "badge.conference": "Hội nghị",
       "link.code": "Mã nguồn",
+      "link.presentation": "Báo cáo hội nghị",
       "projects.kicker": "Mã nguồn mở & Đồ án",
       "projects.heading": "Dự án",
       "status.research": "Nghiên cứu",
@@ -547,6 +549,16 @@
         code.dataset.i18n = "link.code";
         code.textContent = translations[currentLanguage]["link.code"];
         links.append(code);
+      }
+
+      if (item.presentationDetailId) {
+        const presBtn = document.createElement("button");
+        presBtn.type = "button";
+        presBtn.className = "paper-link-btn";
+        presBtn.dataset.detailId = item.presentationDetailId;
+        presBtn.dataset.i18n = "link.presentation";
+        presBtn.innerHTML = `<i data-lucide="presentation" aria-hidden="true"></i><span>${translations[currentLanguage]["link.presentation"]}</span>`;
+        links.append(presBtn);
       }
 
       content.append(heading, authors, venue, statusBadge);

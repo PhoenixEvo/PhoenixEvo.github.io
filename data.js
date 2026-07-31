@@ -6,6 +6,14 @@ const SiteData = {
       datetime: "2026-07",
       dateEn: "Jul 2026",
       dateVi: "07/2026",
+      en: "Presented our research paper at the 8th International Conference GTSD 2026.",
+      vi: "Tham dự và báo cáo bài báo nghiên cứu tại Hội nghị Quốc tế GTSD 2026.",
+      extra: false
+    },
+    {
+      datetime: "2026-07",
+      dateEn: "Jul 2026",
+      dateVi: "07/2026",
       en: "Awarded 1st Prize at Project Showcase 2026 (Academic Pathways track) organized by HCMUTE & Faculty of Advanced Education.",
       vi: "Đạt Giải Nhất cuộc thi Project Showcase 2026 (Hạng mục Hướng nghiên cứu) do HCMUTE & Khoa Đào tạo Tiên tiến tổ chức.",
       extra: false
@@ -301,6 +309,27 @@ const SiteData = {
   ],
 
   details: {
+    "gtsd-2026-presentation": {
+      images: [
+        "./assets/awards/gtsd-2026-cert.webp",
+        "./assets/awards/gtsd-2026-presenter.webp",
+        "./assets/awards/gtsd-2026-backdrop.webp"
+      ],
+      tags: ["Oral Presentation", "GTSD 2026", "Springer Track", "3DGS"],
+      link: "",
+      en: {
+        title: "Oral Presentation – GTSD 2026 International Conference",
+        organization: "The 8th International Conference on Green Technology and Sustainable Development (GTSD 2026)",
+        date: "July 30–31, 2026",
+        description: "<strong>Presenter:</strong> Nhat-Phat Nguyen.<br><strong>Paper:</strong> Adaptive Density-Based Geometry Compression for Efficient 3D Gaussian Splatting.<br><strong>Session:</strong> Session BS12-A: Information Technology and Data Science.<br><strong>Venue:</strong> GTSD 2026 International Conference, Ho Chi Minh City, Vietnam."
+      },
+      vi: {
+        title: "Báo cáo hội nghị – Hội nghị Quốc tế GTSD 2026",
+        organization: "Hội nghị Khoa học Quốc tế về Công nghệ Xanh và Phát triển Bền vững lần thứ 8 (GTSD 2026)",
+        date: "30–31/07/2026",
+        description: "<strong>Báo cáo viên:</strong> Nguyễn Nhật Phát.<br><strong>Bài báo:</strong> Adaptive Density-Based Geometry Compression for Efficient 3D Gaussian Splatting.<br><strong>Phiên báo cáo:</strong> Session BS12-A: Information Technology and Data Science.<br><strong>Địa điểm:</strong> Hội nghị Quốc tế GTSD 2026, TP. Hồ Chí Minh, Việt Nam."
+      }
+    },
     "project-showcase-2026": {
       images: [
         "./assets/awards/project-showcase-2026-1.webp",
@@ -681,6 +710,7 @@ const SiteData = {
       detailId: "project-showcase-2026",
       awardBadgeEn: "1st Prize – Project Showcase 2026 (Academic Pathways)",
       awardBadgeVi: "Giải Nhất – Project Showcase 2026 (Hướng nghiên cứu)",
+      presentationDetailId: "gtsd-2026-presentation",
       links: { code: "https://github.com/PhoenixEvo/3dgs-adp", pdf: "https://1drv.ms/b/c/D4E310767890E57B/IQBObjQAFLoBRJpiBHYHjvb3AZo0r7o-LHkfBChWfIChrMo?e=bPmocy" },
       image: "./assets/projects/ADP.webp",
       imageAlt: "Adaptive Density Pruning for 3D Gaussian Splatting result",
@@ -800,6 +830,27 @@ const SiteData = {
   ],
 
   gallery: [
+    {
+      src: "./assets/awards/gtsd-2026-cert.webp",
+      alt: "Certificate of Participation GTSD 2026 Nhat-Phat Nguyen",
+      captionEn: "Certificate of Participation – GTSD 2026",
+      captionVi: "Giấy chứng nhận tham gia báo cáo – GTSD 2026",
+      captionI18nKey: "gallery.item.gtsd_2026_cert"
+    },
+    {
+      src: "./assets/awards/gtsd-2026-presenter.webp",
+      alt: "Nhat-Phat Nguyen Oral Presentation at GTSD 2026",
+      captionEn: "Oral Presentation at GTSD 2026 (Session BS12-A)",
+      captionVi: "Báo cáo bài báo tại GTSD 2026 (Phiên BS12-A)",
+      captionI18nKey: "gallery.item.gtsd_2026_presenter"
+    },
+    {
+      src: "./assets/awards/gtsd-2026-backdrop.webp",
+      alt: "Nhat-Phat Nguyen at GTSD 2026 International Conference",
+      captionEn: "GTSD 2026 International Conference",
+      captionVi: "Hội nghị Quốc tế GTSD 2026",
+      captionI18nKey: "gallery.item.gtsd_2026_backdrop"
+    },
     {
       src: "./assets/awards/project-showcase-2026-1.webp",
       alt: "1st Prize Project Showcase 2026 Academic Pathways Award Ceremony",
