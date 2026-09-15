@@ -309,6 +309,25 @@ const SiteData = {
   ],
 
   details: {
+    "toeic-lr-880": {
+      images: [
+        "./assets/certificates/toeic-880.webp"
+      ],
+      tags: ["TOEIC L&R", "880 / 990", "Listening 455", "Reading 425", "ETS"],
+      link: "",
+      en: {
+        title: "TOEIC Listening & Reading – 880 / 990",
+        organization: "Educational Testing Service (ETS) / IIG Vietnam",
+        date: "August 25, 2026",
+        description: "Achieved an official score of <strong>880 / 990</strong> on the TOEIC Listening & Reading test (Listening: <strong>455 / 495</strong>, Reading: <strong>425 / 495</strong>), administered by ETS / IIG Vietnam. Valid through August 2028."
+      },
+      vi: {
+        title: "Chứng chỉ TOEIC Listening & Reading – 880 / 990",
+        organization: "Educational Testing Service (ETS) / IIG Vietnam",
+        date: "25/08/2026",
+        description: "Đạt số điểm chính thức <strong>880 / 990</strong> trong kỳ thi TOEIC Listening & Reading (Listening: <strong>455 / 495</strong>, Reading: <strong>425 / 495</strong>) do ETS / IIG Việt Nam tổ chức. Hiệu lực đến tháng 08/2028."
+      }
+    },
     "gtsd-2026-presentation": {
       images: [
         "./assets/awards/gtsd-2026-cert.webp",
@@ -830,6 +849,13 @@ const SiteData = {
   ],
 
   gallery: [
+    {
+      src: "./assets/certificates/toeic-880.webp",
+      alt: "TOEIC LR 880 Certificate Nguyen Nhat Phat",
+      captionEn: "TOEIC L&R 880 / 990 Score Certificate (ETS)",
+      captionVi: "Chứng chỉ điểm TOEIC L&R 880 / 990 (ETS)",
+      captionI18nKey: "gallery.item.toeic_880"
+    },
     {
       src: "./assets/awards/gtsd-2026-cert.webp",
       alt: "Certificate of Participation GTSD 2026 Nhat-Phat Nguyen",

@@ -906,6 +906,24 @@ h3 {
   font-weight: 600;
 }
 
+.education-stat[data-detail-id] {
+  cursor: pointer;
+  padding: 0.15rem 0.45rem;
+  margin: -0.15rem -0.45rem;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.education-stat[data-detail-id]:hover,
+.education-stat[data-detail-id]:focus-visible {
+  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+}
+
+.education-stat[data-detail-id]:hover strong,
+.education-stat[data-detail-id]:focus-visible strong {
+  color: var(--color-primary);
+}
+
 .tag-list {
   display: flex;
   flex-wrap: wrap;
