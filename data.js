@@ -371,6 +371,7 @@ const SiteData = {
     },
     "edge-computing-innovation-2026": {
       images: [
+        "./assets/certificates/GCN_EDGE_COMPUTING_26.webp",
         "./assets/awards/edge-computing-2026-1.webp",
         "./assets/awards/edge-computing-2026-2.webp"
       ],
@@ -890,6 +891,13 @@ const SiteData = {
       captionEn: "1st Prize – Project Showcase 2026 (Poster Showcase)",
       captionVi: "Giải Nhất – Project Showcase 2026 (Trưng bày Poster)",
       captionI18nKey: "gallery.item.project_showcase_2"
+    },
+    {
+      src: "./assets/certificates/GCN_EDGE_COMPUTING_26.webp",
+      alt: "3rd Prize Certificate Edge Computing Innovation 2026",
+      captionEn: "3rd Prize Certificate – Edge Computing Innovation (2026)",
+      captionVi: "Giấy chứng nhận Giải Ba – Edge Computing Innovation (2026)",
+      captionI18nKey: "gallery.item.edge_computing_gcn"
     },
     {
       src: "./assets/awards/edge-computing-2026-1.webp",
